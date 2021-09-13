@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+        "plugin:json/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "import/prefer-default-export": "off",
+        "camelcase": 1,
+        "quotes": 0,
+        "comma-dangle": 0,
+        "no-control-regex": 0,
+        "no-useless-escape": 0,
+        "max-len": [
+            "error",
+            {
+                "code": 120
+            }
+        ]
+    }
+}
