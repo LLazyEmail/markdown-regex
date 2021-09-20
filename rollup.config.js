@@ -159,7 +159,7 @@ export default {
       // https://rollupjs.org/guide/en#output-globals-g-globals
       globals: {
         // path: "path"
-        // os: "os"
+        os: "os"
       }
     }
   ]
