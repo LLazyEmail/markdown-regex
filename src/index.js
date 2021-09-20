@@ -6,11 +6,11 @@ import {
   REGEXP_DEL,
   REGEXP_Q,
   REGEXP_CODE,
-
+  // -----------
   REGEXP_BLOCKQUOTE,
   REGEXP_HR,
   REGEXP_PARAGRAPH,
-
+  // -----------
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
   REGEXP_EM,
