@@ -1,13 +1,13 @@
 import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import builtins from "rollup-plugin-node-builtins";
 import babel from "@rollup/plugin-babel";
+//-----
 import pkg from "./package.json";
 import globals from "rollup-plugin-node-globals";
 import includePaths from "rollup-plugin-includepaths";
 
-import nodePolyfills from 'rollup-plugin-node-polyfills';
-
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 // import json from "rollup-plugin-json";
 // import notify from "rollup-plugin-notify";
@@ -24,7 +24,9 @@ const name = "newsletterConst";
 
 // packages that should be treated as external dependencies, not bundled
 // e.g. ['axios']
-const external = ["os"];
+const external = [
+  //"os" -- because it seems that it was imported by polyfills
+];
 
 const includePathOptions = {
   include: {},
@@ -35,8 +37,10 @@ const includePathOptions = {
 
 // list of plugins used during building process
 const plugins = () => [
+
+
   // Allows node_modules resolution
-  resolve({
+  nodeResolve({
     extensions,
 
     // the fields to scan in a package.json to determine the entry point
@@ -155,7 +159,7 @@ export default {
       // https://rollupjs.org/guide/en#output-globals-g-globals
       globals: {
         // path: "path"
-        os: "os"
+        // os: "os"
       }
     }
   ]

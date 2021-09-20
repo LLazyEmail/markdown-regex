@@ -3,3 +3,5 @@ dist
 rollup.config.js
 babel.config.js
 dist/*
+package-lock.json
+yarn.lock

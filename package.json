@@ -33,20 +33,27 @@
     "rollup-plugin-includepaths": "0.2.4",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
-    "rollup-plugin-node-polyfills": "0.2.1",
     "rollup-plugin-polyfill-node": "^0.7.0",
     "shx": "0.3.3"
-  },
-  "author": "Arthur Tkachenko",
-  "license": "MIT",
-  "private": false,
-  "release": {
-    "publishDir": "dist"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "os": "0.1.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atherdon/markdown-regex"
+  },
+  "bugs": "https://github.com/atherdon/markdown-regex/issues",
+  "author": "Arthur Tkachenko",
+  "license": "MIT",
+  "private": false,
+  "release": {
+    "publishDir": "dist"
   }
 }
