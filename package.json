@@ -1,6 +1,6 @@
 {
   "name": "markdown-regex",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "set of constants that can help you to parse markdown content",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
