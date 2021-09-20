@@ -15,12 +15,12 @@ import {
   REGEXP_EMPTY_BLOCKQUOTE,
   REGEXP_EM,
 } from "./tags";
-import {  
-    REGEXP_UL_LIST,
-    REGEXP_OL_LIST,
-    REGEXP_EMPTY_UL,
-    REGEXP_EMPTY_OL 
-} from './list';
+import {
+  REGEXP_UL_LIST,
+  REGEXP_OL_LIST,
+  REGEXP_EMPTY_UL,
+  REGEXP_EMPTY_OL,
+} from "./list";
 
 export {
   REGEXP_HEADER,
@@ -39,5 +39,5 @@ export {
   REGEXP_EMPTY_OL,
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
-  REGEXP_EM
+  REGEXP_EM,
 };

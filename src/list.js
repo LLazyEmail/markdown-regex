@@ -20,5 +20,4 @@ export {
   // -----------
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
-
 };
