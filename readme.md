@@ -70,5 +70,9 @@
 
 submodule for https://github.com/atherdon/markdown-to-email
 
+npm link: https://www.npmjs.com/package/markdown-regex
+
+Hackernoon article: https://hackernoon.com/open-sourcing-regular-expressions-for-markdown-syntax-module
+
 @todo: 
 - we need to move some tests here
