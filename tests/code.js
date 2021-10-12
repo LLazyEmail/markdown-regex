@@ -1,1 +1,1 @@
-const { REGEXP_MEM } = require('../src/index');
+const { REGEXP_CODE } = require('../src/index');

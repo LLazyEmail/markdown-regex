@@ -1,1 +1,1 @@
-const { REGEXP_MEM } = require('../src/index');
+const { REGEXP_PARAGRAPH } = require('../src/index');

@@ -1,1 +1,1 @@
-const { REGEXP_MEM } = require('../src/index');
+const { REGEXP_EMPTY_BLOCKQUOTE } = require('../src/index');
