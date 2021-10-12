@@ -76,3 +76,8 @@ Hackernoon article: https://hackernoon.com/open-sourcing-regular-expressions-for
 
 @todo: 
 - we need to move some tests here
+
+
+for tests can be used:
+ https://gist.github.com/sequielo/3521937
+ https://github.com/mxstbr/markdown-test-file/blob/master/TEST.md
