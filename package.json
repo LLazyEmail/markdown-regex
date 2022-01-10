@@ -35,7 +35,7 @@
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-polyfill-node": "0.8.0",
     "semantic-release": "18.0.1",
-    "shx": "0.3.3"
+    "shx": "0.3.4"
   },
   "publishConfig": {
     "access": "public"
