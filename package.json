@@ -34,7 +34,7 @@
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-polyfill-node": "0.8.0",
-    "semantic-release": "18.0.1",
+    "semantic-release": "19.0.2",
     "shx": "0.3.4"
   },
   "publishConfig": {
