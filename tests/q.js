@@ -1,4 +1,4 @@
 const { REGEXP_Q } = require('../src/index');
-describe('test1', () => {
+describe( => {
 
 });
