@@ -1,4 +1,4 @@
 const { REGEXP_DEL } = require('../src/index');
-describe( => {
+describe( , () => {
 
 });
