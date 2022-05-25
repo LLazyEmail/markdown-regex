@@ -1,4 +1,11 @@
 const { REGEXP_EM } = require('../src/index');
-describe( , () => {
 
+describe('RegEx: REGEXP_EM', () => {
+
+    test('should match the expected ...', () => {
+    });
+    test( , () => {
+    });
+    test( , () => {
+    });
 });

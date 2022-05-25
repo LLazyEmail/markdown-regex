@@ -1,4 +1,11 @@
 const { REGEXP_UL_LIST } = require('../src/index');
-describe( , () => {
 
+describe('RegEx: REGEXP_UL_LIST', () => {
+
+    test('should match the expected ...', () => {
+    });
+    test( , () => {
+    });
+    test( , () => {
+    });
 });

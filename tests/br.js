@@ -1,4 +1,11 @@
 const { REGEXP_BR } = require('../src/index');
-describe( , () => {
 
+describe('RegEx: REGEXP_BR', () => {
+
+    test('should match the expected ...', () => {
+    });
+    test( , () => {
+    });
+    test( , () => {
+    });
 });

@@ -1,4 +1,11 @@
 const { REGEXP_PARAGRAPH } = require('../src/index');
-describe( , () => {
 
+describe('RegEx: REGEXP_PARAGRAPH', () => {
+
+    test('should match the expected ...', () => {
+    });
+    test( , () => {
+    });
+    test( , () => {
+    });
 });
