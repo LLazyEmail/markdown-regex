@@ -1,6 +1,6 @@
-const { REGEXP_Q } = require('../src/index');
+const { REGEXP_BR } = require('../../src/index');
 
-describe('RegEx: REGEXP_Q', () => {
+describe('RegEx: REGEXP_BR', () => {
 
     test('should match the expected ...', () => {
     });

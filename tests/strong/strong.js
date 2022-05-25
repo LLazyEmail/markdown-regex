@@ -1,6 +1,6 @@
-const { REGEXP_EMPTY_OL } = require('../src/index');
+const { REGEXP_MEM } = require('../../src/index');
 
-describe('RegEx: REGEXP_EMPTY_OL', () => {
+describe('RegEx: REGEXP_MEM', () => {
 
     test('should match the expected ...', () => {
     });

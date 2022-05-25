@@ -1,6 +1,6 @@
-const { REGEXP_BLOCKQUOTE } = require('../src/index');
+const { REGEXP_DEL } = require('../../src/index');
 
-describe('RegEx: REGEXP_BLOCKQUOTE', () => {
+describe('RegEx: REGEXP_DEL', () => {
 
     test('should match the expected ...', () => {
     });

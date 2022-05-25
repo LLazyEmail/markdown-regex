@@ -1,6 +1,6 @@
-const { REGEXP_EM } = require('../src/index');
+const { REGEXP_EMPTY_BLOCKQUOTE } = require('../../src/index');
 
-describe('RegEx: REGEXP_EM', () => {
+describe('RegEx: REGEXP_EMPTY_BLOCKQUOTE', () => {
 
     test('should match the expected ...', () => {
     });

@@ -1,6 +1,6 @@
-const { REGEXP_CODE } = require('../src/index');
+const { REGEXP_EMPTY_UL } = require('../../src/index');
 
-describe('RegEx: REGEXP_CODE', () => {
+describe('RegEx: REGEXP_EMPTY_UL', () => {
 
     test('should match the expected ...', () => {
     });
