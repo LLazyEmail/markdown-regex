@@ -1,6 +1,6 @@
 const { REGEXP_DEL } = require('../src/index');
 
-describe('REGEXP_DEL', () => {
+describe('RegEx: REGEXP_DEL', () => {
 
     test('should match the expected ...', () => {
     });

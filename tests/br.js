@@ -1,6 +1,6 @@
 const { REGEXP_BR } = require('../src/index');
 
-describe('REGEXP_BR', () => {
+describe('RegEx: REGEXP_BR', () => {
 
     test('should match the expected ...', () => {
     });

@@ -1,6 +1,6 @@
 const { REGEXP_MEM } = require('../src/index');
 
-describe('REGEXP_MEM', () => {
+describe('RegEx: REGEXP_MEM', () => {
 
     test('should match the expected ...', () => {
     });
