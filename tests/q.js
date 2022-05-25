@@ -1,6 +1,6 @@
 const { REGEXP_Q } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_Q', () => {
 
     test( , () => {
     });

@@ -1,6 +1,6 @@
 const { REGEXP_EM } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_EM', () => {
 
     test( , () => {
     });

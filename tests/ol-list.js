@@ -1,6 +1,6 @@
 const { REGEXP_OL_LIST } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_OL_LIST', () => {
 
     test( , () => {
     });

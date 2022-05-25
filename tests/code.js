@@ -1,6 +1,6 @@
 const { REGEXP_CODE } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_CODE', () => {
 
     test( , () => {
     });

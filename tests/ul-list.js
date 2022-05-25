@@ -1,6 +1,6 @@
 const { REGEXP_UL_LIST } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_UL_LIST', () => {
 
     test( , () => {
     });

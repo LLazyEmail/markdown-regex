@@ -1,6 +1,6 @@
 const { REGEXP_PARAGRAPH } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_PARAGRAPH', () => {
 
     test( , () => {
     });

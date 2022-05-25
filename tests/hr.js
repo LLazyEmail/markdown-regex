@@ -1,6 +1,6 @@
 const { REGEXP_HR } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_HR', () => {
 
     test( , () => {
     });

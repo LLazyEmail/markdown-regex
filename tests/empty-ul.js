@@ -1,6 +1,6 @@
 const { REGEXP_EMPTY_UL } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_EMPTY_UL', () => {
 
     test( , () => {
     });

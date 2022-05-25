@@ -1,6 +1,6 @@
 const { REGEXP_BLOCKQUOTE } = require('../src/index');
 
-describe( , () => {
+describe('REGEXP_BLOCKQUOTE', () => {
 
     test( , () => {
     });
