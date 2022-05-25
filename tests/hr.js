@@ -4,8 +4,8 @@ describe('RegEx: REGEXP_HR', () => {
 
     test('should match the expected ...', () => {
     });
-    test( , () => {
+    test('', () => {
     });
-    test( , () => {
+    test('', () => {
     });
 });
