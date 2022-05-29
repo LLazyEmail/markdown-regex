@@ -11,7 +11,7 @@
     "build": "npm run clean && npm run bundle",
     "build:babel": "babel src -d dist",
     "prepublish": "npm run clean && npm run build",
-    "test": "npm run test",
+    "test": "jest ./tests",
     "clean": "shx rm -rf ./coverage && shx rm -rf ./dist",
     "lint:prettier": "prettier --write src/",
     "lint": "eslint --ext .js . --ignore-path ./.eslintignore --resolve-plugins-relative-to .",
@@ -28,6 +28,7 @@
     "@rollup/plugin-node-resolve": "13.3.0",
     "eslint": "8.15.0",
     "eslint-plugin-json": "3.1.0",
+    "jest": "^28.1.0",
     "prettier": "2.6.2",
     "rollup": "2.74.1",
     "rollup-plugin-includepaths": "0.2.4",
@@ -56,5 +57,10 @@
   "private": false,
   "release": {
     "publishDir": "dist"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@root(.*)$": "<rootDir>/src/$1"
+    }
   }
 }
