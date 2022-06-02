@@ -1,5 +1,7 @@
 ```
 yarn add markdown-regex
+
+import { REGEXP_BR } from 'markdown-regex';
 ```
 
 ### REGEXP_HEADER
