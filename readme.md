@@ -4,6 +4,8 @@ yarn add markdown-regex
 import { REGEXP_BR, REGEXP_LINK, REGEXP_STRONG } from 'markdown-regex';
 ```
 
+https://lgtm.com/projects/g/LLazyEmail/markdown-regex
+
 ### REGEXP_HEADER
 
 ---
