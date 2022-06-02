@@ -11,7 +11,7 @@
     "build": "npm run clean && npm run bundle",
     "build:babel": "babel src -d dist",
     "prepublish": "npm run clean && npm run build",
-    "test": "jest ./tests",
+    "test": "jest ./tests --passWithNoTests",
     "clean": "shx rm -rf ./coverage && shx rm -rf ./dist",
     "lint:prettier": "prettier --write src/",
     "lint": "eslint --ext .js . --ignore-path ./.eslintignore --resolve-plugins-relative-to .",
