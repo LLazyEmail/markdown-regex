@@ -1,7 +1,7 @@
 ```
 yarn add markdown-regex
 
-import { REGEXP_BR } from 'markdown-regex';
+import { REGEXP_BR, REGEXP_LINK, REGEXP_STRONG } from 'markdown-regex';
 ```
 
 ### REGEXP_HEADER
