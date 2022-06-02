@@ -1,3 +1,6 @@
+// const { resolve } = require('path')
+// const root = resolve(__dirname, '')
+
 const { writeReactComponent, readSourceFile } = require('@root/utils');
 const { replaceMarkdown } = require('@root/helpers');
 const { del } = require('../../callbacks-simpleMDReact');
