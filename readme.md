@@ -6,6 +6,8 @@ import { REGEXP_BR, REGEXP_LINK, REGEXP_STRONG } from 'markdown-regex';
 
 https://lgtm.com/projects/g/LLazyEmail/markdown-regex
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/LLazyEmail/markdown-regex.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LLazyEmail/markdown-regex/alerts/)
+
 ### REGEXP_HEADER
 
 ---
