@@ -1,3 +1,7 @@
+```
+yarn add markdown-regex
+```
+
 ### REGEXP_HEADER
 
 ---
@@ -68,6 +72,8 @@
 ---
 
 
+NPM Link: https://www.npmjs.com/package/markdown-regex
+
 submodule for https://github.com/atherdon/markdown-to-email
 
 npm link: https://www.npmjs.com/package/markdown-regex
@@ -79,9 +85,11 @@ Hackernoon article: https://hackernoon.com/open-sourcing-regular-expressions-for
 
 
 for tests can be used:
- https://gist.github.com/sequielo/3521937
- https://github.com/mxstbr/markdown-test-file/blob/master/TEST.md
- 
+ - https://gist.github.com/sequielo/3521937
+ - https://github.com/mxstbr/markdown-test-file/blob/master/TEST.md
+
+- https://stackoverflow.com/questions/51850672/how-to-test-this-regex-in-jest
+ - https://jestjs.io/docs/expect#expectstringmatchingstring--regexp
  
  
  

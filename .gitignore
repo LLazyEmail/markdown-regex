@@ -1,3 +1,6 @@
 node_modules
 dist
 build
+
+yarn.lock
+yarn-error.lock
