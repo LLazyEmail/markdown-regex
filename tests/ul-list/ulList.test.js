@@ -1,8 +1,10 @@
+// import { resolve } from 'path';
+
 const { resolve } = require('path')
 const { readFileSync } = require('fs');
 
 const { REGEXP_UL_LIST } = require('../../src/index');
-// ../../src/index')
+// // ../../src/index')
 
 const root = resolve(__dirname, '');
 

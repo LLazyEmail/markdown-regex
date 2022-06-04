@@ -35,4 +35,24 @@ const plugins = [
   // ["@babel/proposal-object-rest-spread"]
 ];
 
+const env = {
+  "test": {
+    "plugins": ["@babel/plugin-transform-modules-commonjs"]
+  }
+}
+// env": {
+  
+// }
+
+// module.exports = () => ({
+//   presets: [require("@babel/preset-env")],
+//   plugins: [
+//     [require("@babel/plugin-proposal-class-properties"), { loose: true }],
+//     require("@babel/plugin-proposal-object-rest-spread"),
+//   ],
+      env: env
+// });
+
 module.exports = { presets, plugins };
+
+
