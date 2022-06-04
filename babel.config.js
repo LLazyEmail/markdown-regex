@@ -1,5 +1,7 @@
 "use strict";
 
+// https://stackoverflow.com/questions/57060316/environment-variables-in-babel-config-js
+
 const presets = [
   [
     "@babel/preset-env",
@@ -7,14 +9,18 @@ const presets = [
       modules: false
     }
   ]
-  // {
-  //
-  // }
 ];
+
 // Add this to working tests
 // const env = {
 //   test: {
 //     presets: [['@babel/preset-env']]
+//   }
+// }
+
+// const env = {
+//   "test": {
+//     "plugins": ["@babel/plugin-transform-modules-commonjs"]
 //   }
 // }
 
@@ -35,14 +41,6 @@ const plugins = [
   // ["@babel/proposal-object-rest-spread"]
 ];
 
-const env = {
-  "test": {
-    "plugins": ["@babel/plugin-transform-modules-commonjs"]
-  }
-}
-// env": {
-  
-// }
 
 // module.exports = () => ({
 //   presets: [require("@babel/preset-env")],
@@ -50,9 +48,8 @@ const env = {
 //     [require("@babel/plugin-proposal-class-properties"), { loose: true }],
 //     require("@babel/plugin-proposal-object-rest-spread"),
 //   ],
-      env: env
+//  env: env
 // });
 
 module.exports = { presets, plugins };
-
 
