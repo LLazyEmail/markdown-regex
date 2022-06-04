@@ -9,6 +9,7 @@ describe('RegEx: REGEXP_BLOCKQUOTE', () => {
         let result = REGEXP_BLOCKQUOTE.test('> this is blockquote');
         expect(result).toBe(true);
     });
+    
    // test('', () => {
    // });
    // test('', () => {
