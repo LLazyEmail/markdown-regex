@@ -1,28 +1,28 @@
 "use strict";
 
 // https://stackoverflow.com/questions/57060316/environment-variables-in-babel-config-js
+// https://stackoverflow.com/questions/34924581/how-do-you-configure-babel-to-run-with-different-configurations-in-different-env
 
 const presets = [
   [
     "@babel/preset-env",
     {
-      modules: false
+      modules: false,
+
+      targets: { node: 'current' }
     }
   ]
 ];
 
-// Add this to working tests
-// const env = {
-//   test: {
-//     presets: [['@babel/preset-env']]
-//   }
-// }
 
-// const env = {
-//   "test": {
-//     "plugins": ["@babel/plugin-transform-modules-commonjs"]
-//   }
-// }
+
+// Add this to working tests
+const env = {
+  test: {
+    presets: [['@babel/preset-env']],
+    plugins: ["@babel/plugin-transform-modules-commonjs"]
+  }
+}
 
 const plugins = [
   // [
@@ -37,19 +37,16 @@ const plugins = [
   //     // }
   //   }
   // ],
-  ["@babel/plugin-syntax-dynamic-import"]
+  ["@babel/plugin-syntax-dynamic-import"],
   // ["@babel/proposal-object-rest-spread"]
 ];
 
-
-// module.exports = () => ({
-//   presets: [require("@babel/preset-env")],
-//   plugins: [
-//     [require("@babel/plugin-proposal-class-properties"), { loose: true }],
-//     require("@babel/plugin-proposal-object-rest-spread"),
-//   ],
-//  env: env
-// });
-
-module.exports = { presets, plugins };
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: presets,
+    plugins: plugins,
+    env: env
+  };
+};
 

@@ -11,7 +11,7 @@ const config = {
         "@root(.*)$": "<rootDir>/src/$1"
     },
     testEnvironment: 'jest-environment-node',
-    transform: {}
+    // transform: {}
 };
 
 module.exports = config;
