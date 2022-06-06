@@ -39,6 +39,7 @@
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-polyfill-node": "0.9.0",
     "semantic-release": "19.0.2",
+    "semver": "^7.3.7",
     "shx": "0.3.4"
   },
   "publishConfig": {
