@@ -8,6 +8,9 @@ https://lgtm.com/projects/g/LLazyEmail/markdown-regex
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/LLazyEmail/markdown-regex.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LLazyEmail/markdown-regex/alerts/)
 
+
+[![NPM](https://nodei.co/npm/markdown-regex.png)](https://npmjs.org/package/markdown-regex)
+
 ### REGEXP_HEADER
 
 ---
