@@ -32,7 +32,7 @@
     "eslint-plugin-json": "3.1.0",
     "fs": "^0.0.1-security",
     "jest": "28.1.1",
-    "prettier": "2.7.0",
+    "prettier": "2.7.1",
     "rollup": "2.75.6",
     "rollup-plugin-includepaths": "0.2.4",
     "rollup-plugin-node-builtins": "2.1.2",
