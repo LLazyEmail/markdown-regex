@@ -117,6 +117,11 @@ for tests can be used:
 - empty-blockquote: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-blockqoute/empty-blockquote.js
 ---
 - empty-ol: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ol/empty-ol.js
+---
+- empty-ul: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ul/empty-ul.js
+---
+-
+---
 
  
 #### Arthur Tkachenko articles
