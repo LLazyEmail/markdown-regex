@@ -122,6 +122,10 @@ for tests can be used:
 ---
 - header: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/header/header.js
 ---
+- hr: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/hr/hr.js
+---
+-
+---
 
  
 #### Arthur Tkachenko articles
