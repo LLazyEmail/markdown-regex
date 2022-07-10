@@ -105,8 +105,38 @@ for tests can be used:
 
 - blockquote: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/blockquote/blockquote.js
 
-
-
+---
+- br: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/br/br.js
+---
+- code: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/code/code.js
+---
+- del: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/del/del.js
+---
+- em:  https://github.com/LLazyEmail/markdown-regex/blob/main/tests/em/em.js
+---
+- empty-blockquote: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-blockqoute/empty-blockquote.js
+---
+- empty-ol: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ol/empty-ol.js
+---
+- empty-ul: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ul/empty-ul.js
+---
+- header: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/header/header.js
+---
+- hr: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/hr/hr.js
+---
+- image: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/image/image.js
+---
+- link: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/link/link.js
+---
+- ol-list: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/ol-list/ol-list.js
+---
+- paragraph: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/paragraph/paragraph.js
+---
+- q: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/q/q.js
+---
+- strong: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/strong/strong.js
+---
+- ul-list: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/ul-list/ulList.test.js
 ---
 
  
