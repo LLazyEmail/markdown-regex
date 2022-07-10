@@ -108,7 +108,7 @@ for tests can be used:
 ---
 - br: https://github.com/LLazyEmail/markdown-regex/commit/434a3c582de881d789e5d8a0cb21f37aec3beb2a
 ---
-
+- code: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/code/code.js
 ---
 
  
