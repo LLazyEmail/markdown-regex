@@ -120,7 +120,7 @@ for tests can be used:
 ---
 - empty-ul: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ul/empty-ul.js
 ---
--
+- header: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/header/header.js
 ---
 
  
