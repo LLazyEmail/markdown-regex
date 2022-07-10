@@ -128,6 +128,8 @@ for tests can be used:
 ---
 - link: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/link/link.js
 ---
+- ol-list: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/ol-list/ol-list.js
+---
 -
 ---
 
