@@ -134,7 +134,9 @@ for tests can be used:
 ---
 - q: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/q/q.js
 ---
--
+- strong: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/strong/strong.js
+---
+- 
 ---
 
  
