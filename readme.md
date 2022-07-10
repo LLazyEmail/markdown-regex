@@ -130,7 +130,9 @@ for tests can be used:
 ---
 - ol-list: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/ol-list/ol-list.js
 ---
--
+- paragraph: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/paragraph/paragraph.js
+---
+- 
 ---
 
  
