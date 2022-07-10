@@ -126,6 +126,8 @@ for tests can be used:
 ---
 - image: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/image/image.js
 ---
+- link: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/link/link.js
+---
 -
 ---
 
