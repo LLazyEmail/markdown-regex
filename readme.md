@@ -110,6 +110,12 @@ for tests can be used:
 ---
 - code: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/code/code.js
 ---
+- del: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/del/del.js
+---
+-
+---
+-
+---
 
  
 #### Arthur Tkachenko articles
