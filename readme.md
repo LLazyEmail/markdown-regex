@@ -105,7 +105,9 @@ for tests can be used:
 
 - blockquote: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/blockquote/blockquote.js
 
-
+---
+- br: https://github.com/LLazyEmail/markdown-regex/commit/434a3c582de881d789e5d8a0cb21f37aec3beb2a
+---
 
 ---
 
