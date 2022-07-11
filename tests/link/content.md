@@ -1,11 +1,14 @@
 
-**AD Link: [https://bit.ly/3pGj1Zq](https://bit.ly/3pGj1Zq)**
+If interested in receiving leads for paid video calls, [please fill out this Google Form](https://docs.google.com/forms/d/e/1FAIpQLSce_si23Kc8Ydmv27J9Z4f_BdwY5VWczKDGtZBGtUPCsbDW0Q/viewform). We’ll review the information and then if sufficient send over an invite to the Hacker Noon network via Superpeer within a week. This program is a revenue share with 75% of the earnings going to the writer and 25% going to Hacker Noon - minus the Superpeer transaction fee. Writers set their own rate and availability for all video calls.
 
-**AD Copy: Buy NordVPN's 2-year plan and get +3 months for free.**
-
-**They want to change this AD Copy to: Black Friday ONLY! Buy NordVPN's 2-year plan and get +3 months FREE**
+Meet Tech Experts by Hacker Noon is a beta marketplace. Would be great to list a talented contributor like yourself to start to stimulate supply side demand.
 
 
+As you can see, proper **[data analytics](https://hackernoon.com/data-analytics-is-a-journey-p4k3ugj)** calls for various data cleansing techniques so that your data is all set for analysis.
 
 
-[around 55 percent of specialists](https://www.techrepublic.com/article/security-faux-pas-56-of-employees-use-personal-computers-to-wfh/#:~:text=During%20this%20unexpected%20remote%20work,protocols%20are%20on%20their%20devices.)
+You didn’t ** [think](https://hackernoon.com/how-to-think-like-a-data-scientist-or-data-analyst-7s983yg9)  ** it was that easy?
+
+
+
+[MEMES HERE](https://gitlab.com/hackernoon/creative/-/raw/master/newsletters/memes/2020/october/24.10/image4.gif)
