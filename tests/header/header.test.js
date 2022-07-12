@@ -1,13 +1,13 @@
 // const { resolve } = require('path')
 // const root = resolve(__dirname, '')
 
-const { REGEXP_MEM } = require('../../src/index');
+const { REGEXP_HEADER } = require('../../src/index');
 
-describe('RegEx: REGEXP_MEM', () => {
+describe('REGEXP_HEADER', () => {
 
     test('should match the expected ...', () => {
     });
-    
+
    // test('', () => {
    // });
    // test('', () => {
