@@ -4,9 +4,10 @@ A standard .TECH domain for 3 years
 
 A standard .TECH domain for 2 years
 
-Sub item 1
-Sub item 2
-Sub item 3
+* Sub item 1
+* Sub item 2
+* Sub item 3
+
 A standard .TECH domain for 5 years
 
 Hacker Noon Stickers
