@@ -3,7 +3,7 @@
 
 const {   REGEXP_STRONG } = require('../../src/index');
 
-describe('RegEx: REGEXP_MEM', () => {
+describe('RegEx: REGEXP_STRONG', () => {
 
     test('should match the expected ...', () => {
     });

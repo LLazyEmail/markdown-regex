@@ -3,7 +3,7 @@
 
 const { REGEXP_LINK } = require('../../src/index');
 
-describe('RegEx: REGEXP_MEM', () => {
+describe('RegEx: REGEXP_LINK', () => {
 
     test('should match the expected ...', () => {
     });
