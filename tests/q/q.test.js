@@ -6,7 +6,7 @@ const { REGEXP_Q } = require('../../src/index');
 describe('RegEx: REGEXP_Q', () => {
 
     test('should match the expected ...', () => {
-      let result = REGEXP_Q.test ('> this  is q');
+      let result = REGEXP_Q.test(':"hello this is q":');
       expect(result).toBe(true);
     });
 
