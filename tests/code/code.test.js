@@ -9,7 +9,7 @@ describe('RegEx: REGEXP_CODE', () => {
         let result = REGEXP_CODE.test('> this is code');
         expect(result).toBe(true);
     });
-    
+
    // test('', () => {
    // });
    // test('', () => {
