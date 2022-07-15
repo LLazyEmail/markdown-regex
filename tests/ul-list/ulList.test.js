@@ -1,31 +1,25 @@
 // import { resolve } from 'path';
+const { resolve } = require("path");
+const { readFileSync } = require("fs");
+const { REGEXP_UL_LIST } = require("../../src/index");
 
-const { resolve } = require('path')
-const { readFileSync } = require('fs');
+const root = resolve(__dirname, "");
 
-const { REGEXP_UL_LIST } = require('../../src/index');
+const markdown = readFileSync(`${root}/content.md`, { encoding: "utf-8" });
 
-const root = resolve(__dirname, '');
+describe("RegEx: REGEXP_UL_LIST", () => {
+  // console.log(markdown) ;
 
-const markdown = readFileSync(`${root}/content.md`, { encoding: 'utf-8' });
+//   console.log();
+  // console.log(markdown.match(REGEXP_UL_LIST) ) ;
 
-describe('RegEx: REGEXP_UL_LIST', () => {
+  test("should match the expected ...", () => {
+    let result = REGEXP_UL_LIST.test(markdown);
+    expect(result).toBe(true);
+  });
 
-    
-    console.log(markdown) ;
-
-    console.log(REGEXP_UL_LIST.test(markdown)) ;
-    
-
-    test('should match the expected ...', () => {
-
-
-
-
-    });
-    
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+  // test('', () => {
+  // });
+  // test('', () => {
+  // });
 });

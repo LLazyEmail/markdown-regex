@@ -3,8 +3,7 @@
 //   {regex: /(#+)(.*)/g, replacement: header},                                         // headers
 //   {regex: /!\[([^\[]+)\]\(([^\)]+)\)/g, replacement: '<img src=\'$2\' alt=\'$1\'>'}, // image
 //   {regex: /\[([^\[]+)\]\(([^\)]+)\)/g, replacement: '<a href=\'$2\'>$1</a>'},        // hyperlink
-//   {regex: /(\*\*|__)(.*?)\1/g, replacement: '<strong>$2</strong>'},                  // bold
-//   {regex: /(\*|_)(.*?)\1/g, replacement: '<em>$2</em>'},                             // emphasis
+
 
 //   {regex: /`(.*?)`/g, replacement: '<code>$1</code>'},                               // inline code
 //   {regex: /\n\*(.*)/g, replacement: ulList},                                         // ul lists
