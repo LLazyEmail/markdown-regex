@@ -6,7 +6,7 @@ const { REGEXP_HR } = require('../../src/index');
 describe('RegEx: REGEXP_HR', () => {
 
     test('should match the expected ...', () => {
-      let result = REGEXP_HR.test('');
+      let result = REGEXP_HR.test("***");
       expect(result).toBe(true);
     });
 
