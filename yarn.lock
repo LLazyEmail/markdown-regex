@@ -6028,10 +6028,10 @@ rollup-plugin-node-globals@1.4.0:
     process-es6 "^0.11.6"
     rollup-pluginutils "^2.3.1"
 
-rollup-plugin-polyfill-node@0.10.1:
-  version "0.10.1"
-  resolved "https://registry.npmjs.org/rollup-plugin-polyfill-node/-/rollup-plugin-polyfill-node-0.10.1.tgz"
-  integrity sha512-PT9OfHuOya8juO0YJZE0JDyeZGXjY0SOhFGvvldzR6JwwzCVoJFMWK44pEuzdoDoOodEYD9ltwLVJ+3JnrPpRQ==
+rollup-plugin-polyfill-node@0.10.2:
+  version "0.10.2"
+  resolved "https://registry.npmjs.org/rollup-plugin-polyfill-node/-/rollup-plugin-polyfill-node-0.10.2.tgz"
+  integrity sha512-5GMywXiLiuQP6ZzED/LO/Q0HyDi2W6b8VN+Zd3oB0opIjyRs494Me2ZMaqKWDNbGiW4jvvzl6L2n4zRgxS9cSQ==
   dependencies:
     "@rollup/plugin-inject" "^4.0.0"
 
