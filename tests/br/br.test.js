@@ -6,7 +6,7 @@ const { REGEXP_BR } = require('../../src/index');
 describe('RegEx: REGEXP_BR', () => {
 
     test('should match the expected ...', () => {
-      let result = REGEXP_BR.test('this is br');
+      let result = REGEXP_BR.test("**AD Link: [https://bit.ly/3pGj1Zq](https://bit.ly/3pGj1Zq)**");
       expect(result).toBe(true);
     });
 
