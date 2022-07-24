@@ -6,7 +6,7 @@ const platform = os.platform();
 
 const newLine = platform === "win32" ? "\r\n" : "\n";
 
-
+// [\s\S]
 const recipe_regex = `:::\s*.*:::`;
 
 //const REGEXP_UL_LIST = new RegExp(
