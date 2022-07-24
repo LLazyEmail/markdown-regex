@@ -7,6 +7,8 @@ const platform = os.platform();
 const newLine = platform === "win32" ? "\r\n" : "\n";
 
 
+const recipe_regex = `:::\s*.*:::`;
+
 //const REGEXP_UL_LIST = new RegExp(
 //  `${newLine}(((\\s{4})?\\*(.*?)${newLine}){1,})`,
 //  "g"
