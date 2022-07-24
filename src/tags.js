@@ -7,8 +7,8 @@ const newLine = platform === "win32" ? "\r\n" : "\n";
 // TODO: make all regex to feel similar
 const REGEXP_HEADER = new RegExp(`${newLine}(#+)(.*)`, "g");
 
-// const REGEXP_H3 = /^### (.*$)/gim;
-// const REGEXP_H2 = /^## (.*$)/gim;
+const REGEXP_H3 = /^### (.*$)/gim;
+const REGEXP_H2 = /^## (.*$)/gim;
 // -----------
 
 // TODO: make all regex to feel similar
@@ -35,6 +35,8 @@ const REGEXP_EM = /(\s|>)(\*|_)(.*?)\2(\s|<)/g;
 
 export {
   REGEXP_HEADER,
+  REGEXP_H2,
+  REGEXP_H3,
   REGEXP_IMAGE,
   REGEXP_LINK,
   REGEXP_STRONG,
