@@ -11,6 +11,8 @@ https://lgtm.com/projects/g/LLazyEmail/markdown-regex
 
 [![NPM](https://nodei.co/npm/markdown-regex.png)](https://npmjs.org/package/markdown-regex)
 
+https://openbase.com/js/markdown-regex
+
 ### REGEXP_HEADER
 
 ---
