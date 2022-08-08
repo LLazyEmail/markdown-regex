@@ -12,3 +12,6 @@ As you can see, proper **[data analytics](https://hackernoon.com/data-analytics-
 **_YEP_**    
 
 ***yy***
+
+   
+## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)
