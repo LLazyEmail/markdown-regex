@@ -29,3 +29,6 @@ A standard .TECH domain for 3 years \
 Search for your domain here
 Use this coupon code during checkout \
 <Any Award by Award Sponsor, if any>
+
+
+## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)
