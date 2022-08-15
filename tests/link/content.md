@@ -12,3 +12,6 @@ You didn’t ** [think](https://hackernoon.com/how-to-think-like-a-data-scientis
 
 
 [MEMES HERE](https://gitlab.com/hackernoon/creative/-/raw/master/newsletters/memes/2020/october/24.10/image4.gif)
+
+
+## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)

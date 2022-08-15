@@ -90,3 +90,6 @@ _Join us to welcome today newsletter’s sponsor - [BridgeCrew](https://bit.ly/3
 
 
 ~[The security-as-code solution for developers][https://bit.ly/3n9CgbE][https://gitlab.com/hackernoon/creative/-/raw/master/newsletters/logos/thematic/2020/October/Bridgecrew_stacked.jpg]
+
+
+## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)

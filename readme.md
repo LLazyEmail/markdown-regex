@@ -156,3 +156,6 @@ for tests can be used:
 * [https://hackernoon.com/together4victory-list-of-email-marketing-tools](https://hackernoon.com/together4victory-list-of-email-marketing-tools)
 * [https://hackernoon.com/cool-newsletters-for-developers-part-1](https://hackernoon.com/cool-newsletters-for-developers-part-1)
 * [https://hackernoon.com/cool-resources-for-sending-emails](https://hackernoon.com/cool-resources-for-sending-emails)
+
+
+## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)
