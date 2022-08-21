@@ -6,7 +6,7 @@ const { REGEXP_EMPTY_UL } = require('../../src/index');
 describe('RegEx: REGEXP_EMPTY_UL', () => {
 
     test('should match the expected ...', () => {
-      let result = REGEXP_EMPTY_UL.test('this  is empty ul');
+      let result = REGEXP_EMPTY_UL.test('## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)');
       expect(result).toBe(true);
     });
 
