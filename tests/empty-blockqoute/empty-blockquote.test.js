@@ -6,7 +6,7 @@ const { REGEXP_EMPTY_BLOCKQUOTE } = require('../../src/index');
 describe('RegEx: REGEXP_EMPTY_BLOCKQUOTE', () => {
 
     test('should match the expected ...', () => {
-      let result = REGEXP_EMPTY_BLOCKQUOTE.test(markdown);
+      let result = REGEXP_EMPTY_BLOCKQUOTE.test(">");
       expect(result).toBe(true);
     });
 
