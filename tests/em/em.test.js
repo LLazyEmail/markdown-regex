@@ -6,7 +6,7 @@ const { REGEXP_EM } = require('../../src/index');
 describe('RegEx: REGEXP_EM', () => {
 
     test('should match the expected ...', () => {
-      let result = REGEXP_EM.test("*#Magic Behind Test Automation*");
+      let result = REGEXP_EM.test("_Magic Behind Test Automation_");
       expect(result).toBe(true);
     });
 
