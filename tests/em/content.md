@@ -1,4 +1,4 @@
-# _Magic Behind Test Automation_
+_Magic Behind Test Automation_
 
 _I test, therefore it works._
 
