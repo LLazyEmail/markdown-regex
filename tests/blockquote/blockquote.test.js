@@ -5,7 +5,7 @@ const { REGEXP_BLOCKQUOTE } = require("../../src/index");
 
 describe("RegEx: REGEXP_BLOCKQUOTE", () => {
   test("should match the expected ...", () => {
-    let result = REGEXP_BLOCKQUOTE.test("\n> this is blockquote1");
+    let result = REGEXP_BLOCKQUOTE.test("\n> this is blockquote11");
     expect(result).toBe(true);
   });
 
