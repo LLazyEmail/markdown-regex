@@ -33,7 +33,7 @@
     "fs": "0.0.1-security",
     "jest": "29.3.1",
     "prettier": "2.7.1",
-    "rollup": "2.79.0",
+    "rollup": "2.79.1",
     "rollup-plugin-includepaths": "0.2.4",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
