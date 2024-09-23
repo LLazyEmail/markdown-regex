@@ -26,7 +26,7 @@
     "@babel/preset-env": "7.20.2",
     "@rollup/plugin-babel": "6.0.3",
     "@rollup/plugin-commonjs": "23.0.5",
-    "@rollup/plugin-node-resolve": "15.0.1",
+    "@rollup/plugin-node-resolve": "15.3.0",
     "chalk": "5.2.0",
     "eslint": "8.34.0",
     "eslint-plugin-json": "3.1.0",
