@@ -17,4 +17,4 @@ renovate.json
 examples
 CONTRIBUTING.md
 CHANGELOG.md
-yarn.lock
+*.lock
