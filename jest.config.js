@@ -1,10 +1,3 @@
-// try es6 version later
-// export default {
-//     testEnvironment: 'jest-environment-node',
-//     transform: {}
-//     ...
-// };
-
 const config = {
     verbose: true,
     "moduleNameMapper": {
