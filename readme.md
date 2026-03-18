@@ -1,161 +1,129 @@
-```
-yarn add markdown-regex
-
-import { REGEXP_BR, REGEXP_LINK, REGEXP_STRONG } from 'markdown-regex';
-```
-
-https://lgtm.com/projects/g/LLazyEmail/markdown-regex
-
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/LLazyEmail/markdown-regex.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LLazyEmail/markdown-regex/alerts/)
-
+# markdown-regex
 
 [![NPM](https://nodei.co/npm/markdown-regex.png)](https://npmjs.org/package/markdown-regex)
+[![npm version](https://badge.fury.io/js/markdown-regex.svg)](https://badge.fury.io/js/markdown-regex)
+[![Tests](https://github.com/LLazyEmail/markdown-regex/actions/workflows/test.yml/badge.svg)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-https://openbase.com/js/markdown-regex
+A set of ready-to-use RegExp constants for parsing and extracting elements from Markdown content.
 
-### REGEXP_HEADER
+## Features
 
----
+- 17 regex patterns covering all common Markdown elements
+- Cross-platform support (Windows `\r\n` and Unix `\n` line endings)
+- Zero runtime dependencies
+- TypeScript definitions included
+- Lightweight (~2 KB)
 
-### REGEXP_IMAGE
+## Installation
 
----
+```bash
+npm install markdown-regex
+```
 
-### REGEXP_LINK
+```bash
+yarn add markdown-regex
+```
 
----
+## Quick Start
 
-### REGEXP_STRONG
+### CommonJS
 
----
+```javascript
+const { REGEXP_HEADER, REGEXP_LINK } = require('markdown-regex');
+```
 
-### REGEXP_DEL
+### ES Modules
 
----
+```javascript
+import { REGEXP_HEADER, REGEXP_LINK } from 'markdown-regex';
+```
 
-### REGEXP_Q
+## API Reference
 
----
+| Export | Description | Matches |
+|--------|-------------|---------|
+| `REGEXP_HEADER` | Markdown headers | `# H1`, `## H2`, `### H3` |
+| `REGEXP_IMAGE` | Image syntax | `![alt](url)` |
+| `REGEXP_LINK` | Link syntax | `[text](url)` |
+| `REGEXP_STRONG` | Bold text | `**bold**`, `__bold__` |
+| `REGEXP_EM` | Italic/emphasis | `*italic*`, `_italic_` |
+| `REGEXP_DEL` | Strikethrough | `~~deleted~~` |
+| `REGEXP_CODE` | Inline code | `` `code` `` |
+| `REGEXP_Q` | Quoted text | `:"quoted":` |
+| `REGEXP_BLOCKQUOTE` | Blockquotes | `> quote` |
+| `REGEXP_HR` | Horizontal rules | `-----` (5+ dashes) |
+| `REGEXP_PARAGRAPH` | Paragraphs | Block of text between newlines |
+| `REGEXP_BR` | Line breaks | Two or more consecutive newlines |
+| `REGEXP_EMPTY_BLOCKQUOTE` | Consecutive blockquote HTML tags | `</blockquote><blockquote>` |
+| `REGEXP_UL_LIST` | Unordered list items | `* item` |
+| `REGEXP_OL_LIST` | Ordered list items | `1. item` |
+| `REGEXP_EMPTY_UL` | Consecutive unordered list HTML tags | `</ul><ul>` |
+| `REGEXP_EMPTY_OL` | Consecutive ordered list HTML tags | `</ol><ol>` |
 
-### REGEXP_CODE
+## Usage Examples
 
----
+### Extract all links from Markdown
 
-### REGEXP_BLOCKQUOTE
+```javascript
+import { REGEXP_LINK } from 'markdown-regex';
 
----
+const markdown = 'Visit [GitHub](https://github.com) and [npm](https://npmjs.com).';
+const matches = markdown.match(REGEXP_LINK);
+console.log(matches);
+// [ '[GitHub](https://github.com)', '[npm](https://npmjs.com)' ]
+```
 
-### REGEXP_HR
+### Extract headers
 
----
+```javascript
+import { REGEXP_HEADER } from 'markdown-regex';
 
-### REGEXP_PARAGRAPH
+const markdown = '\n# Title\n## Subtitle\n### Section';
+const matches = markdown.match(REGEXP_HEADER);
+console.log(matches);
+// [ '\n# Title', '\n## Subtitle', '\n### Section' ]
+```
 
----
+### Extract images
 
-### REGEXP_BR
+```javascript
+import { REGEXP_IMAGE } from 'markdown-regex';
 
----
+const markdown = 'Here is an ![example image](https://example.com/img.png).';
+const matches = markdown.match(REGEXP_IMAGE);
+console.log(matches);
+// [ '![example image](https://example.com/img.png)' ]
+```
 
-### REGEXP_EMPTY_BLOCKQUOTE
+See [`examples/basic-usage.js`](examples/basic-usage.js) for a more comprehensive demonstration.
 
----
+## TypeScript Support
 
-### REGEXP_EM
+TypeScript definitions are included. No `@types/` package is needed:
 
----
+```typescript
+import { REGEXP_LINK, REGEXP_HEADER } from 'markdown-regex';
 
-  
-###  REGEXP_UL_LIST
+const links: RegExpMatchArray | null = text.match(REGEXP_LINK);
+```
 
----
+## Contributing
 
-###  REGEXP_OL_LIST
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
----
+## Changelog
 
-###  REGEXP_EMPTY_UL
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
----
+## Related
 
-###  REGEXP_EMPTY_OL
+- NPM: https://www.npmjs.com/package/markdown-regex
+- Used by: https://github.com/atherdon/markdown-to-email
+- Hackernoon article: https://hackernoon.com/open-sourcing-regular-expressions-for-markdown-syntax-module
 
----
+## License
 
-
-
-NPM Link: https://www.npmjs.com/package/markdown-regex
-
-submodule for https://github.com/atherdon/markdown-to-email
-
-npm link: https://www.npmjs.com/package/markdown-regex
-
-Hackernoon article: https://hackernoon.com/open-sourcing-regular-expressions-for-markdown-syntax-module
-
-@todo: 
-- we need to move some tests here
-
-
-for tests can be used:
- - https://gist.github.com/sequielo/3521937
- - https://github.com/mxstbr/markdown-test-file/blob/master/TEST.md
-
-- https://stackoverflow.com/questions/51850672/how-to-test-this-regex-in-jest
- - https://jestjs.io/docs/expect#expectstringmatchingstring--regexp
- 
-
----
-
-- blockquote: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/blockquote/blockquote.js
-
----
-- br: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/br/br.js
----
-- code: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/code/code.js
----
-- del: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/del/del.js
----
-- em:  https://github.com/LLazyEmail/markdown-regex/blob/main/tests/em/em.js
----
-- empty-blockquote: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-blockqoute/empty-blockquote.js
----
-- empty-ol: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ol/empty-ol.js
----
-- empty-ul: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/empty-ul/empty-ul.js
----
-- header: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/header/header.js
----
-- hr: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/hr/hr.js
----
-- image: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/image/image.js
----
-- link: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/link/link.js
----
-- ol-list: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/ol-list/ol-list.js
----
-- paragraph: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/paragraph/paragraph.js
----
-- q: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/q/q.js
----
-- strong: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/strong/strong.js
----
-- ul-list: https://github.com/LLazyEmail/markdown-regex/blob/main/tests/ul-list/ulList.test.js
----
-
- 
-#### Arthur Tkachenko articles
-
-* [https://hackernoon.com/5-reasons-why-newsletters-should-be-part-of-your-business-strategy](https://hackernoon.com/5-reasons-why-newsletters-should-be-part-of-your-business-strategy)
-* [https://hackernoon.com/organizing-an-advanced-structure-for-html-email-template](https://hackernoon.com/organizing-an-advanced-structure-for-html-email-template)
-* [https://hackernoon.com/how-i-started-to-build-react-components-for-email-templates](https://hackernoon.com/how-i-started-to-build-react-components-for-email-templates)
-* [https://hackernoon.com/introducing-a-simple-npm-module-with-email-templates](https://hackernoon.com/introducing-a-simple-npm-module-with-email-templates)
-* [https://hackernoon.com/glossary-for-non-technies](https://hackernoon.com/glossary-for-non-technies)
-* [https://hackernoon.com/email-marketing-and-how-to-curate-an-effective-business-newsletter](https://hackernoon.com/email-marketing-and-how-to-curate-an-effective-business-newsletter)
-* [https://hackernoon.com/exploring-substack-for-building-your-newsletter](https://hackernoon.com/exploring-substack-for-building-your-newsletter)
-* [https://hackernoon.com/building-a-design-system-for-email-templates-react](https://hackernoon.com/building-a-design-system-for-email-templates-react)
-* [https://hackernoon.com/together4victory-list-of-email-marketing-tools](https://hackernoon.com/together4victory-list-of-email-marketing-tools)
-* [https://hackernoon.com/cool-newsletters-for-developers-part-1](https://hackernoon.com/cool-newsletters-for-developers-part-1)
-* [https://hackernoon.com/cool-resources-for-sending-emails](https://hackernoon.com/cool-resources-for-sending-emails)
-
+[MIT](LICENSE)
 
 ## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)
