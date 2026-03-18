@@ -48,14 +48,27 @@
   "dependencies": {
     "os": "0.1.2"
   },
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js",
+      "browser": "./dist/index.iife.js"
+    }
+  },
   "files": [
-    "dist"
+    "dist",
+    "src/index.d.ts"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/atherdon/markdown-regex"
+    "url": "https://github.com/LLazyEmail/markdown-regex"
   },
-  "bugs": "https://github.com/atherdon/markdown-regex/issues",
+  "bugs": {
+    "url": "https://github.com/LLazyEmail/markdown-regex/issues"
+  },
+  "homepage": "https://github.com/LLazyEmail/markdown-regex#readme",
   "author": "Arthur Tkachenko",
   "license": "MIT",
   "private": false,
