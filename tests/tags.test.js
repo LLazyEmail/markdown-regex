@@ -91,8 +91,7 @@ describe('Markdown Regex Tests', () => {
 
     it('should match blockquote patterns', () => {
         const testCases = [
-            { input: '> Blockquote
-Next line', expected: true },
+            { input: '> Blockquote\nNext line', expected: true },
             { input: 'Not a blockquote', expected: false },
         ];
         testCases.forEach(({ input, expected }) => {
