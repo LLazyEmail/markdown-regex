@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_BR } = require('../../src/index');
+import { REGEXP_BR } from '../../src/index.js';
 
 describe('REGEXP_BR', () => {
   test('should match double newline', () => {

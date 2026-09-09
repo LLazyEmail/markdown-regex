@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_HEADER, REGEXP_H2, REGEXP_H3 } = require('../../src/index');
+import { REGEXP_HEADER, REGEXP_H2, REGEXP_H3 } from '../../src/index.js';
 
 describe('REGEXP_HEADER', () => {
   test('should match h1 header', () => {

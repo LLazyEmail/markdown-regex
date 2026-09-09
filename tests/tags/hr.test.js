@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_HR } = require('../../src/index');
+import { REGEXP_HR } from '../../src/index.js';
 
 describe('REGEXP_HR', () => {
   test('should match horizontal rule with 5 dashes', () => {

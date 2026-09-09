@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_PARAGRAPH } = require('../../src/index');
+import { REGEXP_PARAGRAPH } from '../../src/index.js';
 
 describe('REGEXP_PARAGRAPH', () => {
   test('should match paragraph text between newlines', () => {

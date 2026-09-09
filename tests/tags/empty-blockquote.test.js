@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_EMPTY_BLOCKQUOTE } = require('../../src/index');
+import { REGEXP_EMPTY_BLOCKQUOTE } from '../../src/index.js';
 
 describe('REGEXP_EMPTY_BLOCKQUOTE', () => {
   test('should match consecutive blockquote HTML tags', () => {

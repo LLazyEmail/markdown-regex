@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_HR } = require('../../src/index');
+import { REGEXP_HR } from '../../src/index.js';
 
 describe('RegEx: REGEXP_HR', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_HR', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });
