@@ -29,6 +29,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Use Node.js 24
+        uses: actions/setup-node@v3
+        with:
+          node-version: 24
+
       - name: Install ESLint
         run: |
           npm install eslint@8.10.0
