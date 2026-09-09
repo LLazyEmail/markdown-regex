@@ -13,7 +13,7 @@ const {
     REGEXP_BR,
     REGEXP_EMPTY_BLOCKQUOTE,
     REGEXP_EM
-} = require('../index'); // Adjust the path as necessary
+} = require('../src/index');
 
 describe('Markdown Regex Tests', () => {
     it('should match header patterns', () => {

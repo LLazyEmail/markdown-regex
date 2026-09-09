@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_HEADER } = require('../../src/index');
+import { REGEXP_HEADER } from '../../src/index.js';
 
 describe('REGEXP_HEADER', () => {
 
@@ -10,8 +7,8 @@ describe('REGEXP_HEADER', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });

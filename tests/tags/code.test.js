@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_CODE } = require('../../src/index');
+import { REGEXP_CODE } from '../../src/index.js';
 
 describe('REGEXP_CODE', () => {
   test('should match inline code with backticks', () => {

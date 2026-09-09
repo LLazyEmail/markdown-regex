@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_CODE } = require('../../src/index');
+import { REGEXP_CODE } from '../../src/index.js';
 
 describe('RegEx: REGEXP_CODE', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_CODE', () => {
         expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });

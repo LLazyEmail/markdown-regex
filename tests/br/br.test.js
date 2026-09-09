@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_BR } = require('../../src/index');
+import { REGEXP_BR } from '../../src/index.js';
 
 describe('RegEx: REGEXP_BR', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_BR', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });

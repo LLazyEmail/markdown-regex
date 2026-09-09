@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_LINK } = require('../../src/index');
+import { REGEXP_LINK } from '../../src/index.js';
 
 describe('REGEXP_LINK', () => {
   test('should match standard markdown link', () => {

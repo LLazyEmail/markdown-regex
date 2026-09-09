@@ -1,6 +1,6 @@
 'use strict';
 
-const { REGEXP_EM } = require('../../src/index');
+import { REGEXP_EM } from '../../src/index.js';
 
 describe('REGEXP_EM', () => {
   test('should match emphasis with asterisk preceded by space', () => {

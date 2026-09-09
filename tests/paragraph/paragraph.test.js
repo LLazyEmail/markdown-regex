@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_PARAGRAPH } = require('../../src/index');
+import { REGEXP_PARAGRAPH } from '../../src/index.js';
 
 describe('RegEx: REGEXP_PARAGRAPH', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_PARAGRAPH', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });

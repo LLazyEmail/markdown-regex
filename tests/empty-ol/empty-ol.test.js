@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_EMPTY_OL } = require('../../src/index');
+import { REGEXP_EMPTY_OL } from '../../src/index.js';
 
 describe('RegEx: REGEXP_EMPTY_OL', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_EMPTY_OL', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });

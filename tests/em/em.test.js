@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_EM } = require('../../src/index');
+import { REGEXP_EM } from '../../src/index.js';
 
 describe('RegEx: REGEXP_EM', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_EM', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });

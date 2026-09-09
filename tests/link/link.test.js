@@ -1,7 +1,4 @@
-// const { resolve } = require('path')
-// const root = resolve(__dirname, '')
-
-const { REGEXP_LINK } = require('../../src/index');
+import { REGEXP_LINK } from '../../src/index.js';
 
 describe('RegEx: REGEXP_LINK', () => {
 
@@ -10,8 +7,8 @@ describe('RegEx: REGEXP_LINK', () => {
       expect(result).toBe(true);
     });
 
-   // test('', () => {
-   // });
-   // test('', () => {
-   // });
+    // test('', () => {
+    // });
+    // test('', () => {
+    // });
 });
