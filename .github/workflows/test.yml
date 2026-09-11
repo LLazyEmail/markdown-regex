@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [main, 'feat/**', 'fix/**']
+    branches: [main, 'feat/**', 'fix/**', 'chore/**']
   pull_request:
     branches: [main]
 
@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # Use npm install instead of npm ci until package-lock.json is regenerated
+      # Using npm install (not npm ci) until a complete package-lock.json is committed
       - name: Install dependencies
         run: npm install
 
