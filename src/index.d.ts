@@ -5,6 +5,18 @@
 export const REGEXP_HEADER: RegExp;
 
 /**
+ * Matches markdown level 2 headers (lines starting with exactly ##).
+ * Example: `## Heading 2`
+ */
+export const REGEXP_H2: RegExp;
+
+/**
+ * Matches markdown level 3 headers (lines starting with exactly ###).
+ * Example: `### Heading 3`
+ */
+export const REGEXP_H3: RegExp;
+
+/**
  * Matches markdown image syntax.
  * Example: `![alt text](https://example.com/image.png)`
  */
@@ -29,8 +41,8 @@ export const REGEXP_STRONG: RegExp;
 export const REGEXP_DEL: RegExp;
 
 /**
- * Matches quoted text using `:"..."` syntax.
- * Example: `:"quoted text":`
+ * Matches quoted text using `::"...":` syntax.
+ * Example: `::"quoted text":`
  */
 export const REGEXP_Q: RegExp;
 
