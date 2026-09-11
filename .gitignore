@@ -1,6 +1,15 @@
-node_modules
-dist
-build
+node_modules/
+dist/
+build/
+coverage/
+
+*.log
+*.tgz
+.DS_Store
 
 yarn.lock
-yarn-error.lock
+yarn-error.log
+
+# local env
+.env
+.env.*

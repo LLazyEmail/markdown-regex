@@ -1,7 +1,7 @@
 {
   "name": "markdown-regex",
-  "version": "2.0.0-beta.1",
-  "description": "A set of ready-to-use RegExp constants for parsing and extracting elements from Markdown content",
+  "version": "2.0.0",
+  "description": "Ready-to-use RegExp constants for parsing Markdown elements. Zero runtime dependencies. TypeScript, ESM, CJS, and browser builds.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -14,12 +14,19 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "readme.md",
+    "CHANGELOG.md"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -27,8 +34,9 @@
     "test:watch": "npm run test -- --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
-    "prepublishOnly": "npm run typecheck && npm run build && npm run test",
-    "clean": "rm -rf dist coverage"
+    "clean": "rm -rf dist coverage",
+    "prepublishOnly": "npm run typecheck && npm run build && npm test",
+    "pack:check": "npm pack --dry-run"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
@@ -40,11 +48,12 @@
     "typescript": "^5.7.2"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LLazyEmail/markdown-regex.git"
+    "url": "git+https://github.com/LLazyEmail/markdown-regex.git"
   },
   "bugs": {
     "url": "https://github.com/LLazyEmail/markdown-regex/issues"
@@ -58,6 +67,8 @@
     "regexp",
     "parser",
     "email",
-    "typescript"
+    "typescript",
+    "commonmark",
+    "gfm"
   ]
 }
