@@ -29,9 +29,9 @@ pnpm add markdown-regex
 ### ESM
 
 ```ts
-import { REGEXP_HEADER, REGEXP_LINK, REGEXP_STRONG } from 'markdown-regex';
+import { REGEXP_HEADER, REGEXP_LINK, REGEXP_STRONG, REGEXP_ITALIC } from 'markdown-regex';
 
-const md = `# Title\n\nVisit [GitHub](https://github.com) and **bold**.`;
+const md = `# Title\n\nVisit [GitHub](https://github.com) and **bold** and *italic*.`;
 console.log(md.match(REGEXP_LINK));
 ```
 
@@ -60,7 +60,7 @@ const { REGEXP_HEADER, REGEXP_LINK } = require('markdown-regex');
 | `REGEXP_IMAGE` | Image syntax | `![alt](url)` |
 | `REGEXP_LINK` | Link syntax | `[text](url)` |
 | `REGEXP_STRONG` | Bold | `**bold**`, `__bold__` |
-| `REGEXP_EM` | Italic | `*italic*`, `_italic_` |
+| `REGEXP_ITALIC` | Italic | `*italic*`, `_italic_` |
 | `REGEXP_DEL` | Strikethrough | `~~deleted~~` |
 | `REGEXP_CODE` | Inline code | `` `code` `` |
 | `REGEXP_Q` | Custom quote | `:"quoted":` |
