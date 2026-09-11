@@ -2,7 +2,7 @@ export { REGEXP_HEADER, REGEXP_H2, REGEXP_H3 } from './header';
 export { REGEXP_IMAGE } from './image';
 export { REGEXP_LINK } from './link';
 export { REGEXP_STRONG } from './strong';
-export { REGEXP_EM } from './em';
+export { REGEXP_ITALIC } from './italic';
 export { REGEXP_DEL } from './del';
 export { REGEXP_CODE } from './code';
 export { REGEXP_Q } from './quote';
