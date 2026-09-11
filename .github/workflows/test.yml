@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [ main, 'feat/**' ]
+    branches: [main, 'feat/**', 'fix/**']
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -13,6 +13,7 @@ jobs:
       contents: read
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: [18.x, 20.x, 22.x]
 
@@ -25,8 +26,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      # Use npm install instead of npm ci until package-lock.json is regenerated
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Typecheck
         run: npm run typecheck
