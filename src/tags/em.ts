@@ -1,7 +1,6 @@
 /**
- * Matches italic/emphasis text using * or _ delimiters.
- * Requires surrounding whitespace or certain characters to reduce false positives.
- *
- * Examples: *italic*, _italic_
+ * @deprecated Removed. Use REGEXP_ITALIC from './italic' instead.
+ * This file only exists so accidental imports fail clearly at review time.
+ * Delete this file after the hygiene pass (`git rm src/tags/em.ts`).
  */
-export const REGEXP_EM = /(\s|>)(\*|_)(.*?)\2(\s|<)/g;
+export { REGEXP_ITALIC as REGEXP_ITALIC_ONLY } from './italic';

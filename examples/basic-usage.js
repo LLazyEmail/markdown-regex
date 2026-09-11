@@ -1,11 +1,7 @@
 /**
  * basic-usage.js
  *
- * Demonstrates how to use markdown-regex patterns to extract
- * various elements from a markdown string.
- *
- * Run with: node examples/basic-usage.js
- * (requires a prior `npm run build`)
+ * Run: npm run build && node examples/basic-usage.js
  */
 
 import {
@@ -39,11 +35,9 @@ Here is some \`inline code\`.
 
 * First unordered item
 * Second unordered item
-* Third unordered item
 
 1. First ordered item
 2. Second ordered item
-3. Third ordered item
 `;
 
 console.log('=== Headers ===');
@@ -55,13 +49,13 @@ console.log(markdown.match(REGEXP_LINK));
 console.log('\n=== Images ===');
 console.log(markdown.match(REGEXP_IMAGE));
 
-console.log('\n=== Bold / Strong ===');
+console.log('\n=== Bold ===');
 console.log(markdown.match(REGEXP_STRONG));
 
 console.log('\n=== Italic ===');
 console.log(markdown.match(REGEXP_ITALIC));
 
-console.log('\n=== Inline Code ===');
+console.log('\n=== Code ===');
 console.log(markdown.match(REGEXP_CODE));
 
 console.log('\n=== Strikethrough ===');
@@ -70,11 +64,11 @@ console.log(markdown.match(REGEXP_DEL));
 console.log('\n=== Blockquotes ===');
 console.log(markdown.match(REGEXP_BLOCKQUOTE));
 
-console.log('\n=== Horizontal Rules ===');
+console.log('\n=== HR ===');
 console.log(markdown.match(REGEXP_HR));
 
-console.log('\n=== Unordered Lists ===');
+console.log('\n=== UL ===');
 console.log(markdown.match(REGEXP_UL_LIST));
 
-console.log('\n=== Ordered Lists ===');
+console.log('\n=== OL ===');
 console.log(markdown.match(REGEXP_OL_LIST));
