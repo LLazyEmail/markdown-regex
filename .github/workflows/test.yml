@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # Using npm install (not npm ci) until a complete package-lock.json is committed
+      # Using npm install until a complete package-lock.json is committed
       - name: Install dependencies
         run: npm install
 
