@@ -5,6 +5,7 @@
  * various elements from a markdown string.
  *
  * Run with: node examples/basic-usage.js
+ * (requires a prior `npm run build`)
  */
 
 import {
@@ -12,14 +13,14 @@ import {
   REGEXP_IMAGE,
   REGEXP_LINK,
   REGEXP_STRONG,
-  REGEXP_EM,
+  REGEXP_ITALIC,
   REGEXP_CODE,
   REGEXP_DEL,
   REGEXP_BLOCKQUOTE,
   REGEXP_HR,
   REGEXP_UL_LIST,
   REGEXP_OL_LIST,
-} from 'markdown-regex';
+} from '../dist/index.js';
 
 const markdown = `
 # My Document Title
@@ -57,8 +58,8 @@ console.log(markdown.match(REGEXP_IMAGE));
 console.log('\n=== Bold / Strong ===');
 console.log(markdown.match(REGEXP_STRONG));
 
-console.log('\n=== Italic / Emphasis ===');
-console.log(markdown.match(REGEXP_EM));
+console.log('\n=== Italic ===');
+console.log(markdown.match(REGEXP_ITALIC));
 
 console.log('\n=== Inline Code ===');
 console.log(markdown.match(REGEXP_CODE));

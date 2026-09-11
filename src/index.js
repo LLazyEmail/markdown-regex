@@ -1,3 +1,7 @@
+/**
+ * Legacy CommonJS/ESM entry kept for compatibility during migration.
+ * Prefer the TypeScript source (src/index.ts) and the built dist/ package.
+ */
 export {
   REGEXP_HEADER,
   REGEXP_H2,
@@ -13,12 +17,11 @@ export {
   REGEXP_PARAGRAPH,
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
-  REGEXP_EM,
-} from "./tags/index";
+  REGEXP_ITALIC,
+} from './tags/index.js';
 export {
   REGEXP_UL_LIST,
   REGEXP_OL_LIST,
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
-} from "./lists/index";
-
+} from './lists/index.js';
