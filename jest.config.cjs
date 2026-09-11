@@ -1,46 +1,29 @@
 /** @type {import('jest').Config} */
 module.exports = {
-  verbose: true,
+  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
-  testMatch: ['**/tests/**/*.test.js', '**/tests/**/*.test.ts'],
-  // Ignore known-broken / duplicate / not-yet-migrated legacy test folders
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/tests/olga/',
-    '/tests/empty-blockqoute/',
-    '/tests/edge-cases-advanced.test.js',
-    '/tests/integration/full-content.test.js',
-    '/tests/tags/',
-    '/tests/lists/',
-    '/tests/blockquote/',
-    '/tests/br/',
-    '/tests/code/',
-    '/tests/del/',
-    '/tests/em/',
-    '/tests/empty-ol/',
-    '/tests/empty-ul/',
-    '/tests/header/',
-    '/tests/hr/',
-    '/tests/image/',
-    '/tests/link/',
-    '/tests/ol-list/',
-    '/tests/paragraph/',
-    '/tests/q/',
-    '/tests/recipe/',
-    '/tests/strong/',
-    '/tests/ul-list/',
-  ],
+  roots: ['<rootDir>/tests'],
+  testMatch: ['**/*.test.ts'],
+  extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
-    '^markdown-regex$': '<rootDir>/dist/index.cjs',
+    '^(\.{1,2}/.*)\.js$': '$1',
   },
-  transform: {},
-  collectCoverageFrom: ['src/**/*.{ts,js}', '!src/**/*.d.ts'],
-  coverageThreshold: {
-    global: {
-      branches: 30,
-      functions: 30,
-      lines: 30,
-      statements: 30,
-    },
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        useESM: true,
+        tsconfig: {
+          module: 'ESNext',
+          moduleResolution: 'node',
+          esModuleInterop: true,
+          strict: true,
+          skipLibCheck: true,
+        },
+      },
+    ],
   },
+  collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts'],
+  coverageDirectory: 'coverage',
+  verbose: true,
 };

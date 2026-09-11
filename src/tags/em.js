@@ -1,9 +1,4 @@
 /**
- * Matches italic/emphasis text using `*` or `_` delimiters.
- * Requires surrounding whitespace or angle brackets for context.
- * Captures the content between delimiters.
- * Example: `*italic*`, `_italic_`
+ * @deprecated Use REGEXP_ITALIC from './italic.js'. Delete this file.
  */
-const REGEXP_EM = /(\s|>)(\*|_)(.*?)\2(\s|<)/g;
-
-export { REGEXP_EM };
+export { REGEXP_ITALIC as REGEXP_ITALIC_ONLY } from './italic.js';
