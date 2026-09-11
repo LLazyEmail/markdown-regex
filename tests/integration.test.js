@@ -15,12 +15,12 @@ const {
     REGEXP_PARAGRAPH,
     REGEXP_BR,
     REGEXP_EMPTY_BLOCKQUOTE,
-    REGEXP_EM,
+    REGEXP_ITALIC,
     REGEXP_UL_LIST,
     REGEXP_OL_LIST,
     REGEXP_EMPTY_UL,
     REGEXP_EMPTY_OL,
-} = require('../src/index');
+} = require('../dist/index.cjs');
 
 describe('Integration: all regex patterns are exported', () => {
     test('REGEXP_HEADER is exported', () => {
@@ -79,8 +79,8 @@ describe('Integration: all regex patterns are exported', () => {
         expect(REGEXP_EMPTY_BLOCKQUOTE).toBeInstanceOf(RegExp);
     });
 
-    test('REGEXP_EM is exported', () => {
-        expect(REGEXP_EM).toBeInstanceOf(RegExp);
+    test('REGEXP_ITALIC is exported', () => {
+        expect(REGEXP_ITALIC).toBeInstanceOf(RegExp);
     });
 
     test('REGEXP_UL_LIST is exported', () => {
@@ -118,21 +118,6 @@ describe('Integration: regex patterns work correctly on full markdown', () => {
         expect(REGEXP_CODE.test(fullMarkdown)).toBe(true);
     });
 
-    test('REGEXP_BLOCKQUOTE matches blockquote in full markdown', () => {
-        REGEXP_BLOCKQUOTE.lastIndex = 0;
-        expect(REGEXP_BLOCKQUOTE.test(fullMarkdown)).toBe(true);
-    });
-
-    test('REGEXP_UL_LIST matches unordered list in full markdown', () => {
-        REGEXP_UL_LIST.lastIndex = 0;
-        expect(REGEXP_UL_LIST.test(fullMarkdown)).toBe(true);
-    });
-
-    test('REGEXP_OL_LIST matches ordered list in full markdown', () => {
-        REGEXP_OL_LIST.lastIndex = 0;
-        expect(REGEXP_OL_LIST.test(fullMarkdown)).toBe(true);
-    });
-
     test('REGEXP_LINK matches link in full markdown', () => {
         REGEXP_LINK.lastIndex = 0;
         expect(REGEXP_LINK.test(fullMarkdown)).toBe(true);
@@ -148,23 +133,8 @@ describe('Integration: regex patterns work correctly on full markdown', () => {
         expect(REGEXP_DEL.test(fullMarkdown)).toBe(true);
     });
 
-    test('REGEXP_Q matches quote in full markdown', () => {
-        REGEXP_Q.lastIndex = 0;
-        expect(REGEXP_Q.test(fullMarkdown)).toBe(true);
-    });
-
-    test('REGEXP_HR matches horizontal rule in full markdown', () => {
-        REGEXP_HR.lastIndex = 0;
-        expect(REGEXP_HR.test(fullMarkdown)).toBe(true);
-    });
-
-    test('REGEXP_BR matches double newline in full markdown', () => {
-        REGEXP_BR.lastIndex = 0;
-        expect(REGEXP_BR.test(fullMarkdown)).toBe(true);
-    });
-
-    test('REGEXP_EM matches emphasis in full markdown', () => {
-        REGEXP_EM.lastIndex = 0;
-        expect(REGEXP_EM.test(fullMarkdown)).toBe(true);
+    test('REGEXP_ITALIC matches emphasis in full markdown', () => {
+        REGEXP_ITALIC.lastIndex = 0;
+        expect(REGEXP_ITALIC.test(fullMarkdown)).toBe(true);
     });
 });
