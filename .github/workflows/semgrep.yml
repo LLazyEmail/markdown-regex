@@ -1,10 +1,9 @@
 name: Semgrep
 
+# Security scan: main + weekly. Not on every PR.
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    branches: [main]
   schedule:
     - cron: '22 15 * * 3'
 
@@ -20,15 +19,13 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v7
-
       - uses: returntocorp/semgrep-action@9d0e5a1dbfaf51e4c3a5026d12c65508fe58f191
         with:
           publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
           publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
           generateSarif: "1"
-
       - name: Upload SARIF file
+        if: always()
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: semgrep.sarif
-        if: always()

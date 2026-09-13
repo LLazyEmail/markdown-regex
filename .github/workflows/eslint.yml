@@ -1,35 +1,12 @@
-name: ESLint
+# Disabled — ESLint now runs inside .github/workflows/ci.yml
+name: ESLint (disabled)
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
-  schedule:
-    - cron: '34 7 * * 3'
+  workflow_dispatch:
 
 jobs:
-  eslint:
-    name: Run eslint scanning
+  disabled:
+    if: false
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Use Node.js 20
-        uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run ESLint
-        run: |
-          npx eslint src --ext .ts,.js --max-warnings 50 || true
-        continue-on-error: true
+      - run: echo "Use the CI workflow instead"
