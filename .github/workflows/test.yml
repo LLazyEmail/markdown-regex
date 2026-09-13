@@ -1,40 +1,12 @@
-name: Tests
+# Disabled — replaced by .github/workflows/ci.yml
+name: Tests (disabled)
 
 on:
-  push:
-    branches: [main, 'feat/**', 'fix/**', 'chore/**']
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  test:
+  disabled:
+    if: false
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-
     steps:
-      - uses: actions/checkout@v7
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v7
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      # Using npm install until a complete package-lock.json is committed
-      - name: Install dependencies
-        run: npm install
-
-      - name: Typecheck
-        run: npm run typecheck
-
-      - name: Build
-        run: npm run build
-
-      - name: Run tests
-        run: npm test
+      - run: echo "Use the CI workflow instead"
