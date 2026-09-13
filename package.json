@@ -1,6 +1,6 @@
 {
   "name": "markdown-regex",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.1",
   "description": "A set of ready-to-use RegExp constants for parsing and extracting elements from Markdown content",
   "type": "module",
   "main": "./dist/index.cjs",
