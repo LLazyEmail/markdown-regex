@@ -20,6 +20,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -32,8 +35,9 @@
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.10.0",
+    "@types/node": "^24.0.0",
     "eslint": "^10.0.0",
+    "glob": "^10.6.0",
     "jest": "^30.0.0",
     "ts-jest": "^29.2.5",
     "tsup": "^8.3.5",
