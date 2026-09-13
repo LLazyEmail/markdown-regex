@@ -1,4 +1,5 @@
-# Single CI workflow for pull requests and main.
+# One lightweight CI job. ubuntu-latest is the smallest official Linux runner.
+# The old 8-minute runs were a stalled npm install on Node 18, not the VM size.
 
 name: CI
 
@@ -19,8 +20,11 @@ jobs:
   check:
     name: Lint, typecheck, build, test
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
 
       - uses: actions/setup-node@v7
         with:
@@ -28,17 +32,11 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm install
+        run: npm install --no-audit --no-fund --prefer-offline
 
-      - name: ESLint
-        run: npx eslint src
-        continue-on-error: true
-
-      - name: Typecheck
-        run: npm run typecheck
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm test
+      - name: ESLint, typecheck, build, test
+        run: |
+          npx eslint src || true
+          npm run typecheck
+          npm run build
+          npm test
