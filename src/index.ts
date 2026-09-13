@@ -7,7 +7,6 @@
  * Zero runtime dependencies. Works in Node, browsers, and bundlers.
  */
 
-// Core tags
 export {
   REGEXP_HEADER,
   REGEXP_H2,
@@ -24,12 +23,11 @@ export {
   REGEXP_PARAGRAPH,
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
-} from './tags';
+} from './tags/index';
 
-// Lists
 export {
   REGEXP_UL_LIST,
   REGEXP_OL_LIST,
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
-} from './lists';
+} from './lists/index';

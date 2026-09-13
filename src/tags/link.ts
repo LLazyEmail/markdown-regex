@@ -4,4 +4,4 @@
  *
  * Example: [link text](https://example.com)
  */
-export const REGEXP_LINK = /\\[([^\\[]*?)\\]\\(([^\\)]+?)\\)/g;
+export const REGEXP_LINK = new RegExp('\\[([^\\]]*?)\\]\\(([^)]+?)\\)', 'g');
