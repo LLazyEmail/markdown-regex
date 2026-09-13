@@ -4,6 +4,8 @@ A set of ready-to-use RegExp constants for parsing and extracting elements from 
 
 > **v2.0 (beta)** — Fully rewritten in TypeScript, powered by tsup. Zero runtime dependencies.
 
+Requires **Node.js 20+** (Node 18 is not supported).
+
 ## Features
 
 - 17+ regex patterns covering common Markdown elements
@@ -83,6 +85,8 @@ npm run typecheck    # tsc --noEmit
 npm test             # Jest
 npm run dev          # watch mode
 ```
+
+CI builds on **Node 20, 22, and 24**. Publish uses Node 24.
 
 ## Future: Custom Tag Addons
 
