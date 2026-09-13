@@ -21,15 +21,15 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "npx tsup",
+    "dev": "npx tsup --watch",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs",
     "test:watch": "npm run test -- --watch",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts",
+    "typecheck": "npx tsc --noEmit",
+    "lint": "npx eslint src --ext .ts",
     "prepublishOnly": "npm run typecheck && npm run build && npm run test",
     "clean": "rm -rf dist coverage"
   },
@@ -37,7 +37,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.0",
     "eslint": "^9.0.0",
-    "glob": "^10.5.0",
+    "glob": "^13.0.6",
     "jest": "^30.0.0",
     "ts-jest": "^29.4.12",
     "tsup": "^8.3.5",

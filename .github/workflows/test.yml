@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x, 24.x]
 
     steps:
       - uses: actions/checkout@v7
@@ -24,9 +24,8 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: npm
 
-      # Using npm install until a complete package-lock.json is committed
       - name: Install dependencies
         run: npm install
 
