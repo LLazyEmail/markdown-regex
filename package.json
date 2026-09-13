@@ -29,14 +29,14 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs",
     "test:watch": "npm run test -- --watch",
     "typecheck": "npx tsc --noEmit",
-    "lint": "npx eslint src --ext .ts",
+    "lint": "npx eslint src",
     "prepublishOnly": "npm run typecheck && npm run build && npm run test",
     "clean": "rm -rf dist coverage"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.0",
-    "eslint": "^9.0.0",
+    "eslint": "^10.10.0",
     "glob": "^13.0.6",
     "jest": "^30.0.0",
     "ts-jest": "^29.4.12",

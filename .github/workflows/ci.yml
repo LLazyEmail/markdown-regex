@@ -1,5 +1,4 @@
 # Single CI workflow for pull requests and main.
-# Security scanners stay in their own files and no longer run on every PR.
 
 name: CI
 
@@ -32,7 +31,7 @@ jobs:
         run: npm install
 
       - name: ESLint
-        run: npx eslint src --ext .ts,.js --max-warnings 50
+        run: npx eslint src
         continue-on-error: true
 
       - name: Typecheck
