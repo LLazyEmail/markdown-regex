@@ -1,2 +1,2 @@
-/** Bold: **text** or __text__. */
+/** @example "**bold**" */
 export const REGEXP_STRONG = /\*\*(.+?)\*\*|__(.+?)__/g;

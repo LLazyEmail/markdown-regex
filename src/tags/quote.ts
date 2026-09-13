@@ -1,7 +1,2 @@
-/**
- * Matches quoted text using the non-standard :"...": syntax
- * used by some email/newsletter pipelines.
- *
- * Example: :"quoted text":
- */
+/** @example ":\"quoted\":" */
 export const REGEXP_Q = /:"(.*?)":/g;
