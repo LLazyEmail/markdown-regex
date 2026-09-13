@@ -1,5 +1,5 @@
-# One lightweight CI job. ubuntu-latest is the smallest official Linux runner.
-# The old 8-minute runs were a stalled npm install on Node 18, not the VM size.
+# One lightweight CI job.
+# npm ci requires package-lock.json to match package.json.
 
 name: CI
 
@@ -32,7 +32,7 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm install --no-audit --no-fund --prefer-offline
+        run: npm ci --no-audit --no-fund
 
       - name: ESLint, typecheck, build, test
         run: |

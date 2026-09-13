@@ -1,14 +1,4 @@
 # Publish markdown-regex to npm when a GitHub Release is published.
-#
-# Setup (once):
-#   1. Create an npm Access Token with publish rights
-#      https://www.npmjs.com/settings/~/tokens
-#   2. Add it as a repository secret named `npm_token`
-#      Settings → Secrets and variables → Actions → New repository secret
-#   3. Create a GitHub Release whose tag matches package.json version
-#      (e.g. tag v2.0.0 when version is 2.0.0)
-#
-# Manual run is also available via workflow_dispatch.
 
 name: Publish to npm
 
@@ -31,37 +21,24 @@ jobs:
   publish:
     name: Build, test, and publish
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
-      id-token: write   # npm provenance / OIDC
-
+      id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
-          check-latest: true
           registry-url: https://registry.npmjs.org/
           cache: npm
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Typecheck
-        run: npm run typecheck
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm test
-
-      - name: Preview published files
-        run: npm pack --dry-run
-
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - run: npm pack --dry-run
       - name: Publish to npm
         if: ${{ github.event_name == 'release' || inputs.dry_run != true }}
         run: npm publish --access public --provenance
