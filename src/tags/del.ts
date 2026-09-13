@@ -1,6 +1,6 @@
 /**
- * Matches strikethrough text using ~~ delimiters.
+ * Matches strikethrough text using `~~` delimiters.
  *
- * Example: ~~strikethrough~~
+ * @example ~~deleted~~
  */
-export const REGEXP_DEL = /~~(.*?)~~/g;
+export const REGEXP_DEL = /~~(.+?)~~/g;

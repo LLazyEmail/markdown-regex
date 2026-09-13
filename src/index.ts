@@ -1,10 +1,10 @@
 /**
  * markdown-regex
  *
- * A set of ready-to-use RegExp constants for parsing and extracting
- * elements from Markdown content.
- *
+ * Ready-to-use RegExp constants for parsing Markdown.
  * Zero runtime dependencies. Works in Node, browsers, and bundlers.
+ *
+ * @packageDocumentation
  */
 
 export {

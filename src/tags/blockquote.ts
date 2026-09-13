@@ -1,9 +1,7 @@
-import { NEWLINE } from '../utils';
-
 /**
- * Matches blockquote lines starting with > or &gt;.
- * Platform-agnostic newline handling.
+ * Matches blockquote lines starting with `>` or `&gt;` after a newline.
  *
- * Example: > blockquote text
+ * @example
+ *   > quoted paragraph
  */
-export const REGEXP_BLOCKQUOTE = new RegExp(`${NEWLINE}(&gt;|>)(.*)`, 'g');
+export const REGEXP_BLOCKQUOTE = /(?:\r\n|\r|\n)(?:>|&gt;)(.*)/g;

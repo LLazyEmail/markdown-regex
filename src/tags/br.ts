@@ -1,7 +1,7 @@
-import { NEWLINE } from '../utils';
-
 /**
  * Matches two or more consecutive newlines (paragraph / line breaks).
- * Platform-agnostic.
+ * Understands `\n`, `\r\n` and `\r`.
+ *
+ * @example a\\n\\nb
  */
-export const REGEXP_BR = new RegExp(`((${NEWLINE}){2,})`, 'g');
+export const REGEXP_BR = /(?:\r\n|\r|\n){2,}/g;

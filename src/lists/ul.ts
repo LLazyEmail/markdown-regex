@@ -1,15 +1,9 @@
-import { NEWLINE } from '../utils';
-
 /**
- * Matches unordered list items (lines starting with *).
- * Supports optional leading indentation (4 spaces).
- * Platform-agnostic newline handling.
+ * Matches an unordered list item (`*` after a newline).
+ * Optional 4-space indent is allowed.
  *
- * Example:
- * * item one
- * * item two
+ * @example
+ *   * item one
+ *   * item two
  */
-export const REGEXP_UL_LIST = new RegExp(
-  `${NEWLINE}(((?:\\s{4})?\\*(.*?)${NEWLINE}){1,})`,
-  'g'
-);
+export const REGEXP_UL_LIST = /(?:\r\n|\r|\n)(?:\s{4})?\*(.*)/g;

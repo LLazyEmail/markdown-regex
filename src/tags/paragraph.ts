@@ -1,7 +1,6 @@
-import { NEWLINE } from '../utils';
-
 /**
- * Matches paragraph content between newlines.
- * Platform-agnostic newline handling.
+ * Matches paragraph-like content sitting between two newlines.
+ *
+ * @example \\nhello world\\n
  */
-export const REGEXP_PARAGRAPH = new RegExp(`${NEWLINE}(.+?)${NEWLINE}`, 'g');
+export const REGEXP_PARAGRAPH = /(?:\r\n|\r|\n)(.+?)(?:\r\n|\r|\n)/g;

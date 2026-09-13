@@ -1,6 +1,6 @@
 /**
  * Matches inline code using single backtick delimiters.
  *
- * Example: `code`
+ * @example `code`
  */
-export const REGEXP_CODE = /`(.*?)`/g;
+export const REGEXP_CODE = /`(.+?)`/g;
