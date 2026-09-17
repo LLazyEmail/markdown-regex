@@ -33,8 +33,10 @@ describe('exports', () => {
     }
   });
 
-  it('export surface matches the expected set', () => {
-    const keys = Object.keys(api).filter((k) => k.startsWith('REGEXP_')).sort();
-    expect(keys).toEqual([...EXPECTED].sort());
-  });
+it('export surface matches snapshot', () => {
+  const keys = Object.keys(api).filter((k) => k.startsWith('REGEXP_')).sort();
+  expect(keys).toMatchSnapshot();
+});
+
+
 });
