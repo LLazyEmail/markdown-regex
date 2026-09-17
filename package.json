@@ -42,7 +42,7 @@
     "eslint": "^10.10.0",
     "glob": "^13.0.6",
     "tsup": "^8.3.5",
-    "typescript": "~5.9.3",
+    "typescript": "~7.0.0",
     "vitest": "^5.0.1"
   },
   "publishConfig": {
