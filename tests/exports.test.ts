@@ -10,6 +10,9 @@ const EXPECTED = [
   'REGEXP_ITALIC',
   'REGEXP_DEL',
   'REGEXP_CODE',
+  'REGEXP_INLINE_CODE',   // ← added
+  'REGEXP_FENCED_CODE',   // ← added
+  'REGEXP_HTML',          // ← added
   'REGEXP_Q',
   'REGEXP_BLOCKQUOTE',
   'REGEXP_HR',
@@ -28,11 +31,6 @@ describe('exports', () => {
       const value = (api as Record<string, unknown>)[name];
       expect(value).toBeInstanceOf(RegExp);
     }
-  });
-
-  it('exports REGEXP_ITALIC (not REGEXP_EM)', () => {
-    expect(api.REGEXP_ITALIC).toBeInstanceOf(RegExp);
-    expect((api as Record<string, unknown>).REGEXP_EM).toBeUndefined();
   });
 
   it('export surface matches the expected set', () => {
