@@ -11,7 +11,7 @@ import {
   REGEXP_BR,
   REGEXP_OL_LIST,
 } from '../src/index';
-
+import { describe, it, expect,afterEach } from 'vitest';
 function fixturePath(): string {
   const candidates = [
     join(process.cwd(), 'source-fullcodetest.md'),

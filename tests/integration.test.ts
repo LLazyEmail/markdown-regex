@@ -7,7 +7,7 @@ import {
   REGEXP_DEL,
   REGEXP_IMAGE,
 } from '../src/index';
-
+import { describe, it, expect, afterEach } from 'vitest';
 const sample = `
 # Title
 

@@ -26,8 +26,10 @@
   "scripts": {
     "build": "npx tsup",
     "dev": "npx tsup --watch",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs",
-    "test:watch": "npm run test -- --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "dev1": "vitest",
     "typecheck": "npx tsc --noEmit",
     "lint": "npx eslint src",
     "prepublishOnly": "npm run typecheck && npm run build && npm run test",

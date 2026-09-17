@@ -1,5 +1,5 @@
 import * as api from '../src/index';
-
+import { describe, it, expect } from 'vitest';
 const EXPECTED = [
   'REGEXP_HEADER',
   'REGEXP_H2',

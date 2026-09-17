@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`exports > export surface matches snapshot 1`] = `
+[
+  "REGEXP_BLOCKQUOTE",
+  "REGEXP_BR",
+  "REGEXP_CODE",
+  "REGEXP_DEL",
+  "REGEXP_EMPTY_BLOCKQUOTE",
+  "REGEXP_EMPTY_OL",
+  "REGEXP_EMPTY_UL",
+  "REGEXP_FENCED_CODE",
+  "REGEXP_H2",
+  "REGEXP_H3",
+  "REGEXP_HEADER",
+  "REGEXP_HR",
+  "REGEXP_HTML",
+  "REGEXP_IMAGE",
+  "REGEXP_INLINE_CODE",
+  "REGEXP_ITALIC",
+  "REGEXP_LINK",
+  "REGEXP_OL_LIST",
+  "REGEXP_PARAGRAPH",
+  "REGEXP_Q",
+  "REGEXP_STRONG",
+  "REGEXP_UL_LIST",
+]
+`;

@@ -14,7 +14,7 @@ import {
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
 } from '../src/index';
-
+import { describe, it, expect } from 'vitest';
 function ok(re: RegExp, input: string): boolean {
   re.lastIndex = 0;
   return re.test(input);
