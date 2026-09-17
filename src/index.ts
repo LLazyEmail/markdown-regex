@@ -26,12 +26,11 @@ export {
 } from './tags/index';
 // src/index.ts
 
-/** Matches fenced code blocks: ```lang\ncode\n``` or ~~~lang\ncode\n~~~ */
-export const REGEXP_FENCED_CODE = /(?:^|\n)(`{3,}|~{3,})([\w-]*)\r?\n([\s\S]*?)\r?\n\1(?=\n|$)/g;
-/** Matches inline code spans: `code` */
-export const REGEXP_INLINE_CODE = /(?<!\\)(`+)([^`\n]+?)\1(?!`)/g;
-/** Matches raw HTML tags: <div>, </span>, <br/> */
-export const REGEXP_HTML = /<\/?[a-z][\w-]*(?:\s+[\w-]+(?:=(?:"[^"]*"|'[^']*'|[^\s>]+))?)*\s*\/?>/gi;
+export { REGEXP_FENCED_CODE } from './code';
+export { REGEXP_INLINE_CODE } from './code';
+export { REGEXP_HTML } from './html';
+export { extract } from './extract';
+export type { ExtractResult } from './extract';
 
 export {
   REGEXP_UL_LIST,
