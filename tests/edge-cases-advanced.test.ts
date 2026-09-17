@@ -1,12 +1,12 @@
-'use strict';
-
-const {
+import { beforeEach, describe, expect, it } from 'vitest';
+import {
   REGEXP_HEADER,
   REGEXP_H2,
   REGEXP_H3,
   REGEXP_IMAGE,
   REGEXP_LINK,
   REGEXP_STRONG,
+  REGEXP_ITALIC,
   REGEXP_DEL,
   REGEXP_Q,
   REGEXP_CODE,
@@ -15,30 +15,31 @@ const {
   REGEXP_PARAGRAPH,
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
-  REGEXP_EM,
   REGEXP_UL_LIST,
   REGEXP_OL_LIST,
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
-} = require('../src/index');
+} from '../src/index';
+
+const ALL_REGEXES: RegExp[] = [
+  REGEXP_HEADER, REGEXP_H2, REGEXP_H3,
+  REGEXP_IMAGE, REGEXP_LINK,
+  REGEXP_STRONG, REGEXP_DEL, REGEXP_Q, REGEXP_CODE,
+  REGEXP_BLOCKQUOTE, REGEXP_HR, REGEXP_PARAGRAPH, REGEXP_BR,
+  REGEXP_EMPTY_BLOCKQUOTE, REGEXP_ITALIC,
+  REGEXP_UL_LIST, REGEXP_OL_LIST, REGEXP_EMPTY_UL, REGEXP_EMPTY_OL,
+];
 
 // Helper: reset lastIndex on all global regexes before each test
 beforeEach(() => {
-  [
-    REGEXP_HEADER, REGEXP_H2, REGEXP_H3,
-    REGEXP_IMAGE, REGEXP_LINK,
-    REGEXP_STRONG, REGEXP_DEL, REGEXP_Q, REGEXP_CODE,
-    REGEXP_BLOCKQUOTE, REGEXP_HR, REGEXP_PARAGRAPH, REGEXP_BR,
-    REGEXP_EMPTY_BLOCKQUOTE, REGEXP_EM,
-    REGEXP_UL_LIST, REGEXP_OL_LIST, REGEXP_EMPTY_UL, REGEXP_EMPTY_OL,
-  ].forEach((r) => { r.lastIndex = 0; });
+  ALL_REGEXES.forEach((r) => { r.lastIndex = 0; });
 });
 
 // ─── Header Patterns ─────────────────────────────────────────────────────────
 
 describe('REGEXP_HEADER: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\n# Heading 1',
       '\n## Heading 2',
       '\n### Heading 3',
@@ -58,7 +59,7 @@ describe('REGEXP_HEADER: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'No leading newline header',
       'plain text',
       '',
@@ -77,13 +78,13 @@ describe('REGEXP_HEADER: edge cases', () => {
     REGEXP_HEADER.lastIndex = 0;
     const matches = multiHeader.match(REGEXP_HEADER);
     expect(matches).not.toBeNull();
-    expect(matches.length).toBeGreaterThanOrEqual(1);
+    expect(matches!.length).toBeGreaterThanOrEqual(1);
   });
 });
 
 describe('REGEXP_H2: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '## Simple H2',
       '## H2 with trailing spaces   ',
       '## H2 with special chars: @#$',
@@ -99,7 +100,7 @@ describe('REGEXP_H2: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '### Not an H2',
       '# Not an H2',
       'plain text',
@@ -117,7 +118,7 @@ describe('REGEXP_H2: edge cases', () => {
 
 describe('REGEXP_H3: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '### Simple H3',
       '### H3 with trailing spaces   ',
       '### H3 Unicode: español',
@@ -132,7 +133,7 @@ describe('REGEXP_H3: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '## Not an H3',
       '# Not an H3',
       '#### Not an H3',
@@ -152,7 +153,7 @@ describe('REGEXP_H3: edge cases', () => {
 
 describe('REGEXP_LINK: edge cases', () => {
   describe('valid patterns', () => {
-    const validLinks = [
+    const validLinks: string[] = [
       '[text](https://example.com)',
       '[text with spaces](https://example.com)',
       '[link](http://example.com/path?query=1&other=2)',
@@ -171,7 +172,7 @@ describe('REGEXP_LINK: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidLinks = [
+    const invalidLinks: string[] = [
       '[text without url',
       'text(url)',
       'plain text',
@@ -191,7 +192,7 @@ describe('REGEXP_LINK: edge cases', () => {
     REGEXP_LINK.lastIndex = 0;
     const matches = text.match(REGEXP_LINK);
     expect(matches).not.toBeNull();
-    expect(matches.length).toBe(2);
+    expect(matches!.length).toBe(2);
   });
 
   it('should capture link text and URL correctly', () => {
@@ -199,8 +200,8 @@ describe('REGEXP_LINK: edge cases', () => {
     REGEXP_LINK.lastIndex = 0;
     const match = REGEXP_LINK.exec(text);
     expect(match).not.toBeNull();
-    expect(match[1]).toBe('my link');
-    expect(match[2]).toBe('https://example.com');
+    expect(match![1]).toBe('my link');
+    expect(match![2]).toBe('https://example.com');
   });
 });
 
@@ -208,7 +209,7 @@ describe('REGEXP_LINK: edge cases', () => {
 
 describe('REGEXP_IMAGE: edge cases', () => {
   describe('valid patterns', () => {
-    const validImages = [
+    const validImages: string[] = [
       '![alt text](image.png)',
       '![alt text](https://example.com/image.jpg)',
       '![alt with spaces](image.gif)',
@@ -225,7 +226,7 @@ describe('REGEXP_IMAGE: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidImages = [
+    const invalidImages: string[] = [
       '![](image.png)',
       '[not an image](url)',
       'plain text',
@@ -245,8 +246,8 @@ describe('REGEXP_IMAGE: edge cases', () => {
     REGEXP_IMAGE.lastIndex = 0;
     const match = REGEXP_IMAGE.exec(text);
     expect(match).not.toBeNull();
-    expect(match[1]).toBe('my image');
-    expect(match[2]).toBe('https://example.com/pic.png');
+    expect(match![1]).toBe('my image');
+    expect(match![2]).toBe('https://example.com/pic.png');
   });
 });
 
@@ -254,7 +255,7 @@ describe('REGEXP_IMAGE: edge cases', () => {
 
 describe('REGEXP_STRONG: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '**bold text**',
       '__bold text__',
       '**bold with spaces**',
@@ -272,7 +273,7 @@ describe('REGEXP_STRONG: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'plain text',
       '*single asterisk*',
       '',
@@ -295,9 +296,9 @@ describe('REGEXP_STRONG: edge cases', () => {
 
 // ─── Emphasis (Italic) Patterns ──────────────────────────────────────────────
 
-describe('REGEXP_EM: edge cases', () => {
+describe('REGEXP_ITALIC: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       ' *italic text* ',
       ' _italic text_ ',
       '> *italic after blockquote marker* ',
@@ -306,14 +307,14 @@ describe('REGEXP_EM: edge cases', () => {
 
     it('should match valid emphasis patterns', () => {
       validInputs.forEach((input) => {
-        REGEXP_EM.lastIndex = 0;
-        expect(REGEXP_EM.test(input)).toBe(true);
+        REGEXP_ITALIC.lastIndex = 0;
+        expect(REGEXP_ITALIC.test(input)).toBe(true);
       });
     });
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'plain text',
       '*no surrounding whitespace*',
       '',
@@ -321,8 +322,8 @@ describe('REGEXP_EM: edge cases', () => {
 
     it('should not match non-emphasis content', () => {
       invalidInputs.forEach((input) => {
-        REGEXP_EM.lastIndex = 0;
-        expect(REGEXP_EM.test(input)).toBe(false);
+        REGEXP_ITALIC.lastIndex = 0;
+        expect(REGEXP_ITALIC.test(input)).toBe(false);
       });
     });
   });
@@ -332,7 +333,7 @@ describe('REGEXP_EM: edge cases', () => {
 
 describe('REGEXP_DEL: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '~~strikethrough~~',
       '~~text with spaces~~',
       '~~special chars: @#$~~',
@@ -349,7 +350,7 @@ describe('REGEXP_DEL: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'plain text',
       '~single tilde~',
       '',
@@ -368,7 +369,7 @@ describe('REGEXP_DEL: edge cases', () => {
 
 describe('REGEXP_CODE: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '`inline code`',
       '`code with spaces`',
       '`code with special chars: @#$`',
@@ -386,7 +387,7 @@ describe('REGEXP_CODE: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'plain text',
       'code without backticks',
       '',
@@ -405,7 +406,7 @@ describe('REGEXP_CODE: edge cases', () => {
     REGEXP_CODE.lastIndex = 0;
     const matches = text.match(REGEXP_CODE);
     expect(matches).not.toBeNull();
-    expect(matches.length).toBe(2);
+    expect(matches!.length).toBe(2);
   });
 });
 
@@ -413,11 +414,11 @@ describe('REGEXP_CODE: edge cases', () => {
 
 describe('REGEXP_BLOCKQUOTE: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\n> simple blockquote',
       '\n> blockquote with special chars: @#$',
       '\n> Unicode blockquote: café',
-      '\n&gt; HTML-entity blockquote',
+      '\n> HTML-entity blockquote',
       '\n> ',
     ];
 
@@ -430,7 +431,7 @@ describe('REGEXP_BLOCKQUOTE: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'plain text',
       '> no leading newline',
       '',
@@ -449,7 +450,7 @@ describe('REGEXP_BLOCKQUOTE: edge cases', () => {
 
 describe('REGEXP_HR: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\n-----',
       '\n------',
       '\n----------',
@@ -464,7 +465,7 @@ describe('REGEXP_HR: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '-----',
       '\n----',
       '\n---',
@@ -485,7 +486,7 @@ describe('REGEXP_HR: edge cases', () => {
 
 describe('REGEXP_PARAGRAPH: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\nsome text\n',
       '\ntext with special chars: @#$\n',
       '\nUnicode: café\n',
@@ -500,7 +501,7 @@ describe('REGEXP_PARAGRAPH: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'no surrounding newlines',
       '\n\n',
       '',
@@ -519,7 +520,7 @@ describe('REGEXP_PARAGRAPH: edge cases', () => {
 
 describe('REGEXP_BR: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\n\n',
       '\n\n\n',
       'text\n\nmore text',
@@ -534,7 +535,7 @@ describe('REGEXP_BR: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '\n',
       'plain text',
       'text\nmore text',
@@ -554,7 +555,7 @@ describe('REGEXP_BR: edge cases', () => {
 
 describe('REGEXP_Q: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       ':"simple quote":',
       ':"quote with spaces":',
       ':"special chars: @#$":',
@@ -571,7 +572,7 @@ describe('REGEXP_Q: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '"just quotes"',
       ':no closing colon"',
       'plain text',
@@ -591,7 +592,7 @@ describe('REGEXP_Q: edge cases', () => {
 
 describe('REGEXP_EMPTY_BLOCKQUOTE: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '</blockquote><blockquote>',
     ];
 
@@ -604,7 +605,7 @@ describe('REGEXP_EMPTY_BLOCKQUOTE: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '<blockquote></blockquote>',
       '<blockquote>content</blockquote>',
       'plain text',
@@ -624,7 +625,7 @@ describe('REGEXP_EMPTY_BLOCKQUOTE: edge cases', () => {
 
 describe('REGEXP_UL_LIST: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\n* Item 1\n',
       '\n* Item with spaces\n',
       '\n* Item with special chars: @#$\n',
@@ -641,7 +642,7 @@ describe('REGEXP_UL_LIST: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       'Item 1',
       '* no leading newline',
       '',
@@ -658,7 +659,7 @@ describe('REGEXP_UL_LIST: edge cases', () => {
 
 describe('REGEXP_OL_LIST: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '\n1. Item 1',
       '\n2. Item 2',
       '\n10. Item 10',
@@ -675,7 +676,7 @@ describe('REGEXP_OL_LIST: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '1. no leading newline',
       'Item 1',
       '',
@@ -692,7 +693,7 @@ describe('REGEXP_OL_LIST: edge cases', () => {
 
 describe('REGEXP_EMPTY_UL: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '</ul><ul>',
       '</ul> <ul>',
     ];
@@ -706,7 +707,7 @@ describe('REGEXP_EMPTY_UL: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '<ul></ul>',
       '<ul>content</ul>',
       'plain text',
@@ -724,7 +725,7 @@ describe('REGEXP_EMPTY_UL: edge cases', () => {
 
 describe('REGEXP_EMPTY_OL: edge cases', () => {
   describe('valid patterns', () => {
-    const validInputs = [
+    const validInputs: string[] = [
       '</ol><ol>',
       '</ol> <ol>',
     ];
@@ -738,7 +739,7 @@ describe('REGEXP_EMPTY_OL: edge cases', () => {
   });
 
   describe('invalid patterns', () => {
-    const invalidInputs = [
+    const invalidInputs: string[] = [
       '<ol></ol>',
       '<ol>content</ol>',
       'plain text',
@@ -757,17 +758,11 @@ describe('REGEXP_EMPTY_OL: edge cases', () => {
 // ─── Integration: Mixed Markdown Scenarios ───────────────────────────────────
 
 describe('Integration: multiple patterns in the same text', () => {
-  const richMarkdown = '\n# Title\n\nA paragraph with **bold** and `code` and ~~del~~.\n\n> blockquote\n\n* Item A\n* Item B\n\n1. First\n\n[link](https://example.com) and ![img alt](image.png)\n\n:"a quote":\n\n\n-----\n\n _em_ \n';
+  const richMarkdown =
+    '\n# Title\n\nA paragraph with **bold** and `code` and ~~del~~.\n\n> blockquote\n\n* Item A\n* Item B\n\n1. First\n\n[link](https://example.com) and ![img alt](image.png)\n\n:"a quote":\n\n\n-----\n\n _em_ \n';
 
   beforeEach(() => {
-    [
-      REGEXP_HEADER, REGEXP_H2, REGEXP_H3,
-      REGEXP_IMAGE, REGEXP_LINK,
-      REGEXP_STRONG, REGEXP_DEL, REGEXP_Q, REGEXP_CODE,
-      REGEXP_BLOCKQUOTE, REGEXP_HR, REGEXP_PARAGRAPH, REGEXP_BR,
-      REGEXP_EMPTY_BLOCKQUOTE, REGEXP_EM,
-      REGEXP_UL_LIST, REGEXP_OL_LIST, REGEXP_EMPTY_UL, REGEXP_EMPTY_OL,
-    ].forEach((r) => { r.lastIndex = 0; });
+    ALL_REGEXES.forEach((r) => { r.lastIndex = 0; });
   });
 
   it('REGEXP_HEADER matches title in rich markdown', () => {
@@ -833,8 +828,8 @@ describe('Integration: multiple patterns in the same text', () => {
     const text = ' **bold** and _italic_ ';
     REGEXP_STRONG.lastIndex = 0;
     expect(REGEXP_STRONG.test(text)).toBe(true);
-    REGEXP_EM.lastIndex = 0;
-    expect(REGEXP_EM.test(text)).toBe(true);
+    REGEXP_ITALIC.lastIndex = 0;
+    expect(REGEXP_ITALIC.test(text)).toBe(true);
   });
 
   it('code and strikethrough can appear together', () => {

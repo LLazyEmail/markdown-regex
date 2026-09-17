@@ -10,6 +10,9 @@ A set of ready-to-use RegExp constants for parsing and extracting elements from 
 [![Tests](https://github.com/LLazyEmail/markdown-regex/actions/workflows/test.yml/badge.svg)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+[![Socket Badge](https://badge.socket.dev/npm/package/markdown-regex/)](https://badge.socket.dev/npm/package/markdown-regex/)
+
+
 > **v2.1 (beta)** — Fully rewritten in TypeScript, powered by tsup. Zero runtime dependencies.
 
 Requires **Node.js 20+** (Node 18 is not supported).
