@@ -1,1 +1,36 @@
-see-local-file
+import { beforeEach, describe, expect, it } from 'vitest';
+import {
+  REGEXP_HEADER,
+  REGEXP_H2,
+  REGEXP_H3,
+  REGEXP_IMAGE,
+  REGEXP_LINK,
+  REGEXP_STRONG,
+  REGEXP_ITALIC,
+  REGEXP_DEL,
+  REGEXP_Q,
+  REGEXP_CODE,
+  REGEXP_BLOCKQUOTE,
+  REGEXP_HR,
+  REGEXP_PARAGRAPH,
+  REGEXP_BR,
+  REGEXP_EMPTY_BLOCKQUOTE,
+  REGEXP_UL_LIST,
+  REGEXP_OL_LIST,
+  REGEXP_EMPTY_UL,
+  REGEXP_EMPTY_OL,
+} from '../src/index';
+
+const ALL_REGEXES: RegExp[] = [
+  REGEXP_HEADER, REGEXP_H2, REGEXP_H3,
+  REGEXP_IMAGE, REGEXP_LINK,
+  REGEXP_STRONG, REGEXP_DEL, REGEXP_Q, REGEXP_CODE,
+  REGEXP_BLOCKQUOTE, REGEXP_HR, REGEXP_PARAGRAPH, REGEXP_BR,
+  REGEXP_EMPTY_BLOCKQUOTE, REGEXP_ITALIC,
+  REGEXP_UL_LIST, REGEXP_OL_LIST, REGEXP_EMPTY_UL, REGEXP_EMPTY_OL,
+];
+
+// Helper: reset lastIndex on all global regexes before each test
+beforeEach(() => {
+  ALL_REGEXES.forEach((r) => { r.lastIndex = 0; });
+});
