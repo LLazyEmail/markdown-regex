@@ -14,8 +14,9 @@ describe('Markdown Regex Patterns', () => {
     });
 
     it('should match empty unordered lists', () => {
-      const emptyList = '* ';
-      expect(REGEXP_EMPTY_UL.test(emptyList)).toBe(true);
+      // REGEXP_EMPTY_UL is an HTML cleanup pattern (</ul><ul>), not markdown.
+      expect(REGEXP_EMPTY_UL.test('</ul><ul>')).toBe(true);
+      expect(REGEXP_UL_LIST.test('* ')).toBe(true);
     });
   });
 
@@ -31,8 +32,9 @@ describe('Markdown Regex Patterns', () => {
     });
 
     it('should match empty ordered lists', () => {
-      const emptyList = '1. ';
-      expect(REGEXP_EMPTY_OL.test(emptyList)).toBe(true);
+      // REGEXP_EMPTY_OL is an HTML cleanup pattern (</ol><ol>), not markdown.
+      expect(REGEXP_EMPTY_OL.test('</ol><ol>')).toBe(true);
+      expect(REGEXP_OL_LIST.test('1. ')).toBe(true);
     });
   });
 });
