@@ -34,3 +34,816 @@ const ALL_REGEXES: RegExp[] = [
 beforeEach(() => {
   ALL_REGEXES.forEach((r) => { r.lastIndex = 0; });
 });
+
+// Header Patterns
+
+describe('REGEXP_HEADER: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\n# Heading 1',
+      '\n## Heading 2',
+      '\n### Heading 3',
+      '\n#### Heading 4',
+      '\n# Heading with trailing space   ',
+      '\n# Heading with special chars: & < >',
+      '\n# Heading with Unicode: cafe',
+      '\n# 123 Numeric heading',
+    ];
+
+    it('should match valid header patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_HEADER.lastIndex = 0;
+        expect(REGEXP_HEADER.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'No leading newline header',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-header content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_HEADER.lastIndex = 0;
+        expect(REGEXP_HEADER.test(input)).toBe(false);
+      });
+    });
+  });
+
+  it('should match multiple headers in sequence', () => {
+    const multiHeader = '\n# First\n## Second\n### Third';
+    REGEXP_HEADER.lastIndex = 0;
+    const matches = multiHeader.match(REGEXP_HEADER);
+    expect(matches).not.toBeNull();
+    expect(matches!.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe('REGEXP_H2: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '## Simple H2',
+      '## H2 with trailing spaces   ',
+      '## H2 with special chars: @#$',
+      '## H2 Unicode heading',
+    ];
+
+    it('should match valid H2 patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_H2.lastIndex = 0;
+        expect(REGEXP_H2.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '### Not an H2',
+      '# Not an H2',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-H2 content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_H2.lastIndex = 0;
+        expect(REGEXP_H2.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_H3: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '### Simple H3',
+      '### H3 with trailing spaces   ',
+      '### H3 Unicode heading',
+    ];
+
+    it('should match valid H3 patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_H3.lastIndex = 0;
+        expect(REGEXP_H3.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '## Not an H3',
+      '# Not an H3',
+      '#### Not an H3',
+      'plain text',
+    ];
+
+    it('should not match non-H3 content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_H3.lastIndex = 0;
+        expect(REGEXP_H3.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_LINK: edge cases', () => {
+  describe('valid patterns', () => {
+    const validLinks: string[] = [
+      '[text](https://example.com)',
+      '[text with spaces](https://example.com)',
+      '[link](http://example.com/path?query=1&other=2)',
+      '[link](https://example.com/path#anchor)',
+      '[link with **bold** inside](https://example.com)',
+      '[a](b)',
+      '[Unicode text](https://example.com)',
+    ];
+
+    it('should match valid link patterns', () => {
+      validLinks.forEach((link) => {
+        REGEXP_LINK.lastIndex = 0;
+        expect(REGEXP_LINK.test(link)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidLinks: string[] = [
+      '[text without url',
+      'text(url)',
+      'plain text',
+      '',
+    ];
+
+    it('should not match malformed link patterns', () => {
+      invalidLinks.forEach((link) => {
+        REGEXP_LINK.lastIndex = 0;
+        expect(REGEXP_LINK.test(link)).toBe(false);
+      });
+    });
+  });
+
+  it('should match multiple links in same text', () => {
+    const text = '[first](https://first.com) and [second](https://second.com)';
+    REGEXP_LINK.lastIndex = 0;
+    const matches = text.match(REGEXP_LINK);
+    expect(matches).not.toBeNull();
+    expect(matches!.length).toBe(2);
+  });
+
+  it('should capture link text and URL correctly', () => {
+    const text = '[my link](https://example.com)';
+    REGEXP_LINK.lastIndex = 0;
+    const match = REGEXP_LINK.exec(text);
+    expect(match).not.toBeNull();
+    expect(match![1]).toBe('my link');
+    expect(match![2]).toBe('https://example.com');
+  });
+});
+
+describe('REGEXP_IMAGE: edge cases', () => {
+  describe('valid patterns', () => {
+    const validImages: string[] = [
+      '![alt text](image.png)',
+      '![alt text](https://example.com/image.jpg)',
+      '![alt with spaces](image.gif)',
+      '![Unicode alt](image.png)',
+      '![special chars: <>&](image.png)',
+      '![](image.png)',
+    ];
+
+    it('should match valid image patterns', () => {
+      validImages.forEach((img) => {
+        REGEXP_IMAGE.lastIndex = 0;
+        expect(REGEXP_IMAGE.test(img)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidImages: string[] = [
+      '[not an image](url)',
+      'plain text',
+      '',
+    ];
+
+    it('should not match malformed image patterns', () => {
+      invalidImages.forEach((img) => {
+        REGEXP_IMAGE.lastIndex = 0;
+        expect(REGEXP_IMAGE.test(img)).toBe(false);
+      });
+    });
+  });
+
+  it('should capture alt text and URL correctly', () => {
+    const text = '![my image](https://example.com/pic.png)';
+    REGEXP_IMAGE.lastIndex = 0;
+    const match = REGEXP_IMAGE.exec(text);
+    expect(match).not.toBeNull();
+    expect(match![1]).toBe('my image');
+    expect(match![2]).toBe('https://example.com/pic.png');
+  });
+});
+
+describe('REGEXP_STRONG: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '**bold text**',
+      '__bold text__',
+      '**bold with spaces**',
+      '**bold with special chars: @#$**',
+      '**Unicode cafe**',
+      '**123**',
+    ];
+
+    it('should match valid bold patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_STRONG.lastIndex = 0;
+        expect(REGEXP_STRONG.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'plain text',
+      '*single asterisk*',
+      '',
+    ];
+
+    it('should not match non-bold content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_STRONG.lastIndex = 0;
+        expect(REGEXP_STRONG.test(input)).toBe(false);
+      });
+    });
+  });
+
+  it('should match bold text within a sentence', () => {
+    const text = 'This has **bold** in it';
+    REGEXP_STRONG.lastIndex = 0;
+    expect(REGEXP_STRONG.test(text)).toBe(true);
+  });
+});
+
+describe('REGEXP_ITALIC: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      ' *italic text* ',
+      ' _italic text_ ',
+      '> *italic after blockquote marker* ',
+      ' *Unicode cafe* ',
+    ];
+
+    it('should match valid emphasis patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_ITALIC.lastIndex = 0;
+        expect(REGEXP_ITALIC.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'plain text',
+      'not*italic*',
+      '',
+    ];
+
+    it('should not match non-emphasis content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_ITALIC.lastIndex = 0;
+        expect(REGEXP_ITALIC.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_DEL: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '~~strikethrough~~',
+      '~~text with spaces~~',
+      '~~special chars: @#$~~',
+      '~~Unicode cafe~~',
+      '~~123~~',
+    ];
+
+    it('should match valid strikethrough patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_DEL.lastIndex = 0;
+        expect(REGEXP_DEL.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'plain text',
+      '~single tilde~',
+      '',
+    ];
+
+    it('should not match non-strikethrough content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_DEL.lastIndex = 0;
+        expect(REGEXP_DEL.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_CODE: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '`inline code`',
+      '`code with spaces`',
+      '`code with special chars: @#$`',
+      '`console.log("hello")`',
+      '`<html>`',
+      '`arr[0]`',
+    ];
+
+    it('should match valid inline code patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_CODE.lastIndex = 0;
+        expect(REGEXP_CODE.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'plain text',
+      'code without backticks',
+      '',
+    ];
+
+    it('should not match non-code content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_CODE.lastIndex = 0;
+        expect(REGEXP_CODE.test(input)).toBe(false);
+      });
+    });
+  });
+
+  it('should match multiple code spans in the same text', () => {
+    const text = 'Use `foo` and `bar` together';
+    REGEXP_CODE.lastIndex = 0;
+    const matches = text.match(REGEXP_CODE);
+    expect(matches).not.toBeNull();
+    expect(matches!.length).toBe(2);
+  });
+});
+
+describe('REGEXP_BLOCKQUOTE: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\n> simple blockquote',
+      '\n> blockquote with special chars: @#$',
+      '\n> Unicode blockquote',
+      '\n> HTML-entity blockquote',
+      '\n> ',
+    ];
+
+    it('should match valid blockquote patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_BLOCKQUOTE.lastIndex = 0;
+        expect(REGEXP_BLOCKQUOTE.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'plain text',
+      '> no leading newline',
+      '',
+    ];
+
+    it('should not match non-blockquote content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_BLOCKQUOTE.lastIndex = 0;
+        expect(REGEXP_BLOCKQUOTE.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_HR: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\n-----',
+      '\n------',
+      '\n----------',
+    ];
+
+    it('should match valid horizontal rule patterns (5+ dashes after newline)', () => {
+      validInputs.forEach((input) => {
+        REGEXP_HR.lastIndex = 0;
+        expect(REGEXP_HR.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '-----',
+      '\n----',
+      '\n---',
+      'plain text',
+      '',
+    ];
+
+    it('should not match invalid horizontal rule patterns', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_HR.lastIndex = 0;
+        expect(REGEXP_HR.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_PARAGRAPH: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\nsome text\n',
+      '\ntext with special chars: @#$\n',
+      '\nUnicode text\n',
+    ];
+
+    it('should match valid paragraph patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_PARAGRAPH.lastIndex = 0;
+        expect(REGEXP_PARAGRAPH.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'no surrounding newlines',
+      '\n\n',
+      '',
+    ];
+
+    it('should not match non-paragraph content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_PARAGRAPH.lastIndex = 0;
+        expect(REGEXP_PARAGRAPH.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_BR: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\n\n',
+      '\n\n\n',
+      'text\n\nmore text',
+    ];
+
+    it('should match double (or more) newlines', () => {
+      validInputs.forEach((input) => {
+        REGEXP_BR.lastIndex = 0;
+        expect(REGEXP_BR.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '\n',
+      'plain text',
+      'text\nmore text',
+      '',
+    ];
+
+    it('should not match single newlines or plain text', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_BR.lastIndex = 0;
+        expect(REGEXP_BR.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_Q: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      ':"simple quote":',
+      ':"quote with spaces":',
+      ':"special chars: @#$":',
+      ':"Unicode cafe":',
+      ':"":',
+    ];
+
+    it('should match valid quote patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_Q.lastIndex = 0;
+        expect(REGEXP_Q.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '"just quotes"',
+      ':no closing colon"',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-quote content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_Q.lastIndex = 0;
+        expect(REGEXP_Q.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_EMPTY_BLOCKQUOTE: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '</blockquote><blockquote>',
+    ];
+
+    it('should match empty blockquote HTML tags', () => {
+      validInputs.forEach((input) => {
+        REGEXP_EMPTY_BLOCKQUOTE.lastIndex = 0;
+        expect(REGEXP_EMPTY_BLOCKQUOTE.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '<blockquote></blockquote>',
+      '<blockquote>content</blockquote>',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-empty-blockquote content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_EMPTY_BLOCKQUOTE.lastIndex = 0;
+        expect(REGEXP_EMPTY_BLOCKQUOTE.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_UL_LIST: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\n* Item 1\n',
+      '\n* Item with spaces\n',
+      '\n* Item with special chars: @#$\n',
+      '\n* Unicode item\n',
+      '\n* First\n* Second\n',
+      '* start of string',
+    ];
+
+    it('should match valid unordered list patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_UL_LIST.lastIndex = 0;
+        expect(REGEXP_UL_LIST.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'Item 1',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-list content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_UL_LIST.lastIndex = 0;
+        expect(REGEXP_UL_LIST.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_OL_LIST: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '\n1. Item 1',
+      '\n2. Item 2',
+      '\n10. Item 10',
+      '\n1. Item with special chars: @#$',
+      '\n1. Unicode item',
+      '1. start of string',
+    ];
+
+    it('should match valid ordered list patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_OL_LIST.lastIndex = 0;
+        expect(REGEXP_OL_LIST.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      'Item 1',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-ordered-list content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_OL_LIST.lastIndex = 0;
+        expect(REGEXP_OL_LIST.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_EMPTY_UL: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '</ul><ul>',
+      '</ul> <ul>',
+    ];
+
+    it('should match empty UL HTML patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_EMPTY_UL.lastIndex = 0;
+        expect(REGEXP_EMPTY_UL.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '<ul></ul>',
+      '<ul>content</ul>',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-empty-UL content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_EMPTY_UL.lastIndex = 0;
+        expect(REGEXP_EMPTY_UL.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('REGEXP_EMPTY_OL: edge cases', () => {
+  describe('valid patterns', () => {
+    const validInputs: string[] = [
+      '</ol><ol>',
+      '</ol> <ol>',
+    ];
+
+    it('should match empty OL HTML patterns', () => {
+      validInputs.forEach((input) => {
+        REGEXP_EMPTY_OL.lastIndex = 0;
+        expect(REGEXP_EMPTY_OL.test(input)).toBe(true);
+      });
+    });
+  });
+
+  describe('invalid patterns', () => {
+    const invalidInputs: string[] = [
+      '<ol></ol>',
+      '<ol>content</ol>',
+      'plain text',
+      '',
+    ];
+
+    it('should not match non-empty-OL content', () => {
+      invalidInputs.forEach((input) => {
+        REGEXP_EMPTY_OL.lastIndex = 0;
+        expect(REGEXP_EMPTY_OL.test(input)).toBe(false);
+      });
+    });
+  });
+});
+
+describe('Integration: multiple patterns in the same text', () => {
+  const richMarkdown =
+    '\n# Title\n\nA paragraph with **bold** and `code` and ~~del~~.\n\n> blockquote\n\n* Item A\n* Item B\n\n1. First\n\n[link](https://example.com) and ![img alt](image.png)\n\n:"a quote":\n\n\n-----\n\n _em_ \n';
+
+  beforeEach(() => {
+    ALL_REGEXES.forEach((r) => { r.lastIndex = 0; });
+  });
+
+  it('REGEXP_HEADER matches title in rich markdown', () => {
+    expect(REGEXP_HEADER.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_STRONG matches bold in rich markdown', () => {
+    REGEXP_STRONG.lastIndex = 0;
+    expect(REGEXP_STRONG.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_CODE matches inline code in rich markdown', () => {
+    REGEXP_CODE.lastIndex = 0;
+    expect(REGEXP_CODE.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_DEL matches strikethrough in rich markdown', () => {
+    REGEXP_DEL.lastIndex = 0;
+    expect(REGEXP_DEL.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_BLOCKQUOTE matches blockquote in rich markdown', () => {
+    REGEXP_BLOCKQUOTE.lastIndex = 0;
+    expect(REGEXP_BLOCKQUOTE.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_LINK matches link in rich markdown', () => {
+    REGEXP_LINK.lastIndex = 0;
+    expect(REGEXP_LINK.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_IMAGE matches image in rich markdown', () => {
+    REGEXP_IMAGE.lastIndex = 0;
+    expect(REGEXP_IMAGE.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_Q matches custom quote in rich markdown', () => {
+    REGEXP_Q.lastIndex = 0;
+    expect(REGEXP_Q.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_HR matches horizontal rule in rich markdown', () => {
+    REGEXP_HR.lastIndex = 0;
+    expect(REGEXP_HR.test(richMarkdown)).toBe(true);
+  });
+
+  it('REGEXP_BR matches double newline in rich markdown', () => {
+    REGEXP_BR.lastIndex = 0;
+    expect(REGEXP_BR.test(richMarkdown)).toBe(true);
+  });
+
+  it('patterns do not interfere: link and image coexist', () => {
+    const text = '[link text](https://link.com) and ![img alt](image.png)';
+    REGEXP_LINK.lastIndex = 0;
+    REGEXP_IMAGE.lastIndex = 0;
+    expect(REGEXP_LINK.test(text)).toBe(true);
+    REGEXP_LINK.lastIndex = 0;
+    REGEXP_IMAGE.lastIndex = 0;
+    expect(REGEXP_IMAGE.test(text)).toBe(true);
+  });
+
+  it('bold and italic can appear in the same text without interference', () => {
+    const text = ' **bold** and _italic_ ';
+    REGEXP_STRONG.lastIndex = 0;
+    expect(REGEXP_STRONG.test(text)).toBe(true);
+    REGEXP_ITALIC.lastIndex = 0;
+    expect(REGEXP_ITALIC.test(text)).toBe(true);
+  });
+
+  it('code and strikethrough can appear together', () => {
+    const text = '`code` and ~~del~~';
+    REGEXP_CODE.lastIndex = 0;
+    REGEXP_DEL.lastIndex = 0;
+    expect(REGEXP_CODE.test(text)).toBe(true);
+    REGEXP_DEL.lastIndex = 0;
+    expect(REGEXP_DEL.test(text)).toBe(true);
+  });
+});
+
+describe('Boundary conditions', () => {
+  it('REGEXP_STRONG: empty bold markers (**) do not match (.+ requires content)', () => {
+    REGEXP_STRONG.lastIndex = 0;
+    expect(REGEXP_STRONG.test('****')).toBe(false);
+  });
+
+  it('REGEXP_CODE: empty backtick pair does not match (.+ requires content)', () => {
+    REGEXP_CODE.lastIndex = 0;
+    expect(REGEXP_CODE.test('``')).toBe(false);
+  });
+
+  it('REGEXP_DEL: empty strikethrough does not match (.+ requires content)', () => {
+    REGEXP_DEL.lastIndex = 0;
+    expect(REGEXP_DEL.test('~~~~')).toBe(false);
+  });
+
+  it('REGEXP_Q: empty quote matches', () => {
+    REGEXP_Q.lastIndex = 0;
+    expect(REGEXP_Q.test(':"":')).toBe(true);
+  });
+
+  it('REGEXP_H2: single character heading', () => {
+    REGEXP_H2.lastIndex = 0;
+    expect(REGEXP_H2.test('## A')).toBe(true);
+  });
+
+  it('REGEXP_H3: single character heading', () => {
+    REGEXP_H3.lastIndex = 0;
+    expect(REGEXP_H3.test('### B')).toBe(true);
+  });
+});
