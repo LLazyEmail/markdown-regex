@@ -1,26 +1,24 @@
 /**
- * Matches ATX markdown headers (lines starting with 1–6 `#` characters).
- * Matches at the start of the string or after a newline (Unix / Windows / old Mac).
+ * Matches ATX Markdown headers (1–6 `#` at start of string or after a newline).
+ * Captures: [1] start/newline, [2] the `#` run, [3] heading text.
  *
- * Captures: [1] the newline or start, [2] the `#` run, [3] the heading text.
- *
- * @example
- *   # Heading 1
- *   ## Heading 2
- *   ### Heading 3
+ * @example Matches `# Header 1`
+ * @example Does not match setext `Title\n=====`
  */
 export const REGEXP_HEADER = /(^|\r\n|\r|\n)(#{1,6})\s+(.*)/gm;
 
 /**
- * Matches level-2 headers only (`## …`).
+ * Matches level-2 ATX headers only (`## …`).
  *
- * @example ## Heading 2
+ * @example Matches `## Heading 2`
+ * @example Does not match `# Heading 1`
  */
 export const REGEXP_H2 = /^##\s+(.*)$/gim;
 
 /**
- * Matches level-3 headers only (`### …`).
+ * Matches level-3 ATX headers only (`### …`).
  *
- * @example ### Heading 3
+ * @example Matches `### Heading 3`
+ * @example Does not match `## Heading 2`
  */
 export const REGEXP_H3 = /^###\s+(.*)$/gim;

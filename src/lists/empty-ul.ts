@@ -1,8 +1,7 @@
 /**
- * Matches consecutive empty unordered-list HTML tags.
- * Useful when cleaning generated HTML.
+ * Matches consecutive empty unordered-list HTML tags. Cleanup helper, not Markdown.
  *
- * @example </ul><ul>
- * @example </ul> <ul>
+ * @example Matches `</ul><ul>` and `</ul> <ul>`
+ * @example Does not match `<ul><li>item</li></ul>`
  */
 export const REGEXP_EMPTY_UL = /<\/ul>\s?<ul>/g;

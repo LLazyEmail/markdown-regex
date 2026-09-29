@@ -4,6 +4,9 @@
  * Ready-to-use RegExp constants for parsing Markdown.
  * Zero runtime dependencies. Works in Node, browsers, and bundlers.
  *
+ * Prefer {@link extract} when you need structured results without matching
+ * inside fenced or inline code.
+ *
  * @packageDocumentation
  */
 
@@ -24,7 +27,6 @@ export {
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
 } from './tags/index';
-// src/index.ts
 
 export { REGEXP_FENCED_CODE } from './code';
 export { REGEXP_INLINE_CODE } from './code';
