@@ -1,7 +1,7 @@
 {
   "name": "markdown-regex",
   "version": "2.1.0",
-  "description": "A set of ready-to-use RegExp constants for parsing and extracting elements from Markdown content",
+  "description": "Zero-dependency, TypeScript-typed RegExp patterns for extracting headers, links, images, lists and code from Markdown",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,7 +18,8 @@
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "engines": {
     "node": ">=20"
@@ -60,10 +61,17 @@
   "license": "MIT",
   "keywords": [
     "markdown",
+    "markdown-parser",
     "regex",
     "regexp",
+    "typescript",
+    "zero-dependency",
+    "commonmark",
     "parser",
-    "email",
-    "typescript"
+    "extract",
+    "headers",
+    "links",
+    "images",
+    "lists"
   ]
 }
