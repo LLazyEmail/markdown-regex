@@ -18,186 +18,117 @@ Requires **Node.js 20+** (Node 18 is not supported).
 
 **Do not use it when** you need a real AST, nested structures, or CommonMark compliance. Use [remark](https://github.com/remarkjs/remark) / [micromark](https://github.com/micromark/micromark) or [markdown-it](https://github.com/markdown-it/markdown-it) for those jobs.
 
-Regex-based parsers have well-known limits (nested emphasis, reference links, setext headings, matching inside code unless you use `extract()`). Stating those limits is intentional: recommend this library only for the jobs above.
-
 ## Status and versions
 
 | Channel | Version | Notes |
 |---|---|---|
-| GitHub `main` / Release `2.1.0` | 2.1.0 | TypeScript rewrite, `extract()`, fenced/inline code, HTML. Treat as preview until npm `latest` matches |
-| npm `latest` | 1.2.0 | Legacy JavaScript API. Do not assume it matches this README |
-| Package name | `markdown-regex` | Same name on GitHub, npm, and the [Hackernoon article](https://hackernoon.com/open-sourcing-regular-expressions-for-markdown-syntax-module) |
-
-Until v2 is published to npm, `npm install markdown-regex` still installs v1. To try v2 from git:
+| GitHub `main` / Release `2.1.0` | 2.1.0 | TypeScript rewrite, `extract()`, fenced/inline code, HTML |
+| npm `latest` | 1.2.0 | Legacy JavaScript API |
+| Package name | `markdown-regex` | Same name on GitHub and npm |
 
 ```bash
 npm install github:LLazyEmail/markdown-regex#main
 ```
 
-## Migrating from v1
-
-v2 is a breaking rewrite. If you are on `1.x`:
-
-1. Require **Node.js 20+**.
-2. Import **named exports** from `markdown-regex` (ESM or CJS). There is no default export.
-3. Rename **`REGEXP_EM` → `REGEXP_ITALIC`**.
-4. Prefer **`REGEXP_INLINE_CODE`** (or keep `REGEXP_CODE` as a legacy alias) and **`extract(md)`** instead of running every regex against the raw string.
-5. Reset `.lastIndex` on global regexes between `.test()` / `.exec()` calls, or use `matchAll`.
-6. Do not expect CommonMark or nested-emphasis correctness. That was never v1 either; v2 documents it.
-
-## Features
-
-- **20+ regex patterns** covering common Markdown elements
-- **`extract(md)`** helper that returns a structured object of all extracted elements
-- **Code-aware**: fenced and inline code are extracted first, so patterns don't match inside them
-- **Platform-agnostic** newlines (works with `\n`, `\r\n` and `\r`)
-- Zero runtime dependencies
-- First-class TypeScript support (generated `.d.ts`)
-- Dual package: ESM + CommonJS + browser (IIFE)
-- Lightweight
-- Ready for custom-tag addons
-
-## Installation
-
-```bash
-npm install markdown-regex
-# or
-yarn add markdown-regex
-# or
-pnpm add markdown-regex
-```
-
 ## Quick Start
 
-### ESM
+Prefer the typed helpers so you do not have to remember capture groups or `lastIndex`:
 
 ```ts
-import { REGEXP_HEADER, REGEXP_LINK, REGEXP_STRONG, REGEXP_ITALIC } from 'markdown-regex';
+import { extractLinks, extractHeaders } from 'markdown-regex';
 
-const md = `# Title\n\nVisit [GitHub](https://github.com) and **bold** and *italic*.`;
-console.log(md.match(REGEXP_LINK));
+extractLinks('[a](b)');
+// [{ text: 'a', url: 'b' }]
+
+extractHeaders('# Title');
+// [{ level: 1, text: 'Title' }]
 ```
 
-### CommonJS
-
-```js
-const { REGEXP_HEADER, REGEXP_LINK } = require('markdown-regex');
-```
-
-### Browser (IIFE)
-
-```html
-<script src="https://unpkg.com/markdown-regex/dist/index.global.js"></script>
-<script>
-  const { REGEXP_LINK } = MarkdownRegex;
-</script>
-```
-
-### Structured extraction with `extract()`
+Every regex is **global (`g`)**. Reusing `.test()` without resetting `.lastIndex` will skip every other call:
 
 ```ts
-import { extract } from 'markdown-regex';
+import { REGEXP_LINK } from 'markdown-regex';
 
-const md = `
-# Title
+REGEXP_LINK.test('[a](b)'); // true
+REGEXP_LINK.test('[a](b)'); // false  ← lastIndex was left mid-string
+REGEXP_LINK.lastIndex = 0;
+REGEXP_LINK.test('[a](b)'); // true
+```
 
-Check [GitHub](https://github.com) and ![logo](./logo.png).
+`String.prototype.matchAll` (or a fresh `new RegExp(REGEXP_LINK)`) avoids that class of bug.
 
-\`\`\`js
-const x = 1;
-\`\`\`
+### Raw match output
 
-Inline \`code\` and <span>raw HTML</span>.
-`;
-
-const result = extract(md);
-// result.headers       → [{ level: 1, text: 'Title' }]
-// result.links         → [{ text: 'GitHub', url: 'https://github.com' }]
-// result.images        → [{ alt: 'logo', url: './logo.png' }]
-// result.codeBlocks    → [{ language: 'js', code: 'const x = 1;' }]
-// result.inlineCode    → ['code']
-// result.html          → ['<span>']
+```ts
+'[a](b)'.match(REGEXP_LINK);
+// ['[a](b)', 'a', 'b']
+//              ^text  ^url
 ```
 
 ## API Reference
 
-### Regex constants
+### Markdown regexes
 
-| Export | Description | Matches | Flags |
-|---|---|---|---|
-| `REGEXP_HEADER` | Markdown headers | `# H1`, `## H2`, … | `gm` |
-| `REGEXP_H2` | Level-2 headers | `## …` | `gm` |
-| `REGEXP_H3` | Level-3 headers | `### …` | `gm` |
-| `REGEXP_IMAGE` | Image syntax | `![alt](url)` | `g` |
-| `REGEXP_LINK` | Link syntax | `[text](url)` | `g` |
-| `REGEXP_STRONG` | Bold | `**bold**`, `__bold__` | `g` |
-| `REGEXP_ITALIC` | Italic | `*italic*`, `_italic_` | `g` |
-| `REGEXP_DEL` | Strikethrough | `~~deleted~~` | `g` |
-| `REGEXP_CODE` | Inline code (legacy alias) | `` `code` `` | `g` |
-| `REGEXP_INLINE_CODE` | Inline code spans | `` `code` `` | `g` |
-| `REGEXP_FENCED_CODE` | Fenced code blocks | fenced `js` / `~~~` blocks | `g` |
-| `REGEXP_HTML` | Raw HTML tags | `<div>`, `</span>`, `<br/>` | `gi` |
-| `REGEXP_Q` | Custom quote | `:"quoted":` | `g` |
-| `REGEXP_BLOCKQUOTE` | Blockquotes | `> quote` | `gm` |
-| `REGEXP_HR` | Horizontal rules | `-----` (5+ dashes) | `gm` |
-| `REGEXP_PARAGRAPH` | Paragraphs | text between newlines | `gm` |
-| `REGEXP_BR` | Line breaks | 2+ consecutive newlines | `gm` |
-| `REGEXP_EMPTY_BLOCKQUOTE` | Cleanup | `</blockquote><blockquote>` | `g` |
-| `REGEXP_UL_LIST` | Unordered lists | `* item` | `gm` |
-| `REGEXP_OL_LIST` | Ordered lists | `1. item` | `gm` |
-| `REGEXP_EMPTY_UL` | Cleanup | `</ul><ul>` | `g` |
-| `REGEXP_EMPTY_OL` | Cleanup | `</ol><ol>` | `g` |
+| Export | Flags | Captures | Example | Fails on |
+|---|---|---|---|---|
+| `REGEXP_HEADER` | `gm` | `[1]` prefix, `[2]` `#` run, `[3]` text | `'# Header 1'.match(REGEXP_HEADER)` → `['# Header 1', '', '#', 'Header 1']` | setext |
+| `REGEXP_H2` | `gim` | `[1]` text | `'## H'.match(REGEXP_H2)` → `['## H', 'H']` | `# H` |
+| `REGEXP_H3` | `gim` | `[1]` text | `'### H'.match(REGEXP_H3)` → `['### H', 'H']` | `## H` |
+| `REGEXP_IMAGE` | `g` | `[1]` alt, `[2]` url | `'![logo](./x.png)'.match(REGEXP_IMAGE)` | `[logo](url)` |
+| `REGEXP_LINK` | `g` | `[1]` text, `[2]` url | `'[a](b)'.match(REGEXP_LINK)` → `['[a](b)', 'a', 'b']` | `[a][id]`, links inside code |
+| `REGEXP_STRONG` | `g` | `[1]` `**` text, `[2]` `__` text | `'**bold**'.match(REGEXP_STRONG)` → `['**bold**', 'bold', undefined]` | nested `***…***` |
+| `REGEXP_ITALIC` | `g` | `[1]` lead, `[2]` delim, `[3]` text, `[4]` trail | `' *i* '.match(REGEXP_ITALIC)` | `not*italic*`, mid-word `_` |
+| `REGEXP_DEL` | `g` | `[1]` text | `'~~x~~'.match(REGEXP_DEL)` | `~x~` |
+| `REGEXP_CODE` | `g` | `[1]` text | inline backticks | fenced blocks |
+| `REGEXP_INLINE_CODE` | `g` | `[1]` ticks, `[2]` text | prefer over `REGEXP_CODE` | escaped ticks |
+| `REGEXP_FENCED_CODE` | `g` | `[1]` fence, `[2]` lang, `[3]` body | fenced blocks | indented-only code |
+| `REGEXP_HTML` | `gi` | `[0]` full tag | `'<br/>'.match(REGEXP_HTML)` | `<<not-a-tag>>` |
+| `REGEXP_Q` | `g` | `[1]` text | `':"q":'` | `"q"` |
+| `REGEXP_BLOCKQUOTE` | `g` | `[1]` text | needs a leading newline before `>` | start-of-string `>` |
+| `REGEXP_HR` | `g` | `[0]` full match | 5+ dashes after a newline | `---` |
+| `REGEXP_PARAGRAPH` | `g` | `[1]` text | heuristic | single-line input |
+| `REGEXP_BR` | `g` | `[0]` the breaks | two or more newlines | a single newline |
+| `REGEXP_UL_LIST` | `gm` | `[1]` item text | `'* item'` | `- item` |
+| `REGEXP_OL_LIST` | `gm` | `[1]` item text | `'1. item'` | `1) item` |
 
-> **Note on flags:** Global (`g`) is set on every export so you can use `matchAll`. Multiline (`m`) is set where `^`/`$` need to anchor to line boundaries. Reset `.lastIndex` between `.test()` calls.
+### HTML cleanup (`markdown-regex/cleanup`)
 
-### `extract(markdown: string): ExtractResult`
-
-Extracts a structured object from a Markdown string. Fenced code blocks and inline code are extracted **first** and removed from the working string, so patterns like `REGEXP_LINK` or `REGEXP_STRONG` do not match syntax inside code.
+These match **generated HTML**, not Markdown.
 
 ```ts
-interface ExtractResult {
-  headers: { level: number; text: string }[];
-  links: { text: string; url: string }[];
-  images: { alt: string; url: string }[];
-  bold: string[];
-  italic: string[];
-  strikethrough: string[];
-  blockquotes: string[];
-  horizontalRules: string[];
-  unorderedLists: string[];
-  orderedLists: string[];
-  codeBlocks: { language: string; code: string }[];
-  inlineCode: string[];
-  html: string[];
-}
+import { REGEXP_EMPTY_UL, REGEXP_EMPTY_OL, REGEXP_EMPTY_BLOCKQUOTE } from 'markdown-regex/cleanup';
 ```
 
-**Ordering matters.** `extract()` runs in this order:
+Still re-exported from `markdown-regex` for compatibility.
 
-1. Fenced code blocks (removed from working string)
-2. Inline code (removed from working string)
-3. All remaining patterns
+| Export | Flags | Example | Fails on |
+|---|---|---|---|
+| `REGEXP_EMPTY_UL` | `g` | `'</ul><ul>'` | a real `<ul><li>` |
+| `REGEXP_EMPTY_OL` | `g` | `'</ol><ol>'` | a real `<ol><li>` |
+| `REGEXP_EMPTY_BLOCKQUOTE` | `g` | `'</blockquote><blockquote>'` | a filled blockquote |
+
+### One-line helpers
+
+```ts
+import { extractLinks, extractImages, extractHeaders, extract } from 'markdown-regex';
+
+extractLinks('See [a](b) and ` [nope](x) `.');
+// [{ text: 'a', url: 'b' }]
+
+extractImages('![logo](./logo.png)');
+// [{ alt: 'logo', url: './logo.png' }]
+
+extractHeaders('# Title\n## Sub');
+// [{ level: 1, text: 'Title' }, { level: 2, text: 'Sub' }]
+```
+
+`extract(md)` still returns the full `ExtractResult`. Helpers strip fenced then inline code first.
 
 ## Limitations
 
-Regex-only Markdown parsing is **not** a full CommonMark parser. Known limitations:
-
-- **Nested emphasis** is not fully handled. `***bold italic***` and `**bold _italic_**` may produce surprising results.
-- **Code fence awareness is handled by `extract()`**. Applying `REGEXP_LINK` directly to raw Markdown **will** match inside code blocks.
-- **Reference links** (`[text][id]`) are not matched by `REGEXP_LINK`.
-- **Setext headers** (`Title` / `=====`) are not matched by `REGEXP_HEADER`.
-- **`REGEXP_PARAGRAPH` and `REGEXP_BR`** are heuristic.
-
-If you need full spec compliance, use `markdown-it`, `micromark`, or `remark`. This library is for lightweight extraction and pattern detection.
-
-## Publishing a release
-
-GitHub Releases exist (`2.1.0`, `2.0.1`, `2.0.0`). npm `latest` is still **1.2.0**. To make agents and humans see the same version:
-
-1. Keep tags and GitHub Releases in lockstep with `package.json` version.
-2. `npm publish --tag beta` for 2.x until you are ready to move `latest` to 2.1.0.
-3. Keep this `README.md` (uppercase) as the file npm displays. Do not use `readme.md`.
-4. After publish, confirm https://www.npmjs.com/package/markdown-regex shows this README and version 2.x.
+- Nested emphasis is not fully handled (`***bold italic***`).
+- `REGEXP_LINK` on raw Markdown **will** match inside code. Use `extractLinks()`.
+- Reference links and setext headers are not matched.
 
 ## Development
 
@@ -206,16 +137,7 @@ npm install
 npm run build
 npm run typecheck
 npm test
-npm run dev
 ```
-
-CI builds on **Node 20, 22, and 24**.
-
-## Related
-
-- NPM: https://www.npmjs.com/package/markdown-regex
-- Used by: https://github.com/LLazyEmail/markdown-to-email
-- Article: https://hackernoon.com/open-sourcing-regular-expressions-for-markdown-syntax-module
 
 ## License
 
