@@ -1,66 +1,45 @@
 # Contributing to markdown-regex
 
-Thank you for your interest in contributing to markdown-regex! This document outlines how to get started.
-
-## Getting Started
-
-1. Fork the repository
-2. Clone your fork:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/markdown-regex.git
-   cd markdown-regex
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Create a feature branch:
-   ```bash
-   git checkout -b feature/my-feature
-   ```
-
-## Development
+## Setup
 
 ```bash
-npm run dev        # Watch mode (Rollup)
-npm run build      # Build distribution files
-npm test           # Run tests
-npm run lint       # Check linting issues
-npm run lint:fix   # Fix linting issues automatically
+git clone https://github.com/LLazyEmail/markdown-regex.git
+cd markdown-regex
+npm install
 ```
 
-## Adding a New Regex Pattern
-
-1. Add the pattern to the appropriate source file (`src/tags.js` or `src/list.js`)
-2. Export it from `src/index.js`
-3. Add a TypeScript declaration in `src/index.d.ts`
-4. Write tests in the `tests/` directory
-5. Update `README.md` to document the new pattern
-
-## Testing
-
-All new patterns must include tests. Run the full test suite before submitting:
+## Commands
 
 ```bash
-npm test
+npm run build        # tsup → dist/
+npm test             # vitest run (tests/**/*.test.ts)
+npm run test:coverage
+npm run typecheck
+npm run lint
+npm run dev          # tsup --watch
 ```
 
-Test files live in `tests/` and follow the naming convention `<pattern-name>.test.js`.
+Node.js 20+. CI runs Node 20, 22, and 24.
 
-## Pull Request Process
+## Adding a regex
 
-1. Ensure all tests pass: `npm test`
-2. Ensure linting passes: `npm run lint`
-3. Update `README.md` for any new patterns
-4. Update `CHANGELOG.md` under the `[Unreleased]` section
-5. Open a pull request against the `main` branch
+Follow [AGENTS.md](./AGENTS.md). Short version:
 
-## Code Style
+1. Add a TypeScript regex literal under `src/tags/`, `src/lists/`, `src/code/`, or `src/html/`.
+2. JSDoc it (match + non-match + capture groups).
+3. Re-export from the folder index and `src/index.ts`.
+4. Add a `tests/*.test.ts` file. Do not add Jest files.
+5. Update `README.md` and `llms-full.txt`.
 
-This project uses ESLint and Prettier. Run `npm run lint:fix` to auto-format your code before committing.
+Do not put a `.js` mirror next to a `.ts` file.
 
-## License
+## Tests
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+The live suite is **Vitest**. Only `tests/**/*.test.ts` is collected.
+Leftover `tests/**/*.test.js` files are not part of CI.
 
-## [Linkedin page of LLazyEmail](https://www.linkedin.com/company/llazyemail/)
+## Pull requests
+
+1. `npm test` and `npm run typecheck` pass.
+2. New patterns have a match and a non-match test.
+3. Open against `main`.

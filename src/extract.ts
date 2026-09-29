@@ -39,6 +39,8 @@ export interface ExtractResult {
  * Fenced code is pulled out first, then inline code, so links and emphasis
  * inside code fences are not reported.
  *
+ * REGEXP_HEADER groups used here: [2] `#` run, [3] text.
+ *
  * @example extract('# Title\n\n[GitHub](https://github.com)')
  * @example Does not treat `[link](url)` inside a fenced block as a link
  */
@@ -77,10 +79,9 @@ export function extract(markdown: string): ExtractResult {
   working = working.replace(REGEXP_INLINE_CODE, '__INLINE_CODE__');
 
   for (const m of working.matchAll(REGEXP_HEADER)) {
-    const hashes = m[1];
     result.headers.push({
-      level: hashes.length,
-      text: m[2].trim(),
+      level: m[2].length,
+      text: m[3].trim(),
     });
   }
 
@@ -93,11 +94,11 @@ export function extract(markdown: string): ExtractResult {
   }
 
   for (const m of working.matchAll(REGEXP_STRONG)) {
-    result.bold.push(m[1]);
+    result.bold.push(m[1] ?? m[2]);
   }
 
   for (const m of working.matchAll(REGEXP_ITALIC)) {
-    result.italic.push(m[1]);
+    result.italic.push(m[3]);
   }
 
   for (const m of working.matchAll(REGEXP_DEL)) {

@@ -5,37 +5,19 @@
 - Repo: https://github.com/LLazyEmail/markdown-regex
 - npm: https://www.npmjs.com/package/markdown-regex
 - README: https://github.com/LLazyEmail/markdown-regex/blob/main/README.md
-- Agent guide: https://github.com/LLazyEmail/markdown-regex/blob/main/AGENTS.md
-- Full API: https://github.com/LLazyEmail/markdown-regex/blob/main/llms-full.txt
-- Source index: https://github.com/LLazyEmail/markdown-regex/blob/main/src/index.ts
-- extract(): https://github.com/LLazyEmail/markdown-regex/blob/main/src/extract.ts
-
-## Use when
-
-You need to pull ATX headers, inline links/images, lists, or code spans out of a string without standing up a parser.
-
-## Do not use when
-
-You need an AST, nested emphasis, setext headings, reference links, or CommonMark compliance. Use remark, micromark, or markdown-it.
-
-## Install
-
-```
-npm install markdown-regex
-```
-
-GitHub is 2.1.x. npm `latest` may still be 1.2.0 (legacy JS, `REGEXP_EM`). Prefer git until 2.x is on `latest`:
-
-```
-npm install github:LLazyEmail/markdown-regex#main
-```
+- Cleanup subpath: import from `markdown-regex/cleanup`
+- extractLinks / extractImages / extractHeaders: https://github.com/LLazyEmail/markdown-regex/blob/main/src/extractors.ts
 
 ## Public surface
 
-Named exports only. Node 20+. ESM + CJS + IIFE (`MarkdownRegex`).
+Named exports. Node 20+. Every regex is global (`g`) — reset `.lastIndex` or use `matchAll`.
 
-- Regexes: `REGEXP_HEADER`, `REGEXP_H2`, `REGEXP_H3`, `REGEXP_IMAGE`, `REGEXP_LINK`, `REGEXP_STRONG`, `REGEXP_ITALIC`, `REGEXP_DEL`, `REGEXP_CODE`, `REGEXP_INLINE_CODE`, `REGEXP_FENCED_CODE`, `REGEXP_HTML`, `REGEXP_Q`, `REGEXP_BLOCKQUOTE`, `REGEXP_HR`, `REGEXP_PARAGRAPH`, `REGEXP_BR`, `REGEXP_EMPTY_BLOCKQUOTE`, `REGEXP_UL_LIST`, `REGEXP_OL_LIST`, `REGEXP_EMPTY_UL`, `REGEXP_EMPTY_OL`
-- Helper: `extract(markdown: string): ExtractResult`
-- v1 rename: `REGEXP_EM` → `REGEXP_ITALIC`
+One-liners (preferred):
 
-Prefer `extract()` over running every regex on raw Markdown; it strips fenced and inline code first.
+```
+extractLinks('[a](b)') // [{ text: 'a', url: 'b' }]
+extractImages('![x](u)') // [{ alt: 'x', url: 'u' }]
+extractHeaders('# T') // [{ level: 1, text: 'T' }]
+```
+
+Cleanup HTML (not Markdown): `REGEXP_EMPTY_UL`, `REGEXP_EMPTY_OL`, `REGEXP_EMPTY_BLOCKQUOTE` via `markdown-regex/cleanup`.

@@ -2,10 +2,13 @@
  * markdown-regex
  *
  * Ready-to-use RegExp constants for parsing Markdown.
- * Zero runtime dependencies. Works in Node, browsers, and bundlers.
+ * Every public regex is global (`g`). Reset `.lastIndex` between `.test()`
+ * / `.exec()` calls, or use `String.prototype.matchAll`.
  *
- * Prefer {@link extract} when you need structured results without matching
- * inside fenced or inline code.
+ * Prefer {@link extract}, {@link extractLinks}, {@link extractImages},
+ * or {@link extractHeaders} over composing regexes yourself.
+ *
+ * HTML cleanup constants live on `markdown-regex/cleanup`.
  *
  * @packageDocumentation
  */
@@ -33,6 +36,7 @@ export { REGEXP_INLINE_CODE } from './code';
 export { REGEXP_HTML } from './html';
 export { extract } from './extract';
 export type { ExtractResult } from './extract';
+export { extractLinks, extractImages, extractHeaders } from './extractors';
 
 export {
   REGEXP_UL_LIST,
