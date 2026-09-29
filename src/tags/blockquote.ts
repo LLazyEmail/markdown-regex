@@ -1,7 +1,7 @@
 /**
- * Matches blockquote lines starting with `>` or `&gt;` after a newline.
+ * Matches a blockquote line starting with `>` or `&gt;` after a newline.
  *
- * @example
- *   > quoted paragraph
+ * @example Matches `\n> quoted paragraph`
+ * @example Does not match `> quote` at the very start of the string
  */
 export const REGEXP_BLOCKQUOTE = /(?:\r\n|\r|\n)(?:>|&gt;)(.*)/g;
