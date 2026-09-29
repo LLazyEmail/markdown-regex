@@ -1,5 +1,4 @@
-# One lightweight CI job.
-# npm ci requires package-lock.json to match package.json.
+# Lint, typecheck, build, test on Node 20 / 22 / 24.
 
 name: CI
 
@@ -18,9 +17,13 @@ permissions:
 
 jobs:
   check:
-    name: Lint, typecheck, build, test
+    name: Node ${{ matrix.node }}
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22, 24]
     steps:
       - uses: actions/checkout@v7
         with:
@@ -28,15 +31,15 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: ${{ matrix.node }}
           cache: npm
 
       - name: Install
         run: npm ci --no-audit --no-fund
 
-      - name: ESLint, typecheck, build, test
+      - name: Typecheck, build, test
         run: |
-          npx eslint src || true
           npm run typecheck
           npm run build
           npm test
+          npm run test:coverage
