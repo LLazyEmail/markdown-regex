@@ -14,6 +14,12 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
+    },
+    "./cleanup": {
+      "types": "./dist/cleanup.d.ts",
+      "import": "./dist/cleanup.js",
+      "require": "./dist/cleanup.cjs",
+      "default": "./dist/cleanup.js"
     }
   },
   "sideEffects": false,
