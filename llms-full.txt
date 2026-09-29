@@ -1,0 +1,65 @@
+# markdown-regex API
+
+Package: `markdown-regex` (same name on GitHub and npm).
+Node 20+. Named exports only. Flags: `g` on every regex; `m` when `^`/`$` need line anchors. Reset `.lastIndex` between `.test()` calls.
+
+GitHub 2.1.0. npm `latest` may still be 1.2.0.
+
+## extract(markdown: string): ExtractResult
+
+Runs fenced code, then inline code (both removed from the working string), then the remaining patterns. Use this instead of applying `REGEXP_LINK` / `REGEXP_STRONG` to raw Markdown if you care about false matches inside code.
+
+```ts
+interface ExtractResult {
+  headers: { level: number; text: string }[];
+  links: { text: string; url: string }[];
+  images: { alt: string; url: string }[];
+  bold: string[];
+  italic: string[];
+  strikethrough: string[];
+  blockquotes: string[];
+  horizontalRules: string[];
+  unorderedLists: string[];
+  orderedLists: string[];
+  codeBlocks: { language: string; code: string }[];
+  inlineCode: string[];
+  html: string[];
+}
+```
+
+## Regex exports
+
+| Export | Match | Non-match | Flags |
+|---|---|---|---|
+| REGEXP_HEADER | `# Title` | `Title\n=====` (setext) | gm |
+| REGEXP_H2 | `## Title` | `# Title` | gim |
+| REGEXP_H3 | `### Title` | `## Title` | gim |
+| REGEXP_IMAGE | `![alt](url)` | `[alt](url)` | g |
+| REGEXP_LINK | `[text](url)` | `[text][id]` (reference) | g |
+| REGEXP_STRONG | `**bold**`, `__bold__` | `*not bold*` | g |
+| REGEXP_ITALIC | ` *italic* ` | `not*italic*` | g |
+| REGEXP_DEL | `~~gone~~` | `~gone~` | g |
+| REGEXP_CODE | `` `code` `` | fenced blocks | g |
+| REGEXP_INLINE_CODE | `` `code` `` | escaped backticks | g |
+| REGEXP_FENCED_CODE | fenced ``` or ~~~ blocks | indented-only code | g |
+| REGEXP_HTML | `<div>`, `</span>`, `<br/>` | `<<not-a-tag>>` | gi |
+| REGEXP_Q | `:"quoted":` | `"quoted"` | g |
+| REGEXP_BLOCKQUOTE | `\n> quote` | start-of-string `>` without a leading newline | g |
+| REGEXP_HR | `\n-----` (5+ dashes) | `---` | g |
+| REGEXP_PARAGRAPH | text between newlines | heuristic only | g |
+| REGEXP_BR | two or more newlines | a single `\n` | g |
+| REGEXP_EMPTY_BLOCKQUOTE | `</blockquote><blockquote>` | a real blockquote | g |
+| REGEXP_UL_LIST | `* item` at line start | `- item` | gm |
+| REGEXP_OL_LIST | `1. item` at line start | `1) item` | gm |
+| REGEXP_EMPTY_UL | `</ul><ul>` | a real list | g |
+| REGEXP_EMPTY_OL | `</ol><ol>` | a real list | g |
+
+## Limits
+
+Nested emphasis, setext headers, reference links, and matching inside code (unless you use `extract()`) are out of scope.
+
+## Sources
+
+- https://github.com/LLazyEmail/markdown-regex/blob/main/src/index.ts
+- https://github.com/LLazyEmail/markdown-regex/blob/main/src/extract.ts
+- https://github.com/LLazyEmail/markdown-regex/blob/main/AGENTS.md
