@@ -1,15 +1,5 @@
-import os from "os";
-import { REGEXP_IMAGE, REGEXP_LINK, REGEXP_H2, REGEXP_H3 } from './index.js';
-
-
-const platform = os.platform();
-
-const newLine = platform === "win32" ? "\r\n" : "\n";
-
-// [\s\S]
-const recipe_regex = `:::\s*.*:::`;
-
-//const REGEXP_UL_LIST = new RegExp(
-//  `${newLine}(((\\s{4})?\\*(.*?)${newLine}){1,})`,
-//  "g"
-//);
+/**
+ * Intentionally removed from the public module surface.
+ * This file is kept as a no-op stub so it cannot affect runtime behavior
+ * or exports in the markdown-regex package.
+ */
