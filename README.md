@@ -68,6 +68,19 @@ import { extractLinks } from 'markdown-regex';
 - Reference links and setext headers are not matched.
 - See [SECURITY.md](./SECURITY.md) for ReDoS. CI runs `tests/redos.test.ts` on every exported pattern.
 
+
+## CLI
+
+```bash
+npx markdown-regex links README.md
+npx markdown-regex headers doc.md
+npx markdown-regex images doc.md
+npx markdown-regex extract doc.md
+cat doc.md | npx markdown-regex links
+```
+
+Prints JSON. No extra runtime dependencies.
+
 ## Development
 
 ```bash

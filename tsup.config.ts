@@ -1,21 +1,36 @@
 import { defineConfig } from 'tsup';
 
-export default defineConfig({
-  entry: {
-    index: 'src/index.ts',
-    cleanup: 'src/cleanup.ts',
+export default defineConfig([
+  {
+    entry: {
+      index: 'src/index.ts',
+      cleanup: 'src/cleanup.ts',
+    },
+    format: ['cjs', 'esm', 'iife'],
+    dts: true,
+    splitting: false,
+    sourcemap: true,
+    clean: true,
+    minify: false,
+    target: 'es2020',
+    globalName: 'MarkdownRegex',
+    outExtension({ format }) {
+      return {
+        js: format === 'cjs' ? '.cjs' : format === 'iife' ? '.global.js' : '.js',
+      };
+    },
   },
-  format: ['cjs', 'esm', 'iife'],
-  dts: true,
-  splitting: false,
-  sourcemap: true,
-  clean: true,
-  minify: false,
-  target: 'es2020',
-  globalName: 'MarkdownRegex',
-  outExtension({ format }) {
-    return {
-      js: format === 'cjs' ? '.cjs' : format === 'iife' ? '.global.js' : '.js',
-    };
+  {
+    entry: { cli: 'src/cli.ts' },
+    format: ['esm'],
+    dts: false,
+    sourcemap: true,
+    clean: false,
+    minify: false,
+    target: 'es2020',
+    banner: { js: '#!/usr/bin/env node' },
+    outExtension() {
+      return { js: '.js' };
+    },
   },
-});
+]);
