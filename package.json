@@ -1,7 +1,7 @@
 {
   "name": "markdown-regex",
   "version": "2.1.1",
-  "description": "Zero-dependency, TypeScript-typed RegExp patterns for extracting headers, links, images, lists and code from Markdown",
+  "description": "Zero-dependency, TypeScript-typed RegExp patterns for extracting headers, links, images, lists and code from Markdown; ideal for scripts and AI-agent tools",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -78,6 +78,16 @@
     "headers",
     "links",
     "images",
-    "lists"
+    "lists",
+    "markdown-links",
+    "markdown-images",
+    "markdown-headers",
+    "extract-links",
+    "ai-agents",
+    "llms",
+    "regexp-patterns",
+    "tree-shaking",
+    "esm",
+    "cjs"
   ]
 }
