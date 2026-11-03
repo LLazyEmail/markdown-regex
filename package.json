@@ -25,7 +25,12 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "llms.txt",
+    "llms-full.txt",
+    "AGENTS.md",
+    "SKILL.md"
   ],
   "engines": {
     "node": ">=20"
