@@ -3,4 +3,5 @@ dist
 build
 
 yarn.lock
-yarn-error.lockcoverage/
+yarn-error.lock
+coverage/
