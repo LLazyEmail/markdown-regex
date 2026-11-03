@@ -11,21 +11,26 @@ import {
   REGEXP_HTML,
 } from '../src/patterns/block';
 
+function firstGroup(re: RegExp, input: string, index: number): string | undefined {
+  const m = [...input.matchAll(re)][0];
+  return m?.[index];
+}
+
 describe('consolidated block patterns', () => {
   it('matches ATX headers', () => {
-    expect('# Title'.match(REGEXP_HEADER)?.[3]).toBe('Title');
-    expect('## H2'.match(REGEXP_H2)?.[1]).toBe('H2');
-    expect('### H3'.match(REGEXP_H3)?.[1]).toBe('H3');
+    expect(firstGroup(REGEXP_HEADER, '# Title', 3)).toBe('Title');
+    expect(firstGroup(REGEXP_H2, '## H2', 1)).toBe('H2');
+    expect(firstGroup(REGEXP_H3, '### H3', 1)).toBe('H3');
   });
 
   it('matches blockquote and HR', () => {
-    expect('\n> quote'.match(REGEXP_BLOCKQUOTE)?.[1]).toBe(' quote');
+    expect(firstGroup(REGEXP_BLOCKQUOTE, '\n> quote', 1)).toBe(' quote');
     expect('-----'.match(REGEXP_HR)).toBeTruthy();
   });
 
   it('matches lists', () => {
-    expect('* item'.match(REGEXP_UL_LIST)?.[1]).toBe(' item');
-    expect('1. item'.match(REGEXP_OL_LIST)?.[1]).toBe(' item');
+    expect(firstGroup(REGEXP_UL_LIST, '* item', 1)).toBe(' item');
+    expect(firstGroup(REGEXP_OL_LIST, '1. item', 1)).toBe(' item');
   });
 
   it('matches fenced code and HTML', () => {
