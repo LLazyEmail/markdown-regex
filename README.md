@@ -82,6 +82,12 @@ Tests are **Vitest** (`tests/**/*.test.ts`). Jest is not used.
 
 CI builds on **Node 20, 22, and 24**.
 
+## MCP / AI agents
+
+Example tool shape (JSON in, JSON out): [`examples/mcp-tool-shape.ts`](./examples/mcp-tool-shape.ts).
+
+Also see [AGENTS.md](./AGENTS.md) and [llms.txt](./llms.txt).
+
 ## Related
 
 - NPM: https://www.npmjs.com/package/markdown-regex
