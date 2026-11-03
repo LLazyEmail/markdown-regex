@@ -99,7 +99,6 @@ import { extractLinks } from 'markdown-regex';
 - Reference links and setext headers are not matched.
 - See [SECURITY.md](./SECURITY.md) for ReDoS. CI runs `tests/redos.test.ts` on every exported pattern.
 
-
 ## Recipes
 
 Copy-paste samples under [`examples/recipes/`](./examples/recipes/):
@@ -125,6 +124,12 @@ CI builds on **Node 20, 22, and 24**.
 ## Docs
 
 Scaffold: [`docs/`](./docs/) (Docusaurus via documentation-actions coming next).
+
+## MCP / AI agents
+
+Example tool shape (JSON in, JSON out): [`examples/mcp-tool-shape.ts`](./examples/mcp-tool-shape.ts).
+
+Also see [AGENTS.md](./AGENTS.md) and [llms.txt](./llms.txt).
 
 ## Related
 
