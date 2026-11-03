@@ -7,8 +7,8 @@ name: CI
 on:
   push:
     branches: [main]
+  # All PRs (including stacked feat/* bases) so the matrix runs before retargeting to main.
   pull_request:
-    branches: [main]
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
