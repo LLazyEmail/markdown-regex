@@ -64,16 +64,18 @@
     "lint": "eslint src packages tests",
     "prepublishOnly": "pnpm exec turbo run build test && pnpm run typecheck",
     "clean": "rm -rf dist coverage",
-    "changeset": "npx changeset",
-    "version-packages": "npx changeset version",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
     "turbo:build": "turbo run build",
     "turbo:test": "turbo run test",
     "turbo:lint": "turbo run lint",
     "turbo:typecheck": "turbo run typecheck",
     "coverage:core": "vitest run --coverage --coverage.include=packages/core/src/**/*.ts --coverage.exclude=packages/core/src/**/*.js",
-    "ci:affected": "turbo run lint typecheck build test --filter=...[origin/main]"
+    "ci:affected": "turbo run lint typecheck build test --filter=...[origin/main]",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
     "@markdown-regex/blocks": "workspace:^",
     "@markdown-regex/core": "workspace:^",

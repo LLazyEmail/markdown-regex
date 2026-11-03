@@ -1,30 +1,9 @@
 # Changesets
 
-Scaffold modelled on [LLazyEmail/generate-template](https://github.com/LLazyEmail/generate-template).
+This repo uses [Changesets](https://github.com/changesets/changesets) for versioning and publishing.
 
-**This PR does not publish.** It only adds the config so future PRs can drop
-markdown fragments under `.changeset/` and a follow-up workflow can open a
-Version packages PR / provenance-signed npm publish (already present in
-`.github/workflows/npm-publish.yml` on GitHub Release).
+- Config: `config.json` — **fixed** group keeps `markdown-regex` and the private `@markdown-regex/*` packages on the same version.
+- Add a fragment: `pnpm changeset` (or the **Add changeset** GitHub Action).
+- On push to `main`, `changesets.yml` opens a Version Packages PR (or publishes when that PR merges).
 
-## How to record a change
-
-```bash
-npx changeset
-```
-
-Or add a file manually:
-
-```md
----
-"markdown-regex": patch
----
-
-Describe the user-facing change.
-```
-
-## Follow-ups (not in this PR)
-
-1. Add `@changesets/cli` as a devDependency.
-2. Port `changesets.yml` / `add-changeset.yml` patterns from generate-template.
-3. Keep `npm publish --provenance` (already on Release publish).
+Private workspace packages are bundled into the public tarball; only `markdown-regex` is published to npm.
