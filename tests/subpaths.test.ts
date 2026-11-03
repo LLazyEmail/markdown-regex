@@ -15,10 +15,13 @@ describe('subpath stubs', () => {
     expect(withFm.content).toBe('# Hi');
   });
 
-  it('blocks stub registry and empty extract', () => {
+  it('blocks extracts flat ::: containers', () => {
     registerBlockRule({ name: 'note', order: 10 });
     expect(listBlockRules().some((r) => r.name === 'note')).toBe(true);
-    expect(extractCustomBlocks(':::note\nhi\n:::')).toEqual([]);
+    const blocks = extractCustomBlocks(':::note\nhi\n:::');
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0].name).toBe('note');
+    expect(blocks[0].body).toBe('hi');
   });
 
   it('email stub is identity', () => {

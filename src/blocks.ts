@@ -8,6 +8,7 @@ export {
   REGEXP_CUSTOM_BLOCK,
   extractCustomBlocks,
   registerBlockRule,
+  clearBlockRules,
   listBlockRules,
 } from '@markdown-regex/blocks';
 export type { CustomBlock, BlockRule } from '@markdown-regex/blocks';
