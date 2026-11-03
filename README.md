@@ -8,18 +8,35 @@ Zero-dependency, TypeScript-typed RegExp patterns for extracting headers, links,
 [![coverage](https://img.shields.io/badge/coverage-vitest%20v8-informational)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Socket Badge](https://badge.socket.dev/npm/package/markdown-regex/)](https://badge.socket.dev/npm/package/markdown-regex/)
+[![npm downloads](https://img.shields.io/npm/dw/markdown-regex.svg)](https://www.npmjs.com/package/markdown-regex)
+[![types](https://img.shields.io/npm/types/markdown-regex)](https://www.npmjs.com/package/markdown-regex)
+[![node](https://img.shields.io/node/v/markdown-regex)](https://www.npmjs.com/package/markdown-regex)
 
-> **v2.1.0** is tagged and released on GitHub. The npm `latest` tag is still **1.2.0**. Treat v2 as a preview until an npm 2.x publish lands.
+**Install (30 seconds):**
+
+```bash
+npm install markdown-regex
+```
+
+```ts
+import { extractLinks, extractHeaders } from 'markdown-regex';
+
+extractLinks('[docs](https://example.com)');
+// [{ text: 'docs', url: 'https://example.com' }]
+
+extractHeaders('# Hello\n## World');
+// [{ level: 1, text: 'Hello' }, { level: 2, text: 'World' }]
+```
 
 Requires **Node.js 20+**. CI builds on **Node 20, 22, and 24**.
 
-- Agent guide: https://github.com/LLazyEmail/markdown-regex/blob/main/AGENTS.md
-- Full API: https://github.com/LLazyEmail/markdown-regex/blob/main/llms-full.txt
-- Source index: https://github.com/LLazyEmail/markdown-regex/blob/main/src/index.ts
+- Agent guide: [AGENTS.md](./AGENTS.md)
+- Full API: [llms-full.txt](./llms-full.txt) · Short: [llms.txt](./llms.txt)
+- Source index: [src/index.ts](./src/index.ts)
 
 ## When to use this
 
-**Use `markdown-regex` for** quick extraction, linting, or lightweight transforms.
+**Use `markdown-regex` for** quick extraction, linting, or lightweight transforms — especially in scripts and AI-agent tool calls that want JSON, not an AST.
 
 **Do not use it when** you need an AST or CommonMark compliance. Use remark, micromark, or markdown-it.
 
@@ -27,12 +44,12 @@ Requires **Node.js 20+**. CI builds on **Node 20, 22, and 24**.
 
 | Channel | Version | Notes |
 |---|---|---|
-| GitHub `main` / Release `2.1.0` | 2.1.0 | TypeScript rewrite |
-| npm `latest` | 1.2.0 | Legacy JavaScript API |
+| npm `latest` | **2.1.1** | TypeScript, ESM + CJS, provenance-signed |
+| GitHub `main` | 2.1.x | Same line as npm |
 | Package name | `markdown-regex` | Same name on GitHub and npm |
 
 ```bash
-npm install github:LLazyEmail/markdown-regex#main
+npm install markdown-regex
 ```
 
 ## Quick Start

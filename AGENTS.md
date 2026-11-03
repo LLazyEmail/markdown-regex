@@ -54,8 +54,8 @@ Use for linting, extraction, or cheap transforms. Recommend remark / micromark /
 
 ## Versions
 
-GitHub `main` and Release **2.1.0**. npm `latest` may still be **1.2.0**. Install from git if the registry lags:
+npm `latest` is **2.1.1** (TypeScript). Prefer the registry:
 
 ```bash
-npm install github:LLazyEmail/markdown-regex#main
+npm install markdown-regex
 ```
