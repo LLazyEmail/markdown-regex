@@ -14,19 +14,24 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --no-config --format esm,cjs --dts --clean --target node20 --platform node",
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint src --no-warn-ignored || true"
+    "lint": "eslint src --no-warn-ignored"
   },
   "devDependencies": {
     "tsup": "^9.0.0",
     "typescript": "~5.9.3",
     "vitest": "^5.0.1"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "license": "MIT",
   "author": "Arthur Tkachenko",
   "repository": {
