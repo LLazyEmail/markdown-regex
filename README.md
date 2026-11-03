@@ -113,6 +113,10 @@ Tests are **Vitest** (`tests/**/*.test.ts`). Jest is not used.
 
 CI builds on **Node 20, 22, and 24**.
 
+## Docs
+
+Scaffold: [`docs/`](./docs/) (Docusaurus via documentation-actions coming next).
+
 ## Related
 
 - NPM: https://www.npmjs.com/package/markdown-regex
