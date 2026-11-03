@@ -8,7 +8,7 @@
   "types": "./dist/index.d.ts",
   "browser": "./dist/index.global.js",
   "exports": {
-    "." : {
+    ".": {
       "types": "./dist/index.d.ts",
       "browser": "./dist/index.global.js",
       "import": "./dist/index.js",
@@ -20,6 +20,24 @@
       "import": "./dist/cleanup.js",
       "require": "./dist/cleanup.cjs",
       "default": "./dist/cleanup.js"
+    },
+    "./frontmatter": {
+      "types": "./dist/frontmatter.d.ts",
+      "import": "./dist/frontmatter.js",
+      "require": "./dist/frontmatter.cjs",
+      "default": "./dist/frontmatter.js"
+    },
+    "./blocks": {
+      "types": "./dist/blocks.d.ts",
+      "import": "./dist/blocks.js",
+      "require": "./dist/blocks.cjs",
+      "default": "./dist/blocks.js"
+    },
+    "./email": {
+      "types": "./dist/email.d.ts",
+      "import": "./dist/email.js",
+      "require": "./dist/email.cjs",
+      "default": "./dist/email.js"
     }
   },
   "sideEffects": false,
@@ -42,12 +60,16 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "dev1": "vitest",
-    "typecheck": "npx tsc --noEmit",
-    "lint": "npx eslint src",
-    "prepublishOnly": "npm run typecheck && npm run build && npm run test",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src packages --no-warn-ignored || eslint src",
+    "prepublishOnly": "pnpm exec turbo run build test && pnpm run typecheck",
     "clean": "rm -rf dist coverage",
     "changeset": "npx changeset",
-    "version-packages": "npx changeset version"
+    "version-packages": "npx changeset version",
+    "turbo:build": "turbo run build",
+    "turbo:test": "turbo run test",
+    "turbo:lint": "turbo run lint",
+    "turbo:typecheck": "turbo run typecheck"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -57,7 +79,12 @@
     "glob": "^14.0.0",
     "tsup": "^9.0.0",
     "typescript": "~5.9.3",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "@markdown-regex/core": "workspace:^",
+    "@markdown-regex/frontmatter": "workspace:^",
+    "@markdown-regex/blocks": "workspace:^",
+    "@markdown-regex/email": "workspace:^",
+    "turbo": "^2.5.4"
   },
   "publishConfig": {
     "access": "public"
@@ -99,5 +126,6 @@
   ],
   "bin": {
     "markdown-regex": "./dist/cli.js"
-  }
+  },
+  "packageManager": "pnpm@9.15.9"
 }

@@ -9,7 +9,7 @@ import {
   REGEXP_OL_LIST,
   REGEXP_FENCED_CODE,
   REGEXP_HTML,
-} from '../src/patterns/block';
+} from '../packages/core/src/patterns/block';
 
 function firstGroup(re: RegExp, input: string, index: number): string | undefined {
   const m = [...input.matchAll(re)][0];

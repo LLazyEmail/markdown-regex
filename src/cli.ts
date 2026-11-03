@@ -8,8 +8,7 @@
  * Reads a file path or stdin (`-` / no path). Prints JSON to stdout.
  */
 import { readFileSync } from 'node:fs';
-import { extract } from './extract.js';
-import { extractHeaders, extractImages, extractLinks } from './extractors.js';
+import { extract, extractHeaders, extractImages, extractLinks } from '@markdown-regex/core';
 
 export type CliMode = 'links' | 'headers' | 'images' | 'extract';
 

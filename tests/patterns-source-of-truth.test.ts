@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import * as patterns from '../src/patterns';
-import { REGEXP_HEADER as TAG_HEADER, REGEXP_HR as TAG_HR, REGEXP_ITALIC as TAG_ITALIC } from '../src/tags';
-import { REGEXP_UL_LIST as LIST_UL } from '../src/lists';
-import { REGEXP_FENCED_CODE as CODE_FENCED, REGEXP_INLINE_CODE as CODE_INLINE } from '../src/code';
-import { REGEXP_HTML as HTML_RE } from '../src/html';
+import * as patterns from '../packages/core/src/patterns';
+import { REGEXP_HEADER as TAG_HEADER, REGEXP_HR as TAG_HR, REGEXP_ITALIC as TAG_ITALIC } from '../packages/core/src/tags';
+import { REGEXP_UL_LIST as LIST_UL } from '../packages/core/src/lists';
+import { REGEXP_FENCED_CODE as CODE_FENCED, REGEXP_INLINE_CODE as CODE_INLINE } from '../packages/core/src/code';
+import { REGEXP_HTML as HTML_RE } from '../packages/core/src/html';
 
 describe('patterns/ is the single source of truth', () => {
   it('tags/ re-exports the same RegExp instances', () => {

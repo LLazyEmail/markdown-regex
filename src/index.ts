@@ -2,19 +2,8 @@
  * markdown-regex
  *
  * Ready-to-use RegExp constants for parsing Markdown.
- * Every public regex is global (`g`). Reset `.lastIndex` between `.test()`
- * / `.exec()` calls, or use `String.prototype.matchAll`.
- *
- * Prefer {@link extract}, {@link extractLinks}, {@link extractImages},
- * or {@link extractHeaders} over composing regexes yourself.
- *
- * For one-off `.test()` / `.exec()` use the factory helpers
- * (`header()`, `link()`, …) so you never share `lastIndex`.
- *
- * HTML cleanup constants live on `markdown-regex/cleanup`.
- *
- * Pattern literals live in `src/patterns/` (single source of truth).
- * `src/tags/`, `src/lists/`, `src/code/`, and `src/html/` are thin re-exports.
+ * Workspace packages under `packages/*` are private and bundled into this
+ * public package (see `tsup.config.ts` `noExternal`).
  *
  * @packageDocumentation
  */
@@ -42,13 +31,10 @@ export {
   REGEXP_EMPTY_BLOCKQUOTE,
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
-} from './patterns';
-
-export { extract } from './extract';
-export type { ExtractResult } from './extract';
-export { extractLinks, extractImages, extractHeaders } from './extractors';
-
-export {
+  extract,
+  extractLinks,
+  extractImages,
+  extractHeaders,
   header,
   link,
   image,
@@ -57,4 +43,7 @@ export {
   fencedCode,
   ulList,
   olList,
-} from './factories';
+  isParsable,
+} from '@markdown-regex/core';
+
+export type { ExtractResult, ParsableResult } from '@markdown-regex/core';
