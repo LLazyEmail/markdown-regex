@@ -1,5 +1,7 @@
 # Agent notes for markdown-regex
 
+Also see [SKILL.md](./SKILL.md) for the agent skill checklist.
+
 Zero-dependency TypeScript RegExp constants plus `extract()` for lightweight Markdown extraction. Not a CommonMark parser.
 
 ## Commands
