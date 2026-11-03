@@ -8,6 +8,9 @@
  * Prefer {@link extract}, {@link extractLinks}, {@link extractImages},
  * or {@link extractHeaders} over composing regexes yourself.
  *
+ * For one-off `.test()` / `.exec()` use the factory helpers
+ * (`header()`, `link()`, …) so you never share `lastIndex`.
+ *
  * HTML cleanup constants live on `markdown-regex/cleanup`.
  *
  * @packageDocumentation
@@ -44,3 +47,14 @@ export {
   REGEXP_EMPTY_UL,
   REGEXP_EMPTY_OL,
 } from './lists/index';
+
+export {
+  header,
+  link,
+  image,
+  strong,
+  italic,
+  fencedCode,
+  ulList,
+  olList,
+} from './factories';
