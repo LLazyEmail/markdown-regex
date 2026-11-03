@@ -107,6 +107,18 @@ Copy-paste samples under [`examples/recipes/`](./examples/recipes/):
 - Header TOC: `examples/recipes/toc-headers.mjs`
 - Code-aware vs raw regex: `examples/recipes/strip-code-then-match.mjs`
 
+## CLI
+
+```bash
+npx markdown-regex links README.md
+npx markdown-regex headers doc.md
+npx markdown-regex images doc.md
+npx markdown-regex extract doc.md
+cat doc.md | npx markdown-regex links
+```
+
+Prints JSON. No extra runtime dependencies.
+
 ## Development
 
 ```bash

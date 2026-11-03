@@ -8,7 +8,7 @@
   "types": "./dist/index.d.ts",
   "browser": "./dist/index.global.js",
   "exports": {
-    ".": {
+    "." : {
       "types": "./dist/index.d.ts",
       "browser": "./dist/index.global.js",
       "import": "./dist/index.js",
@@ -36,7 +36,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "npx tsup",
+    "build": "npx tsup && node --input-type=module -e \"import { chmodSync } from 'node:fs'; chmodSync('dist/cli.js', 0o755);\"",
     "dev": "npx tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -96,5 +96,8 @@
     "tree-shaking",
     "esm",
     "cjs"
-  ]
+  ],
+  "bin": {
+    "markdown-regex": "./dist/cli.js"
+  }
 }
