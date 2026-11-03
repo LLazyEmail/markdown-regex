@@ -434,13 +434,18 @@ describe('REGEXP_BLOCKQUOTE: edge cases', () => {
 
 describe('REGEXP_HR: edge cases', () => {
   describe('valid patterns', () => {
+    // Consolidated block HR: a whole line of 5+ -, *, or _
     const validInputs: string[] = [
+      '-----',
+      '******',
+      '______',
       '\n-----',
       '\n------',
       '\n----------',
+      '\n*****\n',
     ];
 
-    it('should match valid horizontal rule patterns (5+ dashes after newline)', () => {
+    it('should match valid horizontal rule patterns (whole line of 5+ markers)', () => {
       validInputs.forEach((input) => {
         REGEXP_HR.lastIndex = 0;
         expect(REGEXP_HR.test(input)).toBe(true);
@@ -450,11 +455,12 @@ describe('REGEXP_HR: edge cases', () => {
 
   describe('invalid patterns', () => {
     const invalidInputs: string[] = [
-      '-----',
+      '----',
       '\n----',
       '\n---',
       'plain text',
       '',
+      '---- text',
     ];
 
     it('should not match invalid horizontal rule patterns', () => {
