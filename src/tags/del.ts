@@ -1,7 +1,2 @@
-/**
- * Matches strikethrough using `~~` delimiters.
- *
- * @example Matches `~~deleted~~`
- * @example Does not match `~deleted~`
- */
-export const REGEXP_DEL = /~~(.+?)~~/g;
+/** @deprecated Import from `../patterns/inline` — re-export kept for compatibility. */
+export { REGEXP_DEL } from '../patterns/inline';

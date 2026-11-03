@@ -19,7 +19,7 @@ import {
   REGEXP_FENCED_CODE,
   REGEXP_UL_LIST,
   REGEXP_OL_LIST,
-} from './index';
+} from './patterns';
 
 function fresh(re: RegExp): RegExp {
   return new RegExp(re.source, re.flags);

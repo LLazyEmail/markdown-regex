@@ -1,7 +1,2 @@
-/**
- * Matches consecutive empty ordered-list HTML tags. Cleanup helper, not Markdown.
- *
- * @example Matches `</ol><ol>` and `</ol> <ol>`
- * @example Does not match `<ol><li>item</li></ol>`
- */
-export const REGEXP_EMPTY_OL = /<\/ol>\s?<ol>/g;
+/** @deprecated Import from `../patterns/cleanup` — re-export kept for compatibility. */
+export { REGEXP_EMPTY_OL } from '../patterns/cleanup';
