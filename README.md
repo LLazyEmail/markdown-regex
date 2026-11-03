@@ -61,6 +61,20 @@ import { REGEXP_EMPTY_UL } from 'markdown-regex/cleanup';
 import { extractLinks } from 'markdown-regex';
 ```
 
+
+
+## Comparison
+
+| Library | Job | Deps | Typed extract helpers | When to pick it |
+| --- | --- | --- | --- | --- |
+| **markdown-regex** (this) | RegExp constants + `extract*` | **0** | Yes (`links` / `headers` / `images` / full `extract`) | Lint, scripts, AI-agent tools, cheap transforms |
+| [markdown-link-extractor](https://www.npmjs.com/package/markdown-link-extractor) | Links only | small | Links | You only need URLs from Markdown |
+| [remove-markdown](https://www.npmjs.com/package/remove-markdown) | Strip markup → plain text | 0 | No | Plain-text previews / search indexing |
+| [extract-md-headings](https://www.npmjs.com/package/extract-md-headings) | Headings only | small | Headings | TOC-like heading lists |
+| [remark](https://www.npmjs.com/package/remark) / [micromark](https://www.npmjs.com/package/micromark) / [markdown-it](https://www.npmjs.com/package/markdown-it) | Full parse / AST | ecosystem | Via AST | Spec compliance, rendering, complex transforms |
+
+`markdown-regex` is **not** a CommonMark parser. Prefer remark/micromark/markdown-it when you need an AST.
+
 ## Limitations
 
 - Nested emphasis is not fully handled.
