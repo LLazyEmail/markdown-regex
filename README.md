@@ -68,6 +68,15 @@ import { extractLinks } from 'markdown-regex';
 - Reference links and setext headers are not matched.
 - See [SECURITY.md](./SECURITY.md) for ReDoS. CI runs `tests/redos.test.ts` on every exported pattern.
 
+
+## Recipes
+
+Copy-paste samples under [`examples/recipes/`](./examples/recipes/):
+
+- Links → JSON: `examples/recipes/links-only.mjs`
+- Header TOC: `examples/recipes/toc-headers.mjs`
+- Code-aware vs raw regex: `examples/recipes/strip-code-then-match.mjs`
+
 ## Development
 
 ```bash
