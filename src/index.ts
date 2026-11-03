@@ -37,6 +37,7 @@ export { REGEXP_HTML } from './html';
 export { extract } from './extract';
 export type { ExtractResult } from './extract';
 export { extractLinks, extractImages, extractHeaders } from './extractors';
+export { isParsable } from './isParsable';
 
 export {
   REGEXP_UL_LIST,
