@@ -40,7 +40,9 @@
     "typecheck": "npx tsc --noEmit",
     "lint": "npx eslint src",
     "prepublishOnly": "npm run typecheck && npm run build && npm run test",
-    "clean": "rm -rf dist coverage"
+    "clean": "rm -rf dist coverage",
+    "changeset": "npx changeset",
+    "version-packages": "npx changeset version"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

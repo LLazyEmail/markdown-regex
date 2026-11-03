@@ -43,3 +43,8 @@ Leftover `tests/**/*.test.js` files are not part of CI.
 1. `npm test` and `npm run typecheck` pass.
 2. New patterns have a match and a non-match test.
 3. Open against `main`.
+
+## Changelog fragments
+
+User-facing changes should include a Changeset under `.changeset/` (see that folder's README). This prepares an auto-version flow modelled on `generate-template`; publishing still happens via the existing provenance Release workflow until that lands.
+
