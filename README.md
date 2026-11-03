@@ -99,6 +99,14 @@ import { extractLinks } from 'markdown-regex';
 - Reference links and setext headers are not matched.
 - See [SECURITY.md](./SECURITY.md) for ReDoS. CI runs `tests/redos.test.ts` on every exported pattern.
 
+## Recipes
+
+Copy-paste samples under [`examples/recipes/`](./examples/recipes/):
+
+- Links → JSON: `examples/recipes/links-only.mjs`
+- Header TOC: `examples/recipes/toc-headers.mjs`
+- Code-aware vs raw regex: `examples/recipes/strip-code-then-match.mjs`
+
 ## CLI
 
 ```bash
@@ -124,6 +132,10 @@ npm run test:coverage
 Tests are **Vitest** (`tests/**/*.test.ts`). Jest is not used.
 
 CI builds on **Node 20, 22, and 24**.
+
+## Docs
+
+Scaffold: [`docs/`](./docs/) (Docusaurus via documentation-actions coming next).
 
 ## Related
 
