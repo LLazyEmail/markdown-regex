@@ -18,6 +18,11 @@ export default defineConfig({
     globals: false,
     environment: 'node',
     include: ['tests/**/*.test.ts', 'packages/*/tests/**/*.test.ts'],
+    exclude: [
+      'node_modules/**',
+      'dist/**',
+      'tests/real-world-fixtures.test.ts',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

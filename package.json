@@ -72,7 +72,10 @@
     "turbo:typecheck": "turbo run typecheck",
     "coverage:core": "vitest run --coverage --coverage.include=packages/core/src/**/*.ts --coverage.exclude=packages/core/src/**/*.js",
     "ci:affected": "turbo run lint typecheck build test --filter=...[origin/main]",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "test:fixtures": "vitest run --config vitest.fixtures.config.ts",
+    "test:fixtures:update": "vitest run --config vitest.fixtures.config.ts --update",
+    "turbo:test:fixtures": "turbo run test:fixtures"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

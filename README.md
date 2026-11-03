@@ -173,3 +173,15 @@ Also see [AGENTS.md](./AGENTS.md) and [llms.txt](./llms.txt).
 ## License
 
 MIT
+
+## Real-world fixtures
+
+Full-document snapshot tests live under `fixtures/real-world/`. Run them with:
+
+```bash
+pnpm test:fixtures          # assert
+pnpm test:fixtures:update    # update snapshots
+```
+
+See [fixtures/README.md](./fixtures/README.md). CI runs these in a separate **Fixtures** workflow (PRs + nightly).
+

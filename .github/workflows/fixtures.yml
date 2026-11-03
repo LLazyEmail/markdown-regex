@@ -1,0 +1,42 @@
+# Real-world fixture snapshots — separate from the unit-test matrix.
+# Runs on every PR and on a nightly schedule.
+
+name: Fixtures
+
+on:
+  pull_request:
+  schedule:
+    # Nightly 05:17 UTC
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: fixtures-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  fixtures:
+    name: Real-world fixtures
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build workspace
+        run: pnpm exec turbo run build
+
+      - name: Fixture snapshots
+        run: pnpm run test:fixtures
