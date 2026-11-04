@@ -1,6 +1,6 @@
 {
   "name": "@markdown-regex/email",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Email-oriented helpers for markdown-regex (private workspace package)",
   "type": "module",
   "private": true,

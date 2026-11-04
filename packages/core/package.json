@@ -1,6 +1,6 @@
 {
   "name": "@markdown-regex/core",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Core RegExp patterns and extract helpers for markdown-regex (private workspace package)",
   "type": "module",
   "private": true,
