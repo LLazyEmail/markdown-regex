@@ -98,7 +98,7 @@ pnpm workspaces + Turborepo. Private packages `@markdown-regex/core`, `frontmatt
 
 ```ts
 import { extract } from 'markdown-regex';
-import { parseFrontmatter } from 'markdown-regex/frontmatter';
+import { parseFrontmatter } from 'markdown-regex/frontmatter'; // see docs/frontmatter.md
 import { extractCustomBlocks } from 'markdown-regex/blocks';
 import { prepareForEmail } from 'markdown-regex/email';
 import { REGEXP_EMPTY_UL } from 'markdown-regex/cleanup';
@@ -173,3 +173,15 @@ Also see [AGENTS.md](./AGENTS.md) and [llms.txt](./llms.txt).
 ## License
 
 MIT
+
+## Real-world fixtures
+
+Full-document snapshot tests live under `fixtures/real-world/`. Run them with:
+
+```bash
+pnpm test:fixtures          # assert
+pnpm test:fixtures:update    # update snapshots
+```
+
+See [fixtures/README.md](./fixtures/README.md). CI runs these in a separate **Fixtures** workflow (PRs + nightly).
+

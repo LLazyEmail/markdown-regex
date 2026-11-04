@@ -1,0 +1,54 @@
+{
+  "blockquotes": [],
+  "bold": [
+    " I AM SO BOLD and _ME TOO_ ",
+    "_YEP_",
+    "*YEP",
+  ],
+  "codeBlocks": [],
+  "headers": [
+    {
+      "level": 1,
+      "text": "Paid Video Call Opportunities for [Nominee Name]? (beta)",
+    },
+    {
+      "level": 2,
+      "text": "The Bottom Line",
+    },
+    {
+      "level": 3,
+      "text": "The Bottom Line",
+    },
+  ],
+  "horizontalRules": [],
+  "html": [],
+  "images": [],
+  "inlineCode": [],
+  "italic": [
+    "* I AM SO BOLD and _ME TOO_ *",
+    "*_YEP_*",
+    "**YEP**",
+    "David Smooke",
+  ],
+  "links": [
+    {
+      "text": "please fill out this Google Form",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSce_si23Kc8Ydmv27J9Z4f_BdwY5VWczKDGtZBGtUPCsbDW0Q/viewform",
+    },
+  ],
+  "orderedLists": [],
+  "strikethrough": [],
+  "unorderedLists": [
+    "* I AM SO BOLD and _ME TOO_ **    ",
+    "*_YEP_**",
+    "**YEP*** ",
+    "David Smooke*",
+    "   Hacker Noon Stickers",
+    "   A standard .TECH domain for 3 years",
+    "   A standard .TECH domain for 2 years",
+    "   Sub item 1",
+    "   Sub item 2",
+    "   Sub item 3",
+    "   A standard .TECH domain for 5 years",
+  ],
+}

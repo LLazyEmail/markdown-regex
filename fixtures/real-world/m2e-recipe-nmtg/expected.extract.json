@@ -1,0 +1,117 @@
+{
+  "blockquotes": [],
+  "bold": [],
+  "codeBlocks": [],
+  "headers": [
+    {
+      "level": 1,
+      "text": "Korean Barbecue Beef | Pork Schnitzel | Bahn Mi Meatball Skewers",
+    },
+    {
+      "level": 2,
+      "text": "Weekly Menu",
+    },
+    {
+      "level": 3,
+      "text": "April 22nd, 2021",
+    },
+    {
+      "level": 2,
+      "text": "Chipotle Cream Skillet Chicken",
+    },
+    {
+      "level": 3,
+      "text": "over Rice and Snap Peas",
+    },
+    {
+      "level": 2,
+      "text": "Pork Schnitzel",
+    },
+    {
+      "level": 3,
+      "text": "with German Spaetzle and Green Beans",
+    },
+    {
+      "level": 2,
+      "text": "Bahn Mi Meatball Skewers",
+    },
+    {
+      "level": 2,
+      "text": "Korean Barbecue Beef with Sesame Rice Noodles",
+    },
+    {
+      "level": 3,
+      "text": "and Spicy Pickled Cucumbers and Carrots",
+    },
+    {
+      "level": 2,
+      "text": "Grilled Salmon with Chipotle Cream Sauce",
+    },
+    {
+      "level": 3,
+      "text": "over Potato Poblano Hash and Broccolini",
+    },
+    {
+      "level": 2,
+      "text": "Saucy Grilled Shrimp",
+    },
+    {
+      "level": 3,
+      "text": "and a Corn and Radish Salad with Avocado Dressing",
+    },
+    {
+      "level": 3,
+      "text": "Ingredients",
+    },
+    {
+      "level": 3,
+      "text": "Weekend Prep",
+    },
+  ],
+  "horizontalRules": [],
+  "html": [],
+  "images": [],
+  "inlineCode": [],
+  "italic": [],
+  "links": [
+    {
+      "text": "",
+      "url": "https://www.nomoretogo.com/weekly-menu/",
+    },
+    {
+      "text": "",
+      "url": "https://raw.githubusercontent.com/LLazyEmail/nomoretogo_email_template/main/data/images/recipe1.jpeg",
+    },
+    {
+      "text": "",
+      "url": "https://raw.githubusercontent.com/LLazyEmail/nomoretogo_email_template/main/data/images/recipe2.jpeg",
+    },
+    {
+      "text": "",
+      "url": "https://raw.githubusercontent.com/LLazyEmail/nomoretogo_email_template/main/data/images/recipe3.jpeg",
+    },
+    {
+      "text": "",
+      "url": "https://raw.githubusercontent.com/LLazyEmail/nomoretogo_email_template/main/data/images/recipe4.jpeg",
+    },
+    {
+      "text": "",
+      "url": "https://www.nomoretogo.com/weekly-menu/",
+    },
+    {
+      "text": "",
+      "url": "https://raw.githubusercontent.com/LLazyEmail/nomoretogo_email_template/main/data/images/recipe5.jpeg",
+    },
+    {
+      "text": "",
+      "url": "https://www.nomoretogo.com/weekly-menu/",
+    },
+    {
+      "text": "",
+      "url": "https://raw.githubusercontent.com/LLazyEmail/nomoretogo_email_template/main/data/images/recipe6.jpeg",
+    },
+  ],
+  "orderedLists": [],
+  "strikethrough": [],
+  "unorderedLists": [],
+}

@@ -76,3 +76,25 @@ npm `latest` is **2.1.1** (TypeScript). Prefer the registry:
 ```bash
 npm install markdown-regex
 ```
+
+## Releases
+
+Changesets (fixed group: `markdown-regex` + `@markdown-regex/*`).
+
+```bash
+pnpm changeset          # or Actions → Add changeset (package selection)
+pnpm run version-packages
+pnpm run release        # usually via changesets.yml on main
+```
+
+Only the public `markdown-regex` package is published; private workspace packages are bundled.
+
+## Follow-ups
+
+- Nested custom blocks and email remark rendering are **out of scope** for the flat-blocks work. Open a tracking issue after merging the stacked PRs.
+
+## Real-world fixtures
+
+Drop a folder under `fixtures/real-world/<name>/` with `input.md`, then run `pnpm test:fixtures:update`.
+See `fixtures/README.md`. Suite is separate from unit tests (`pnpm test`).
+

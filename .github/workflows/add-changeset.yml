@@ -1,0 +1,132 @@
+# Add a Changeset from the Actions UI.
+#
+# Writes a changeset, commits it, and opens a pull request.
+# Merging that PR triggers "Version packages", which opens the Version PR.
+# Merging the Version Packages PR creates the GitHub Release / publish.
+
+name: Add changeset
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to bump (fixed group keeps workspace packages aligned)'
+        required: true
+        type: choice
+        options:
+          - markdown-regex
+          - '@markdown-regex/core'
+          - '@markdown-regex/frontmatter'
+          - '@markdown-regex/blocks'
+          - '@markdown-regex/email'
+        default: markdown-regex
+      bump:
+        description: 'Semver bump'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: minor
+      summary:
+        description: 'User-facing summary (one or more lines)'
+        required: true
+        type: string
+      branch_prefix:
+        description: 'Branch name prefix'
+        required: false
+        type: string
+        default: 'changeset'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: add-changeset
+  cancel-in-progress: false
+
+jobs:
+  add-changeset:
+    name: Create changeset PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Write changeset file
+        id: changeset
+        env:
+          PKG: ${{ inputs.package }}
+          BUMP: ${{ inputs.bump }}
+          SUMMARY: ${{ inputs.summary }}
+        run: |
+          set -euo pipefail
+          mkdir -p .changeset
+          id=$(date -u +%Y%m%d%H%M%S)-${BUMP}
+          file=".changeset/${id}.md"
+          {
+            echo "---"
+            echo "\"${PKG}\": ${BUMP}"
+            echo "---"
+            echo ""
+            printf '%s\n' "$SUMMARY"
+            echo ""
+          } > "$file"
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "Wrote $file:"
+          cat "$file"
+
+      - name: Commit and open pull request
+        env:
+          PKG: ${{ inputs.package }}
+          BUMP: ${{ inputs.bump }}
+          SUMMARY: ${{ inputs.summary }}
+          BRANCH_PREFIX: ${{ inputs.branch_prefix }}
+          FILE: ${{ steps.changeset.outputs.file }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          branch="${BRANCH_PREFIX}/${BUMP}-$(date -u +%Y%m%d%H%M%S)"
+          git checkout -b "$branch"
+          git add "$FILE"
+          git commit -m "chore: add ${BUMP} changeset for ${PKG}
+
+          ${SUMMARY}"
+          git push -u origin "$branch"
+
+          pr_url=$(gh pr create \
+            --title "chore: add ${BUMP} changeset (${PKG})" \
+            --body "$(cat <<EOF
+          ## Changeset
+
+          Opened by the **Add changeset** workflow.
+
+          - Package: \`${PKG}\`
+          - Bump: \`${BUMP}\`
+          - Fixed group: \`markdown-regex\` + \`@markdown-regex/*\` stay aligned
+          - Summary:
+
+          ${SUMMARY}
+
+          ### Next steps
+
+          1. Merge this PR.
+          2. **Version packages** opens a Version PR (bumps package.json / CHANGELOG).
+          3. Merge that Version PR to release / publish \`markdown-regex\`.
+          EOF
+          )" \
+            --base main \
+            --head "$branch")
+
+          echo "Opened: $pr_url"

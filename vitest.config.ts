@@ -18,10 +18,15 @@ export default defineConfig({
     globals: false,
     environment: 'node',
     include: ['tests/**/*.test.ts', 'packages/*/tests/**/*.test.ts'],
+    exclude: [
+      'node_modules/**',
+      'dist/**',
+      'tests/real-world-fixtures.test.ts',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['src/**/*.ts', 'packages/core/src/**/*.ts'],
+      include: ['src/**/*.ts', 'packages/core/src/**/*.ts', 'packages/frontmatter/src/**/*.ts', 'packages/blocks/src/**/*.ts'],
       exclude: ['src/cli.ts', 'packages/core/src/**/*.js'],
       thresholds: {
         lines: 80,
