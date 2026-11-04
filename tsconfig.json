@@ -16,9 +16,16 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "dist",
-    "rootDir": "src",
-    "allowJs": false
+    "rootDir": ".",
+    "allowJs": false,
+    "paths": {
+      "@markdown-regex/core": ["./packages/core/src/index.ts"],
+      "@markdown-regex/core/*": ["./packages/core/src/*"],
+      "@markdown-regex/frontmatter": ["./packages/frontmatter/src/index.ts"],
+      "@markdown-regex/blocks": ["./packages/blocks/src/index.ts"],
+      "@markdown-regex/email": ["./packages/email/src/index.ts"]
+    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "tests", "src/**/*.js", "src/**/*.d.ts"]
+  "include": ["src/**/*.ts", "packages/*/src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "tests", "**/*.js", "**/*.d.ts"]
 }

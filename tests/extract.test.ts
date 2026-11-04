@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { extract } from '../src/extract';
+import { extract } from '../src/index';
 
 describe('extract()', () => {
   it('pulls headers, links, images, and emphasis', () => {

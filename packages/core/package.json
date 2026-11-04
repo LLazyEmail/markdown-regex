@@ -1,0 +1,45 @@
+{
+  "name": "@markdown-regex/core",
+  "version": "2.1.1",
+  "description": "Core RegExp patterns and extract helpers for markdown-regex (private workspace package)",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./cleanup": {
+      "types": "./dist/cleanup.d.ts",
+      "import": "./dist/cleanup.js",
+      "require": "./dist/cleanup.cjs"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsup src/index.ts src/cleanup.ts --no-config --format esm,cjs --dts --clean --target node20 --platform node",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src --no-warn-ignored || true"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "tsup": "^9.0.0",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "author": "Arthur Tkachenko",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLazyEmail/markdown-regex.git",
+    "directory": "packages/core"
+  }
+}

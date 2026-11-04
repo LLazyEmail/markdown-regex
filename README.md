@@ -92,6 +92,18 @@ import { extractLinks } from 'markdown-regex';
 
 `markdown-regex` is **not** a CommonMark parser. Prefer remark/micromark/markdown-it when you need an AST.
 
+## Monorepo
+
+pnpm workspaces + Turborepo. Private packages `@markdown-regex/core`, `frontmatter`, `blocks`, and `email` are bundled into the public `markdown-regex` package. Subpath imports:
+
+```ts
+import { extract } from 'markdown-regex';
+import { parseFrontmatter } from 'markdown-regex/frontmatter';
+import { extractCustomBlocks } from 'markdown-regex/blocks';
+import { prepareForEmail } from 'markdown-regex/email';
+import { REGEXP_EMPTY_UL } from 'markdown-regex/cleanup';
+```
+
 ## Source layout
 
 RegExp literals live in `src/patterns/` (block / inline / cleanup). Legacy folders under `src/tags/`, `src/lists/`, `src/code/`, and `src/html/` only re-export those constants so older relative imports keep working.

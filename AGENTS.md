@@ -7,45 +7,50 @@ Zero-dependency TypeScript RegExp constants plus `extract()` for lightweight Mar
 ## Commands
 
 ```bash
-npm install
-npm run build        # tsup → dist/ (ESM, CJS, IIFE + .d.ts)
-npm test             # vitest run
-npm run typecheck    # tsc --noEmit
-npm run lint         # eslint src
-npm run dev          # tsup --watch
+pnpm install
+pnpm run build           # tsup → dist/ (bundles private workspace packages)
+pnpm test                # vitest run
+pnpm run typecheck       # tsc --noEmit
+pnpm run lint            # eslint
+pnpm run turbo:build     # turbo run build (packages + root)
+pnpm run turbo:test      # turbo run test
 ```
 
-Node.js **20+**. CI runs Node 20, 22, and 24.
+Node.js **20+**. Package manager: **pnpm** (workspaces). CI runs Node 20, 22, and 24.
 
 ## Layout
 
 ```
-src/index.ts            public exports
-src/extract.ts          extract(md) helper
-src/patterns/           **single source of truth** for all REGEXP_* literals
-src/patterns/block.ts   headers, lists, blockquotes, HR, fenced code, HTML
-src/patterns/inline.ts  links, images, emphasis, code, quotes, paragraphs
-src/patterns/cleanup.ts empty-list / empty-blockquote HTML cleanup
-src/tags/, lists/, code/, html/   thin re-exports (do not edit literals here)
-src/factories.ts        fresh RegExp() wrappers (import from patterns/)
-src/utils.ts            NEWLINE fragment (not a public export)
-tests/                  vitest suites + fixtures
-examples/               usage samples
+pnpm-workspace.yaml     root + packages/*
+turbo.json              build/test/typecheck/lint pipeline
+packages/core/          REGEXP_* + extract/factories (private)
+packages/frontmatter/   YAML frontmatter pre-pass (private; stub → feature PR)
+packages/blocks/        flat :::name containers (private; stub → feature PR)
+packages/email/         email helpers (private; stub; nested remark = follow-up)
+src/index.ts            public barrel (re-exports core)
+src/cleanup.ts          markdown-regex/cleanup
+src/frontmatter.ts      markdown-regex/frontmatter
+src/blocks.ts           markdown-regex/blocks
+src/email.ts            markdown-regex/email
+src/cli.ts              bin entry
+tests/                  vitest suites
 ```
 
-`dist/` is **gitignored**. Build with `npm run build` before publish; never commit stale `dist/`.
+Private `@markdown-regex/*` packages are **bundled** into the published `markdown-regex` tarball (`tsup` `noExternal`). Do not publish them separately.
 
-Do **not** add `src/**/*.js` next to a `.ts` file. Leftover JS mirrors win module resolution and were the cause of header/list test failures.
+`dist/` is **gitignored**. Build with `pnpm run build` before publish; never commit stale `dist/`.
+
+Do **not** add `src/**/*.js` or `packages/*/src/**/*.js` next to a `.ts` file.
 
 ## How to add a new regex
 
-1. Put a **regex literal** in `src/patterns/block.ts`, `inline.ts`, or `cleanup.ts` (not in tags/lists/code/html).
+1. Put a **regex literal** in `packages/core/src/patterns/block.ts`, `inline.ts`, or `cleanup.ts` (not in tags/lists/code/html re-exports).
 2. JSDoc it: one-line description, capture groups, `@example` match, `@example` non-match.
-3. Re-export from `src/patterns/index.ts` and `src/index.ts` (keep public `REGEXP_*` names stable).
-4. If `extract()` uses the pattern, document capture groups in `src/extract.ts` and add an extract test.
+3. Re-export from `packages/core/src/patterns/index.ts` and `packages/core/src/index.ts` (root `src/index.ts` re-exports core).
+4. If `extract()` uses the pattern, document capture groups in `packages/core/src/extract.ts` and add an extract test.
 5. Add tests under `tests/` (positive + negative). Reset `.lastIndex` between `.test()` calls on global regexes.
 6. Document the export in `README.md`, `llms.txt`, and `llms-full.txt`.
-7. Run `npm run typecheck && npm test`.
+7. Run `pnpm run typecheck && pnpm test`.
 
 Rules:
 
