@@ -68,6 +68,11 @@ jobs:
       - name: Build + test (affected)
         run: pnpm exec turbo run build test --filter=...[origin/main]
 
+      # smoke.test.ts dynamically imports dist/index.cjs — ensure it exists
+      # even when the affected filter skipped the build on a push to main.
+      - name: Build public package
+        run: pnpm run build
+
       - name: Coverage gates (root + core)
         run: |
           pnpm run test:coverage
