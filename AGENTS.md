@@ -88,3 +88,7 @@ pnpm run release        # usually via changesets.yml on main
 ```
 
 Only the public `markdown-regex` package is published; private workspace packages are bundled.
+
+## Follow-ups
+
+- Nested custom blocks and email remark rendering are **out of scope** for the flat-blocks work. Open a tracking issue after merging the stacked PRs.
