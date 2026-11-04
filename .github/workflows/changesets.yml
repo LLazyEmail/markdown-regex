@@ -34,7 +34,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Create Version PR, or publish after it merges
-        uses: changesets/action@v1
+        uses: changesets/action@v2.1.2
         with:
           version: pnpm run version-packages
           publish: pnpm exec changeset publish
