@@ -1,12 +1,14 @@
-# Lint, typecheck, build, test on Node 20 / 22 / 24 (pnpm workspaces + turbo).
+# Affected-only turbo CI: lint, typecheck, build, test, coverage.
+# Node matrix 20 / 22 / 24. Local + Actions turbo cache.
+# Remote cache (Vercel): uncomment TURBO_TOKEN / TURBO_TEAM below when ready.
 
 name: CI
 
 on:
   push:
     branches: [main]
+  # All PRs (including stacked feat/* bases) so the matrix runs before retargeting to main.
   pull_request:
-    branches: [main]
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -19,7 +21,7 @@ jobs:
   check:
     name: Node ${{ matrix.node }}
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 1
+          # Need history so turbo can resolve --filter=...[origin/main]
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
 
@@ -39,9 +42,39 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck, build, test
+      - name: Turbo local cache (Actions)
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-node${{ matrix.node }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-node${{ matrix.node }}-
+            turbo-${{ runner.os }}-
+
+      # Remote cache (optional): set repo secrets TURBO_TOKEN + TURBO_TEAM, then uncomment:
+      # env:
+      #   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      #   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+      - name: Fetch main for affected filter
+        run: git fetch origin main --depth=1 || true
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Typecheck (affected)
+        run: pnpm exec turbo run typecheck --filter=...[origin/main]
+
+      - name: Build + test (affected)
+        run: pnpm exec turbo run build test --filter=...[origin/main]
+
+      - name: Coverage gates (root + core)
         run: |
-          pnpm run typecheck
-          pnpm run build
-          pnpm test
           pnpm run test:coverage
+          # Per-package gate: core patterns/extract must stay above 80%
+          pnpm exec vitest run --coverage \
+            --coverage.include='packages/core/src/**/*.ts' \
+            --coverage.exclude='packages/core/src/**/*.js' \
+            --coverage.thresholds.lines=80 \
+            --coverage.thresholds.statements=80 \
+            --coverage.thresholds.functions=80

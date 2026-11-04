@@ -19,12 +19,15 @@
       "require": "./dist/cleanup.cjs"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup src/index.ts src/cleanup.ts --no-config --format esm,cjs --dts --clean --target node20 --platform node",
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint src --no-warn-ignored || true"
+    "lint": "eslint src --no-warn-ignored"
   },
   "devDependencies": {
     "@types/node": "^26.0.0",

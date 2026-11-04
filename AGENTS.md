@@ -18,6 +18,11 @@ pnpm run turbo:test      # turbo run test
 
 Node.js **20+**. Package manager: **pnpm** (workspaces). CI runs Node 20, 22, and 24.
 
+### Affected CI
+
+PRs run `turbo run … --filter=...[origin/main]` (lint, typecheck, build, test) plus coverage gates.
+Turbo local cache is restored via `actions/cache` on `.turbo`. Remote cache (`TURBO_TOKEN` / `TURBO_TEAM`) is documented as a commented option in `.github/workflows/ci.yml`.
+
 ## Layout
 
 ```
