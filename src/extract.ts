@@ -13,7 +13,7 @@ import {
   REGEXP_FENCED_CODE,
   REGEXP_INLINE_CODE,
   REGEXP_HTML,
-} from './index';
+} from './patterns';
 
 /**
  * Structured extraction result from {@link extract}.
@@ -39,7 +39,13 @@ export interface ExtractResult {
  * Fenced code is pulled out first, then inline code, so links and emphasis
  * inside code fences are not reported.
  *
- * REGEXP_HEADER groups used here: [2] `#` run, [3] text.
+ * Capture groups (must stay aligned with `src/patterns/`):
+ * - REGEXP_HEADER: [2] `#` run, [3] text
+ * - REGEXP_INLINE_CODE: [1] fence run, [2] code text
+ * - REGEXP_STRONG: [1] `**` text or [2] `__` text
+ * - REGEXP_ITALIC: [3] inner text (context groups [1]/[2]/[4])
+ * - REGEXP_DEL / REGEXP_BLOCKQUOTE / lists: [1] text
+ * - REGEXP_FENCED_CODE: [2] language, [3] body
  *
  * @example extract('# Title\n\n[GitHub](https://github.com)')
  * @example Does not treat `[link](url)` inside a fenced block as a link
@@ -74,6 +80,7 @@ export function extract(markdown: string): ExtractResult {
 
   const inlineMatches = [...working.matchAll(REGEXP_INLINE_CODE)];
   for (const m of inlineMatches) {
+    // REGEXP_INLINE_CODE captures: [1] fence, [2] content
     result.inlineCode.push(m[2]);
   }
   working = working.replace(REGEXP_INLINE_CODE, '__INLINE_CODE__');
@@ -98,7 +105,8 @@ export function extract(markdown: string): ExtractResult {
   }
 
   for (const m of working.matchAll(REGEXP_ITALIC)) {
-    result.italic.push(m[3]);
+    // REGEXP_ITALIC captures: [1] lead, [2] delim, [3] text, [4] trail
+    if (m[3] != null) result.italic.push(m[3]);
   }
 
   for (const m of working.matchAll(REGEXP_DEL)) {

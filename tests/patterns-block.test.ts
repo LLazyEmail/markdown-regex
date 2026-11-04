@@ -25,6 +25,7 @@ describe('consolidated block patterns', () => {
 
   it('matches blockquote and HR', () => {
     expect(firstGroup(REGEXP_BLOCKQUOTE, '\n> quote', 1)).toBe(' quote');
+    expect(firstGroup(REGEXP_BLOCKQUOTE, '\n&gt; encoded', 1)).toBe(' encoded');
     expect('-----'.match(REGEXP_HR)).toBeTruthy();
   });
 

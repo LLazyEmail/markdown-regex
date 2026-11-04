@@ -1,7 +1,2 @@
-/**
- * Matches consecutive empty blockquote HTML tags. Cleanup helper, not Markdown.
- *
- * @example Matches `</blockquote><blockquote>`
- * @example Does not match `<blockquote>quote</blockquote>`
- */
-export const REGEXP_EMPTY_BLOCKQUOTE = /<\/blockquote><blockquote>/g;
+/** @deprecated Import from `../patterns/cleanup` — re-export kept for compatibility. */
+export { REGEXP_EMPTY_BLOCKQUOTE } from '../patterns/cleanup';

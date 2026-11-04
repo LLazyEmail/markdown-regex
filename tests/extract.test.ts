@@ -49,3 +49,20 @@ Inline \`[no](https://inline)\` then [yes](https://ok).
     expect(r.orderedLists.length).toBeGreaterThan(0);
   });
 });
+
+describe('extract() capture-group alignment', () => {
+  it('extracts italic via REGEXP_ITALIC group [3]', () => {
+    const r = extract('A *italic* word and _also_ here.\n');
+    expect(r.italic).toEqual(expect.arrayContaining(['italic', 'also']));
+  });
+
+  it('extracts strong via REGEXP_STRONG groups [1]/[2]', () => {
+    const r = extract('**star** and __under__\n');
+    expect(r.bold).toEqual(expect.arrayContaining(['star', 'under']));
+  });
+
+  it('extracts horizontal rules from consolidated REGEXP_HR', () => {
+    const r = extract('# T\n\n-----\n\nMore\n');
+    expect(r.horizontalRules.length).toBeGreaterThan(0);
+  });
+});

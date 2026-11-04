@@ -1,7 +1,2 @@
-/**
- * Matches the custom newsletter quote syntax `:"…"`.
- *
- * @example Matches `:"quoted text":`
- * @example Does not match `"quoted text"`
- */
-export const REGEXP_Q = /:"(.*?)":/g;
+/** @deprecated Import from `../patterns/inline` — re-export kept for compatibility. */
+export { REGEXP_Q } from '../patterns/inline';

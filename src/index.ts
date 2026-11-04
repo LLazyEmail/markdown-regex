@@ -13,10 +13,12 @@
  *
  * HTML cleanup constants live on `markdown-regex/cleanup`.
  *
+ * Pattern literals live in `src/patterns/` (single source of truth).
+ * `src/tags/`, `src/lists/`, `src/code/`, and `src/html/` are thin re-exports.
+ *
  * @packageDocumentation
  */
 
-// Block-level patterns (v3 consolidated location)
 export {
   REGEXP_HEADER,
   REGEXP_H2,
@@ -27,31 +29,24 @@ export {
   REGEXP_OL_LIST,
   REGEXP_FENCED_CODE,
   REGEXP_HTML,
-} from './patterns/block';
-
-// Inline / remaining (still from legacy locations — next consolidation step)
-export {
   REGEXP_IMAGE,
   REGEXP_LINK,
   REGEXP_STRONG,
   REGEXP_ITALIC,
   REGEXP_DEL,
   REGEXP_CODE,
+  REGEXP_INLINE_CODE,
   REGEXP_Q,
   REGEXP_PARAGRAPH,
   REGEXP_BR,
   REGEXP_EMPTY_BLOCKQUOTE,
-} from './tags/index';
+  REGEXP_EMPTY_UL,
+  REGEXP_EMPTY_OL,
+} from './patterns';
 
-export { REGEXP_INLINE_CODE } from './code';
 export { extract } from './extract';
 export type { ExtractResult } from './extract';
 export { extractLinks, extractImages, extractHeaders } from './extractors';
-
-export {
-  REGEXP_EMPTY_UL,
-  REGEXP_EMPTY_OL,
-} from './lists/index';
 
 export {
   header,
