@@ -5,11 +5,14 @@ import { prepareForEmail, EMAIL_PACKAGE_VERSION } from '../src/email';
 import { REGEXP_EMPTY_UL } from '../src/cleanup';
 
 describe('subpath stubs', () => {
-  it('frontmatter stub returns content unchanged', () => {
-    const r = parseFrontmatter('# Hi');
-    expect(r.hasFrontmatter).toBe(false);
-    expect(r.content).toBe('# Hi');
-    expect(r.data).toBeNull();
+  it('frontmatter parses optional YAML fence', () => {
+    const plain = parseFrontmatter('# Hi');
+    expect(plain.hasFrontmatter).toBe(false);
+    expect(plain.content).toBe('# Hi');
+    const withFm = parseFrontmatter('---\ntitle: X\n---\n# Hi');
+    expect(withFm.hasFrontmatter).toBe(true);
+    expect(withFm.data).toEqual({ title: 'X' });
+    expect(withFm.content).toBe('# Hi');
   });
 
   it('blocks stub registry and empty extract', () => {

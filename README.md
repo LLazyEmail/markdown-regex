@@ -98,7 +98,7 @@ pnpm workspaces + Turborepo. Private packages `@markdown-regex/core`, `frontmatt
 
 ```ts
 import { extract } from 'markdown-regex';
-import { parseFrontmatter } from 'markdown-regex/frontmatter';
+import { parseFrontmatter } from 'markdown-regex/frontmatter'; // see docs/frontmatter.md
 import { extractCustomBlocks } from 'markdown-regex/blocks';
 import { prepareForEmail } from 'markdown-regex/email';
 import { REGEXP_EMPTY_UL } from 'markdown-regex/cleanup';
