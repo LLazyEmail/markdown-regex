@@ -92,3 +92,9 @@ Only the public `markdown-regex` package is published; private workspace package
 ## Follow-ups
 
 - Nested custom blocks and email remark rendering are **out of scope** for the flat-blocks work. Open a tracking issue after merging the stacked PRs.
+
+## Real-world fixtures
+
+Drop a folder under `fixtures/real-world/<name>/` with `input.md`, then run `pnpm test:fixtures:update`.
+See `fixtures/README.md`. Suite is separate from unit tests (`pnpm test`).
+

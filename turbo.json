@@ -49,6 +49,20 @@
         "tests/**",
         "eslint.config.js"
       ]
+    },
+    "test:fixtures": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [],
+      "inputs": [
+        "fixtures/real-world/**",
+        "tests/real-world-fixtures.test.ts",
+        "vitest.fixtures.config.ts",
+        "packages/*/src/**",
+        "src/**",
+        "package.json"
+      ]
     }
   }
 }
