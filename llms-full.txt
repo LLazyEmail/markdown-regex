@@ -54,6 +54,71 @@ interface ExtractResult {
 | REGEXP_EMPTY_UL | `</ul><ul>` | a real list | g |
 | REGEXP_EMPTY_OL | `</ol><ol>` | a real list | g |
 
+## Subpath exports
+
+All subpaths are bundled into the single `markdown-regex` package (no extra installs, zero runtime deps).
+
+### `markdown-regex/frontmatter`
+
+```ts
+import { parseFrontmatter } from 'markdown-regex/frontmatter';
+
+parseFrontmatter('---\ntitle: Hi\ntags: [a, b]\n---\n# Body');
+// { data: { title: 'Hi', tags: ['a', 'b'] }, content: '# Body', hasFrontmatter: true }
+```
+
+| Export | Kind | Notes |
+|---|---|---|
+| parseFrontmatter(markdown) | function | Returns `FrontmatterResult`: `data` (object or `null`), `content` (body without the fence), `hasFrontmatter` |
+| FrontmatterResult | type | |
+
+Supported YAML subset: `key: value` scalars (string, number, boolean, null), nested maps by 2-space indent, inline lists `[a, b]`, block lists `- item`. Not supported: anchors, tags, `|` / `>` multiline literals. On a YAML parse error `data` is `{}` and `hasFrontmatter` stays `true`.
+
+### `markdown-regex/blocks`
+
+```ts
+import { extractCustomBlocks, registerBlockRule } from 'markdown-regex/blocks';
+
+registerBlockRule({ name: 'warning', order: 1 });
+extractCustomBlocks(':::note\nhi\n:::\n\n:::warning\ncareful\n:::');
+// [{ name: 'warning', body: 'careful', raw: ':::warning…', index: … }, { name: 'note', … }]
+```
+
+| Export | Kind | Notes |
+|---|---|---|
+| extractCustomBlocks(markdown) | function | Flat `:::name … :::` blocks → `CustomBlock[]` (`name`, `body`, `raw`, `index`). `:::` inside fenced code is ignored |
+| REGEXP_CUSTOM_BLOCK | RegExp | The flat block pattern (global) |
+| registerBlockRule({ name, order? }) | function | Optional ordering registry; lower `order` first (default 100) |
+| listBlockRules() / clearBlockRules() | function | Inspect / reset the registry (module-level state, reset it in tests) |
+| CustomBlock, BlockRule | type | |
+
+Nested `:::` containers are out of scope (issue #407).
+
+### `markdown-regex/email`
+
+| Export | Kind | Notes |
+|---|---|---|
+| prepareForEmail(markdown) | function | Placeholder: returns the input unchanged today. Do not rely on it to transform anything yet |
+| EMAIL_PACKAGE_VERSION | string | Internal marker |
+
+### `markdown-regex/cleanup`
+
+| Export | Kind | Notes |
+|---|---|---|
+| REGEXP_EMPTY_UL / REGEXP_EMPTY_OL / REGEXP_EMPTY_BLOCKQUOTE | RegExp | Run on **HTML** after Markdown→HTML to merge adjacent empty containers |
+
+## CLI
+
+```bash
+npx markdown-regex links README.md     # [{ "text": "…", "url": "…" }]
+npx markdown-regex headers doc.md      # [{ "level": 1, "text": "…" }]
+npx markdown-regex images doc.md       # [{ "alt": "…", "url": "…" }]
+npx markdown-regex extract doc.md      # full ExtractResult
+cat doc.md | npx markdown-regex links  # stdin (or pass `-`)
+```
+
+Pretty-printed JSON on stdout. `-h` / `--help` prints usage.
+
 ## Limits
 
 Nested emphasis, setext headers, reference links, and matching inside code (unless you use `extract()`) are out of scope.
@@ -63,3 +128,5 @@ Nested emphasis, setext headers, reference links, and matching inside code (unle
 - https://github.com/LLazyEmail/markdown-regex/blob/main/src/index.ts
 - https://github.com/LLazyEmail/markdown-regex/blob/main/src/extract.ts
 - https://github.com/LLazyEmail/markdown-regex/blob/main/AGENTS.md
+- https://github.com/LLazyEmail/markdown-regex/blob/main/docs/frontmatter.md
+- https://github.com/LLazyEmail/markdown-regex/blob/main/docs/blocks.md
