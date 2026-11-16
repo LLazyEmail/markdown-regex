@@ -151,6 +151,21 @@ Tests are **Vitest** (`tests/**/*.test.ts`). Jest is not used.
 
 CI builds on **Node 20, 22, and 24**.
 
+## CI / GitHub Actions
+
+| Workflow | File | Runs on | What it does |
+| --- | --- | --- | --- |
+| CI | `ci.yml` | Every PR, push to `main` | On Node 20, 22 and 24: `pnpm install --frozen-lockfile`, lint, then Turbo typecheck, build and test for packages changed since `main`. |
+| Fixtures | `fixtures.yml` | PRs, nightly (05:17 UTC), manual | Builds, then runs the real-world snapshot tests (`pnpm test:fixtures`). A red nightly run means a fixture snapshot changed on `main`. |
+| Add changeset | `add-changeset.yml` | Manual | Opens a PR with a `.changeset/*.md` file for the chosen package and bump type, for when you don't want to run `pnpm changeset` locally. |
+| Version packages | `changesets.yml` | Push to `main` | `changesets/action` keeps a *Version packages* PR open while unreleased changesets exist. Merging that PR tags `markdown-regex@x.y.z`, creates the GitHub Release and starts *Publish to npm*. |
+| Publish to npm | `npm-publish.yml` | A published release, or manual | Typecheck, build, test and `pnpm pack --dry-run`, then `pnpm publish --provenance` using npm trusted publishing (OIDC), so no `NPM_TOKEN` secret is needed. |
+| CodeQL | `codeql-analysis.yml` | Push to `main`, weekly (Sunday 23:37 UTC) | GitHub code scanning; findings show under Security → Code scanning. |
+| Semgrep | `semgrep.yml` | Push to `main`, weekly (Wednesday 15:22 UTC) | Semgrep scan uploaded as SARIF to code scanning. |
+| ESLint (disabled), Node.js CI (disabled) | `eslint.yml`, `node.js.yml` | Manual only | Placeholders that just print "Use the CI workflow instead"; their old failed runs from September are historical. |
+
+**Dependency updates.** Renovate (`renovate.json`) opens the regular version-update PRs; Dependabot only runs security updates (there is no `dependabot.yml`). When a vulnerable package is only reachable through a dependency that pins an old major, Dependabot fails with `security_update_not_possible`; fix it with a pnpm `overrides` entry in `pnpm-workspace.yaml`. The current override forces `minimatch@<11.0.1` to `^11.0.5` because eslint 10 still pins minimatch 10 (GHSA-g3hv-75wg-m249). Remove it once eslint moves to minimatch 11.
+
 ## Docs
 
 Scaffold: [`docs/`](./docs/) (Docusaurus via documentation-actions coming next).
