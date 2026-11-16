@@ -8,10 +8,13 @@ concurrency:
   group: changesets
   cancel-in-progress: false
 
+# Publishing itself happens in npm-publish.yml: npm trusted publishing (OIDC)
+# is bound to that workflow file, so this job only versions, tags, creates the
+# GitHub Release, and dispatches npm-publish.yml for the new tag.
 permissions:
   contents: write
   pull-requests: write
-  id-token: write
+  actions: write
 
 jobs:
   version:
@@ -33,15 +36,28 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Create Version PR, or publish after it merges
+      - name: Create Version PR, or tag + GitHub Release after it merges
+        id: changesets
         uses: changesets/action@v2.1.2
         with:
-          version: pnpm run version-packages
-          publish: pnpm exec changeset publish
-          title: Version packages
-          commit: Version packages
-          createGithubReleases: true
+          version-script: pnpm run version-packages
+          publish-script: pnpm exec changeset git-tag
+          pr-title: Version packages
+          commit-message: Version packages
+          create-github-releases: true
+
+      # Releases created with GITHUB_TOKEN do not trigger `release: published`,
+      # but workflow_dispatch is allowed, so hand the tag to npm-publish.yml.
+      - name: Publish the new tag to npm (npm-publish.yml)
+        if: steps.changesets.outputs.published == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          PUBLISHED: ${{ steps.changesets.outputs.publishedPackages }}
+        run: |
+          version="$(echo "$PUBLISHED" | jq -r '.[] | select(.name == "markdown-regex") | .version')"
+          if [ -z "$version" ]; then
+            echo "markdown-regex was not tagged in this run; nothing to publish."
+            exit 0
+          fi
+          gh workflow run npm-publish.yml --ref "markdown-regex@${version}"
+          echo "Dispatched npm-publish.yml for markdown-regex@${version}" >> "$GITHUB_STEP_SUMMARY"
