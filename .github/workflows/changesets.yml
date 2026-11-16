@@ -52,7 +52,7 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          PUBLISHED: ${{ steps.changesets.outputs.publishedPackages }}
+          PUBLISHED: ${{ steps.changesets.outputs.published-packages }}
         run: |
           version="$(echo "$PUBLISHED" | jq -r '.[] | select(.name == "markdown-regex") | .version')"
           if [ -z "$version" ]; then
