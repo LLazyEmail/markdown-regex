@@ -2,7 +2,8 @@
 #
 # Writes a changeset, commits it, and opens a pull request.
 # Merging that PR triggers "Version packages", which opens the Version PR.
-# Merging the Version Packages PR creates the GitHub Release / publish.
+# Merging the Version Packages PR tags the release, creates the GitHub Release,
+# and dispatches npm-publish.yml (npm trusted publishing).
 
 name: Add changeset
 
