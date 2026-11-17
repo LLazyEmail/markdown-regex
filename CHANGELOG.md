@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.1
+
+### Patch Changes
+
+- 3253e19: Document the 2.2.0 subpaths (`markdown-regex/frontmatter`, `/blocks`, `/email`, `/cleanup`) and the CLI in the agent docs that ship in the tarball (`llms.txt`, `llms-full.txt`, `SKILL.md`, `AGENTS.md`), and add a test that keeps them in sync with the runtime exports.
+- 761c1ff: Fix `extract()` false positives: stripped code no longer shows up in `bold` (the `__CODE_BLOCK__` / `__INLINE_CODE__` placeholders matched the `__text__` branch of `REGEXP_STRONG`), and `**bold**` is no longer also reported as italic `*bold*`. Italic nested inside bold (`**a *b* c**`) is now found.
+
 ## 2.2.0
 
 ### Minor Changes
