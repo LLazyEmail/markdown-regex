@@ -13,7 +13,7 @@ import {
   REGEXP_FENCED_CODE,
   REGEXP_INLINE_CODE,
   REGEXP_HTML,
-} from './patterns';
+} from "./patterns";
 
 /**
  * Structured extraction result from {@link extract}.
@@ -50,6 +50,14 @@ export interface ExtractResult {
  * @example extract('# Title\n\n[GitHub](https://github.com)')
  * @example Does not treat `[link](url)` inside a fenced block as a link
  */
+/**
+ * Placeholders for stripped code. Private-use code points, so no pattern can
+ * match them: the old `__CODE_BLOCK__` / `__INLINE_CODE__` markers were
+ * reported as bold by REGEXP_STRONG's `__text__` branch.
+ */
+const CODE_BLOCK_PLACEHOLDER = "\uE000";
+const INLINE_CODE_PLACEHOLDER = "\uE001";
+
 export function extract(markdown: string): ExtractResult {
   const result: ExtractResult = {
     headers: [],
@@ -72,18 +80,21 @@ export function extract(markdown: string): ExtractResult {
   const fencedMatches = [...working.matchAll(REGEXP_FENCED_CODE)];
   for (const m of fencedMatches) {
     result.codeBlocks.push({
-      language: m[2] || '',
+      language: m[2] || "",
       code: m[3],
     });
   }
-  working = working.replace(REGEXP_FENCED_CODE, '\n__CODE_BLOCK__\n');
+  working = working.replace(
+    REGEXP_FENCED_CODE,
+    `\n${CODE_BLOCK_PLACEHOLDER}\n`
+  );
 
   const inlineMatches = [...working.matchAll(REGEXP_INLINE_CODE)];
   for (const m of inlineMatches) {
     // REGEXP_INLINE_CODE captures: [1] fence, [2] content
     result.inlineCode.push(m[2]);
   }
-  working = working.replace(REGEXP_INLINE_CODE, '__INLINE_CODE__');
+  working = working.replace(REGEXP_INLINE_CODE, INLINE_CODE_PLACEHOLDER);
 
   for (const m of working.matchAll(REGEXP_HEADER)) {
     result.headers.push({
@@ -104,7 +115,13 @@ export function extract(markdown: string): ExtractResult {
     result.bold.push(m[1] ?? m[2]);
   }
 
-  for (const m of working.matchAll(REGEXP_ITALIC)) {
+  // Unwrap bold before looking for italic so `**b**` is not also reported as
+  // italic `*b*`, while `**bold *it* bold**` still yields italic `it`.
+  const withoutStrong = working.replace(
+    REGEXP_STRONG,
+    (_m, a?: string, b?: string) => a ?? b ?? ""
+  );
+  for (const m of withoutStrong.matchAll(REGEXP_ITALIC)) {
     // REGEXP_ITALIC captures: [1] lead, [2] delim, [3] text, [4] trail
     if (m[3] != null) result.italic.push(m[3]);
   }
