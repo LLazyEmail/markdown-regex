@@ -45,7 +45,7 @@ Requires **Node.js 20+**. CI builds on **Node 20, 22, and 24**.
 | Channel | Version | Notes |
 |---|---|---|
 | npm `latest` | **2.1.1** | TypeScript, ESM + CJS, provenance-signed |
-| GitHub `main` | 2.1.x | Same line as npm |
+| GitHub `main` | **2.2.0** | Adds `markdown-regex/frontmatter`, `markdown-regex/blocks`, `markdown-regex/email`; ships to npm with the next automated release |
 | Package name | `markdown-regex` | Same name on GitHub and npm |
 
 ```bash

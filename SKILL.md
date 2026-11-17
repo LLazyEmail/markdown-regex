@@ -53,6 +53,25 @@ HTML cleanup (empty `<ul>` / `<ol>` / `<blockquote>` after a Markdown→HTML pas
 import { REGEXP_EMPTY_UL } from 'markdown-regex/cleanup';
 ```
 
+Frontmatter and custom blocks (bundled subpaths, still zero deps):
+
+```ts
+import { parseFrontmatter } from 'markdown-regex/frontmatter';
+import { extractCustomBlocks } from 'markdown-regex/blocks';
+
+const { data, content } = parseFrontmatter(markdownWithYaml);
+const blocks = extractCustomBlocks(content); // flat :::name … ::: only
+```
+
+From a shell (JSON on stdout):
+
+```bash
+npx markdown-regex links README.md
+cat doc.md | npx markdown-regex extract
+```
+
+`markdown-regex/email` → `prepareForEmail` is a placeholder that returns its input unchanged.
+
 ## Agent checklist
 
 - [ ] Confirm the caller wants **extraction**, not rendering or an AST.

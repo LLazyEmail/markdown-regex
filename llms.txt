@@ -6,6 +6,10 @@
 - npm: https://www.npmjs.com/package/markdown-regex
 - README: https://github.com/LLazyEmail/markdown-regex/blob/main/README.md
 - Cleanup subpath: import from `markdown-regex/cleanup`
+- Frontmatter subpath: `markdown-regex/frontmatter` → `parseFrontmatter(md)` returns `{ data, content, hasFrontmatter }`
+- Custom blocks subpath: `markdown-regex/blocks` → `extractCustomBlocks(md)` for flat `:::name … :::` containers
+- Email subpath: `markdown-regex/email` → `prepareForEmail(md)` (currently returns input unchanged; placeholder)
+- CLI: `npx markdown-regex <links|headers|images|extract> [file|-]` prints JSON
 - extractLinks / extractImages / extractHeaders: https://github.com/LLazyEmail/markdown-regex/blob/main/src/extractors.ts
 
 ## Public surface

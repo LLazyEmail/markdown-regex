@@ -29,9 +29,9 @@ Turbo local cache is restored via `actions/cache` on `.turbo`. Remote cache (`TU
 pnpm-workspace.yaml     root + packages/*
 turbo.json              build/test/typecheck/lint pipeline
 packages/core/          REGEXP_* + extract/factories (private)
-packages/frontmatter/   YAML frontmatter pre-pass (private; stub → feature PR)
-packages/blocks/        flat :::name containers (private; stub → feature PR)
-packages/email/         email helpers (private; stub; nested remark = follow-up)
+packages/frontmatter/   YAML frontmatter pre-pass: parseFrontmatter (private, shipped in 2.2.0)
+packages/blocks/        flat :::name containers: extractCustomBlocks + rule registry (private, shipped in 2.2.0)
+packages/email/         email helpers (private; prepareForEmail is still an identity stub; nested remark = #407)
 src/index.ts            public barrel (re-exports core)
 src/cleanup.ts          markdown-regex/cleanup
 src/frontmatter.ts      markdown-regex/frontmatter
