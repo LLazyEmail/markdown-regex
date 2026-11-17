@@ -8,3 +8,8 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - vitest
   - "@vitest/*"
+
+# eslint 10 still pins minimatch@^10; force the patched 11.x line until it
+# moves (Dependabot alert #271, security update not possible via the tree).
+overrides:
+  "minimatch@<11.0.1": "^11.0.5"
