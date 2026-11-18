@@ -5,9 +5,17 @@ packages:
 allowBuilds:
   esbuild: true
 
+# Dev tooling we want to keep current without waiting 1 day.
+# Production deps remain under the default minimumReleaseAge.
 minimumReleaseAgeExclude:
   - vitest
   - "@vitest/*"
+  - eslint
+  - "@eslint/*"
+  - prettier
+  - turbo
+  - typescript-eslint
+  - "@typescript-eslint/*"
 
 # eslint 10 still pins minimatch@^10; force the patched 11.x line until it
 # moves (Dependabot alert #271, security update not possible via the tree).
