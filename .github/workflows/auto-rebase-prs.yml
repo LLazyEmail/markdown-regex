@@ -1,0 +1,35 @@
+# Keep open PRs current automatically. Runs after every push to main:
+# behind PRs get GitHub's update-branch; conflicting PRs get one comment
+# per head SHA listing the conflicting files (nothing is force-pushed).
+# Manual dispatch can target PRs and opt in to a real rebase (owner approval).
+name: Auto-rebase open PRs
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      pr-numbers:
+        description: Comma-separated PR numbers; empty selects all open PRs
+        type: string
+        default: ''
+      rebase-conflicts:
+        description: Allow git rebase and force-push with lease for conflicts
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  rebase:
+    uses: LLazyEmail/documentation-actions/.github/workflows/reusable-auto-rebase-prs.yml@v1
+    with:
+      pr-numbers: ${{ inputs.pr-numbers || '' }}
+      rebase-conflicts: ${{ inputs.rebase-conflicts || false }}
+      report-conflicts: true
+      comment-on-update: ${{ github.event_name != 'push' }}
+    secrets: inherit
