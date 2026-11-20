@@ -2,6 +2,8 @@
 # behind PRs get GitHub's update-branch; conflicting PRs get one comment
 # per head SHA listing the conflicting files (nothing is force-pushed).
 # Manual dispatch can target PRs and opt in to a real rebase (owner approval).
+# Renovate/Dependabot PRs are handed back to the bot (delegate-bot-rebase):
+# Renovate's rebase checkbox is ticked so it regenerates pnpm-lock.yaml itself.
 name: Auto-rebase open PRs
 
 on:
@@ -31,5 +33,6 @@ jobs:
       pr-numbers: ${{ inputs.pr-numbers || '' }}
       rebase-conflicts: ${{ inputs.rebase-conflicts || false }}
       report-conflicts: true
+      delegate-bot-rebase: true
       comment-on-update: ${{ github.event_name != 'push' }}
     secrets: inherit
