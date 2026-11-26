@@ -40,8 +40,9 @@ jobs:
       # warning, a summary column and the checks-failing label. Check names need
       # the AUTO_REBASE_TOKEN secret (a PAT that can read checks); without it the
       # action uses GitHub's "unstable" merge state.
-      # No effect while report-conflicts is on: conflicting PRs are reported
-      # (comment + has-conflicts label), not skipped. Kept for when it's off.
+      # Reported conflicts (report-conflicts) also turn the run red once DA ships
+      # documentation-actions#201 (next release after v2.16.0); until then
+      # this only covers PRs a sweep skips.
       fail-on-skipped-conflicts: true
       report-failing-checks: true
       failing-checks-label: checks-failing
