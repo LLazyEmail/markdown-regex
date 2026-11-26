@@ -1,0 +1,66 @@
+# Add a patch changeset to Renovate / Dependabot dependency PRs so
+# changesets.yml can open a Version packages PR when they merge.
+# Tooling-only PRs (pnpm packageManager bumps, GitHub Actions) are skipped.
+# If Renovate later rebases and drops the file, this workflow writes it again.
+
+name: Add changeset for bot dependency PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "packages/**/package.json"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: add-bot-changeset-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: true
+
+jobs:
+  add-changeset:
+    name: Add patch changeset
+    if: >
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (
+        github.event.pull_request.user.login == 'renovate[bot]' ||
+        github.event.pull_request.user.login == 'dependabot[bot]'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch the PR base
+        run: git fetch origin "${{ github.base_ref }}" --depth=1
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Write and commit a patch changeset if needed
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+          TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          COMMIT: "1"
+        run: bash scripts/add-bot-changeset.sh
+
+      - name: Push
+        run: |
+          remote_ref="origin/${{ github.head_ref }}"
+          if git rev-parse "$remote_ref" >/dev/null 2>&1 && [ "$(git rev-parse HEAD)" = "$(git rev-parse "$remote_ref")" ]; then
+            echo "No new commit to push."
+          else
+            git push origin "HEAD:${{ github.head_ref }}"
+          fi
