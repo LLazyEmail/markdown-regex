@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.3
+
+### Patch Changes
+
+- d53b34f: chore(deps): update dependency eslint to v10.15.0 (#427)
+- 2c49ad6: chore(deps): update vitest monorepo to v5.1.2 (#443)
+
 ## 2.2.2
 
 ### Patch Changes
