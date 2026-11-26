@@ -28,11 +28,23 @@ permissions:
 
 jobs:
   rebase:
-    uses: LLazyEmail/documentation-actions/.github/workflows/reusable-auto-rebase-prs.yml@v2
+    uses: LLazyEmail/documentation-actions/.github/workflows/reusable-auto-rebase.yml@v2
     with:
       pr-numbers: ${{ inputs.pr-numbers || '' }}
       rebase-conflicts: ${{ inputs.rebase-conflicts || false }}
       report-conflicts: true
       delegate-bot-rebase: true
+      conflict-label: has-conflicts
+      # Make PRs this run can't fix visible (DA v2.16.0+): a sweep that skips a
+      # conflicting PR turns the run red, and PRs whose checks are red get a
+      # warning, a summary column and the checks-failing label. Check names need
+      # the AUTO_REBASE_TOKEN secret (a PAT that can read checks); without it the
+      # action uses GitHub's "unstable" merge state.
+      # Reported conflicts (report-conflicts) also turn the run red once DA ships
+      # documentation-actions#201 (next release after v2.16.0); until then
+      # this only covers PRs a sweep skips.
+      fail-on-skipped-conflicts: true
+      report-failing-checks: true
+      failing-checks-label: checks-failing
       comment-on-update: ${{ github.event_name != 'push' }}
     secrets: inherit
