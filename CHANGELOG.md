@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.2
+
+### Patch Changes
+
+- 92d7404: Include dependency updates merged after 2.2.1 that had no changeset: glob 14.0.6 (#423), vitest 5.1.1 (#435), turbo 2.11.13 (#426), and prettier 3.10.1 (#425).
+- c5a9ecf: chore(deps): update dependency typescript-eslint to v8.74.0 (#424)
+
 ## 2.2.1
 
 ### Patch Changes
