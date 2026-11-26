@@ -34,5 +34,16 @@ jobs:
       rebase-conflicts: ${{ inputs.rebase-conflicts || false }}
       report-conflicts: true
       delegate-bot-rebase: true
+      conflict-label: has-conflicts
+      # Make PRs this run can't fix visible (DA v2.16.0+): a sweep that skips a
+      # conflicting PR turns the run red, and PRs whose checks are red get a
+      # warning, a summary column and the checks-failing label. Check names need
+      # the AUTO_REBASE_TOKEN secret (a PAT that can read checks); without it the
+      # action uses GitHub's "unstable" merge state.
+      # No effect while report-conflicts is on: conflicting PRs are reported
+      # (comment + has-conflicts label), not skipped. Kept for when it's off.
+      fail-on-skipped-conflicts: true
+      report-failing-checks: true
+      failing-checks-label: checks-failing
       comment-on-update: ${{ github.event_name != 'push' }}
     secrets: inherit
