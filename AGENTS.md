@@ -87,6 +87,8 @@ pnpm run version-packages
 pnpm run release        # usually via changesets.yml on main
 ```
 
+Renovate and Dependabot PRs that change `package.json` or `pnpm-lock.yaml` get a patch changeset from `add-bot-changeset.yml`. Do not add one by hand unless the workflow skipped the PR (pnpm `packageManager` bumps and GitHub Actions-only updates are skipped on purpose).
+
 Only the public `markdown-regex` package is published; private workspace packages are bundled.
 
 ## Follow-ups
@@ -97,4 +99,3 @@ Only the public `markdown-regex` package is published; private workspace package
 
 Drop a folder under `fixtures/real-world/<name>/` with `input.md`, then run `pnpm test:fixtures:update`.
 See `fixtures/README.md`. Suite is separate from unit tests (`pnpm test`).
-

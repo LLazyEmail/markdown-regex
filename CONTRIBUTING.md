@@ -46,5 +46,4 @@ Leftover `tests/**/*.test.js` files are not part of CI.
 
 ## Changelog fragments
 
-User-facing changes should include a Changeset under `.changeset/` (see that folder's README). This prepares an auto-version flow modelled on `generate-template`; publishing still happens via the existing provenance Release workflow until that lands.
-
+User-facing changes should include a Changeset under `.changeset/` (see that folder's README). This prepares an auto-version flow modelled on `generate-template`. Renovate and Dependabot package updates get a patch changeset automatically; you do not need to add one on those PRs.
