@@ -3,14 +3,21 @@
 Zero-dependency, TypeScript-typed RegExp patterns for extracting headers, links, images, lists and code from Markdown.
 
 [![npm version](https://img.shields.io/npm/v/markdown-regex.svg)](https://www.npmjs.com/package/markdown-regex)
-[![CI](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml/badge.svg)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/markdown-regex)](https://bundlephobia.com/package/markdown-regex)
-[![coverage](https://img.shields.io/badge/coverage-vitest%20v8-informational)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Socket Badge](https://badge.socket.dev/npm/package/markdown-regex/)](https://badge.socket.dev/npm/package/markdown-regex/)
 [![npm downloads](https://img.shields.io/npm/dw/markdown-regex.svg)](https://www.npmjs.com/package/markdown-regex)
-[![types](https://img.shields.io/npm/types/markdown-regex)](https://www.npmjs.com/package/markdown-regex)
 [![node](https://img.shields.io/node/v/markdown-regex)](https://www.npmjs.com/package/markdown-regex)
+[![types](https://img.shields.io/npm/types/markdown-regex)](https://www.npmjs.com/package/markdown-regex)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+[![CI](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml)
+[![Fixtures](https://github.com/LLazyEmail/markdown-regex/actions/workflows/fixtures.yml/badge.svg?branch=main)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/fixtures.yml)
+[![GitHub release](https://img.shields.io/github/v/release/LLazyEmail/markdown-regex)](https://github.com/LLazyEmail/markdown-regex/releases)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://github.com/LLazyEmail/markdown-regex/issues/2)
+[![Snyk](https://snyk.io/test/github/LLazyEmail/markdown-regex/badge.svg)](https://snyk.io/test/github/LLazyEmail/markdown-regex)
+[![Socket](https://badge.socket.dev/npm/package/markdown-regex)](https://socket.dev/npm/package/markdown-regex)
+[![unpacked size](https://img.shields.io/npm/unpacked-size/markdown-regex)](https://www.npmjs.com/package/markdown-regex)
+[![coverage](https://img.shields.io/badge/coverage-vitest%20v8-informational)](https://github.com/LLazyEmail/markdown-regex/actions/workflows/ci.yml)
+
+The Bundlephobia size badge is often rate-limited, so the unpacked-size badge above is shown instead. The [Bundlephobia page](https://bundlephobia.com/package/markdown-regex) is still available.
 
 **Install (30 seconds):**
 
@@ -30,9 +37,32 @@ extractHeaders('# Hello\n## World');
 
 Requires **Node.js 20+**. CI builds on **Node 20, 22, and 24**.
 
-- Agent guide: [AGENTS.md](./AGENTS.md)
+- Agent guide: [AGENTS.md](./AGENTS.md) · Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - Full API: [llms-full.txt](./llms-full.txt) · Short: [llms.txt](./llms.txt)
 - Source index: [src/index.ts](./src/index.ts)
+- Changesets: [`.changeset/README.md`](./.changeset/README.md) · [Releases](#releases)
+
+## Contents
+
+- [When to use this](#when-to-use-this)
+- [Status and versions](#status-and-versions)
+- [Packages](#packages)
+- [Quick Start](#quick-start)
+- [API Reference](#api-reference)
+- [Comparison](#comparison)
+- [Monorepo](#monorepo)
+- [Source layout](#source-layout)
+- [Limitations](#limitations)
+- [Recipes](#recipes)
+- [CLI](#cli)
+- [Development](#development)
+- [CI / GitHub Actions](#ci--github-actions)
+- [Releases](#releases)
+- [Docs](#docs)
+- [MCP / AI agents](#mcp--ai-agents)
+- [Related](#related)
+- [License](#license)
+- [Real-world fixtures](#real-world-fixtures)
 
 ## When to use this
 
@@ -42,11 +72,15 @@ Requires **Node.js 20+**. CI builds on **Node 20, 22, and 24**.
 
 ## Status and versions
 
+The [npm version](https://www.npmjs.com/package/markdown-regex) and [GitHub release](https://github.com/LLazyEmail/markdown-regex/releases) badges above are the live values. As of this writing that is **2.2.2**.
+
 | Channel | Version | Notes |
 |---|---|---|
-| npm `latest` | **2.1.1** | TypeScript, ESM + CJS, provenance-signed |
-| GitHub `main` | **2.2.0** | Adds `markdown-regex/frontmatter`, `markdown-regex/blocks`, `markdown-regex/email`; ships to npm with the next automated release |
+| npm `latest` | **2.2.2** | TypeScript, ESM + CJS, provenance-signed. The 2.2.x line includes the `frontmatter`, `blocks` and `email` subpaths. |
+| GitHub `main` | **2.2.2** | Same release line. Unreleased Changesets ship in the next [*Version packages*](#releases) PR. |
 | Package name | `markdown-regex` | Same name on GitHub and npm |
+
+The earlier figures in this table (**2.1.1** on npm and **2.2.0** on `main`) were written before 2.2.2 shipped: 2.1.1 was the first TypeScript provenance release, and 2.2.0 introduced the subpaths.
 
 ```bash
 npm install markdown-regex
@@ -91,6 +125,18 @@ import { extractLinks } from 'markdown-regex';
 | [remark](https://www.npmjs.com/package/remark) / [micromark](https://www.npmjs.com/package/micromark) / [markdown-it](https://www.npmjs.com/package/markdown-it) | Full parse / AST | ecosystem | Via AST | Spec compliance, rendering, complex transforms |
 
 `markdown-regex` is **not** a CommonMark parser. Prefer remark/micromark/markdown-it when you need an AST.
+
+## Packages
+
+Only the public `markdown-regex` package is published to npm. The `@markdown-regex/*` workspace packages are private and are bundled into that tarball.
+
+| Package | Import | Docs |
+| --- | --- | --- |
+| `markdown-regex` | `markdown-regex` | this README · [npm](https://www.npmjs.com/package/markdown-regex) |
+| `@markdown-regex/core` | bundled into `markdown-regex` | [packages/core/README.md](./packages/core/README.md) |
+| `@markdown-regex/frontmatter` | `markdown-regex/frontmatter` | [packages/frontmatter/README.md](./packages/frontmatter/README.md) · [docs/frontmatter.md](./docs/frontmatter.md) |
+| `@markdown-regex/blocks` | `markdown-regex/blocks` | [packages/blocks/README.md](./packages/blocks/README.md) · [docs/blocks.md](./docs/blocks.md) |
+| `@markdown-regex/email` | `markdown-regex/email` | [packages/email/README.md](./packages/email/README.md) |
 
 ## Monorepo
 
@@ -168,6 +214,16 @@ CI builds on **Node 20, 22, and 24**.
 
 **Dependency updates.** Renovate (`renovate.json`) opens the regular version-update PRs; Dependabot only runs security updates (there is no `dependabot.yml`). Package updates get a patch changeset automatically (`add-bot-changeset.yml`) so they show up in the next *Version packages* PR and changelog. A changeset is not added for pnpm `packageManager` bumps or GitHub Actions-only PRs. When a vulnerable package is only reachable through a dependency that pins an old major, Dependabot fails with `security_update_not_possible`; fix it with a pnpm `overrides` entry in `pnpm-workspace.yaml`. The current override forces `minimatch@<11.0.1` to `^11.0.5` because eslint 10 still pins minimatch 10 (GHSA-g3hv-75wg-m249). Remove it once eslint moves to minimatch 11. If a Renovate PR conflicts (for example over `minimumReleaseAgeExclude` in `pnpm-workspace.yaml`), don't rebase it by hand. Tick its "rebase/retry" checkbox, or let the auto-rebase workflow tick it, and Renovate regenerates the branch.
 
+[↑ Back to top](#markdown-regex)
+
+## Releases
+
+Releases use [Changesets](https://github.com/changesets/changesets). The fragment format is in [`.changeset/README.md`](./.changeset/README.md). Human changes use `pnpm changeset` or [Actions → Add changeset](https://github.com/LLazyEmail/markdown-regex/actions/workflows/add-changeset.yml). Renovate and Dependabot package updates get a patch fragment automatically. See also [CONTRIBUTING.md](./CONTRIBUTING.md) and [AGENTS.md](./AGENTS.md).
+
+1. Merge the change (and its `.changeset/*.md` fragment) to `main`.
+2. `changesets.yml` opens a *Version packages* PR that bumps `package.json` and the changelogs.
+3. Merge that PR to tag `markdown-regex@x.y.z`, create the GitHub Release, and start [Publish to npm](https://github.com/LLazyEmail/markdown-regex/actions/workflows/npm-publish.yml).
+
 ## Docs
 
 Scaffold: [`docs/`](./docs/) (Docusaurus via documentation-actions coming next).
@@ -202,3 +258,4 @@ pnpm test:fixtures:update    # update snapshots
 
 See [fixtures/README.md](./fixtures/README.md). CI runs these in a separate **Fixtures** workflow (PRs + nightly).
 
+[↑ Back to top](#markdown-regex)
