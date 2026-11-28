@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.4
+
+### Patch Changes
+
+- c9d12d6: chore(deps): update dependency eslint to v10.16.0 (#450)
+
 ## 2.2.3
 
 ### Patch Changes
